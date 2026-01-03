@@ -2110,7 +2110,7 @@ async function generateClinicalCase() {
 
     try {
         // 嘗試使用 gemini-1.5-flash，若您的帳號不支援此模型，可改為 gemini-pro
-        const modelName = 'gemini-pro'; 
+        const modelName = 'gemini-flash-latest'; 
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${userApiKey}`;
 
         console.log(`正在請求 API: ${modelName}...`); // Debug Log
@@ -2399,5 +2399,6 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
