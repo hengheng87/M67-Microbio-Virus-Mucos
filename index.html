@@ -2646,6 +2646,7 @@ function openQuestionModal(qid) {
 
 // 3. AI 解題核心函數 (The Brain)
 // 3. AI 解題核心函數 (The Brain) - V9.1 修正版
+// 3. AI 解題核心函數 (The Brain) - V9.2 自動模型切換版
 async function callAIForExplanation(qid) {
     // 檢查 API Key
     if (!userApiKey) {
@@ -2660,13 +2661,13 @@ async function callAIForExplanation(qid) {
 
     // UI 狀態更新
     solveBtn.disabled = true;
-    solveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> 思考中...';
+    solveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> AI 思考中...';
     aiArea.classList.remove('hidden');
     
     // 滾動到底部
     setTimeout(() => aiArea.scrollIntoView({ behavior: 'smooth' }), 100);
 
-    // 準備 Prompt
+    // 準備 Context & Prompt
     let contextData = "";
     if (q.relatedPathogen && pathogenData[q.relatedPathogen]) {
         const pData = pathogenData[q.relatedPathogen];
@@ -2695,58 +2696,79 @@ async function callAIForExplanation(qid) {
         Start with "✅ **正確答案：(X)**"
     `;
 
-    try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${userApiKey}`;
-        
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                contents: [{ parts: [{ text: prompt }] }],
-                // [關鍵修正] 加入安全性設定，防止醫學內容被誤判為危險內容
-                safetySettings: [
-                    { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
-                    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
-                    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
-                    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }
-                ]
-            })
-        });
-        
-        const data = await response.json();
+    // 定義模型清單 (優先嘗試輕量快閃模型，失敗則退回舊版)
+    const models = [
+        'gemini-1.5-flash', 
+        'gemini-1.5-flash-001', 
+        'gemini-1.5-flash-latest',
+        'gemini-1.5-pro',
+        'gemini-pro' // 最穩定的舊版 (1.0)
+    ];
 
-        // [關鍵修正] 詳細錯誤檢查
-        if (!response.ok) {
-            console.error("API Error Detail:", data);
-            throw new Error(data.error?.message || `API HTTP Error: ${response.status}`);
-        }
-        
-        // 檢查是否因為安全性被阻擋 (Finish Reason)
-        if (data.promptFeedback && data.promptFeedback.blockReason) {
-            console.warn("Safety Block:", data.promptFeedback);
-            throw new Error(`內容被安全性篩選器阻擋 (Reason: ${data.promptFeedback.blockReason})`);
-        }
+    let success = false;
+    let lastError = '';
 
-        if (data.candidates && data.candidates.length > 0) {
-            const aiText = data.candidates[0].content.parts[0].text;
-            aiContent.innerHTML = marked.parse(aiText);
+    for (const modelName of models) {
+        if (success) break;
+        
+        try {
+            console.log(`[System] 嘗試模型: ${modelName}...`);
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${userApiKey}`;
             
-            // 成功狀態
-            solveBtn.innerHTML = '<i class="fas fa-check"></i> 解析完成';
-            solveBtn.classList.remove('from-teal-600', 'to-emerald-600');
-            solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
-        } else {
-            console.warn("Empty Candidates:", data);
-            throw new Error("AI 未回傳任何內容 (No content generated)");
-        }
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    contents: [{ parts: [{ text: prompt }] }],
+                    safetySettings: [
+                        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
+                        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
+                        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
+                        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }
+                    ]
+                })
+            });
+            
+            const data = await response.json();
 
-    } catch (error) {
-        console.error("Call AI Error:", error);
+            if (!response.ok) {
+                // 如果是 404 (Not Found) 或 400，代表這個模型名稱不能用，嘗試下一個
+                const errorMsg = data.error?.message || response.statusText;
+                console.warn(`[System] ${modelName} 失敗: ${errorMsg}`);
+                lastError = `${modelName}: ${errorMsg}`;
+                continue; 
+            }
+
+            if (data.promptFeedback && data.promptFeedback.blockReason) {
+                throw new Error(`內容被安全性阻擋 (${data.promptFeedback.blockReason})`);
+            }
+
+            if (data.candidates && data.candidates.length > 0) {
+                const aiText = data.candidates[0].content.parts[0].text;
+                aiContent.innerHTML = marked.parse(aiText);
+                
+                // 成功！
+                success = true;
+                solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成 (${modelName})`;
+                solveBtn.classList.remove('from-teal-600', 'to-emerald-600');
+                solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+            } else {
+                throw new Error("AI 未回傳內容");
+            }
+
+        } catch (error) {
+            console.error(`[System] ${modelName} 執行錯誤:`, error);
+            lastError = error.message;
+        }
+    }
+
+    // 如果所有模型都失敗
+    if (!success) {
         aiContent.innerHTML = `
             <div class="text-red-600 bg-red-50 p-4 rounded border border-red-200">
-                <p class="font-bold"><i class="fas fa-exclamation-triangle"></i> 解題失敗</p>
-                <p class="text-sm mt-1 text-gray-600">${error.message}</p>
-                <p class="text-xs mt-2 text-gray-400">建議：請按 F12 開啟 Console 查看詳細錯誤。</p>
+                <p class="font-bold"><i class="fas fa-exclamation-triangle"></i> 所有模型皆嘗試失敗</p>
+                <p class="text-sm mt-1 text-gray-600">最後一次錯誤：${lastError}</p>
+                <p class="text-xs mt-2 text-gray-400">請確認您的 API Key 是否正確，或是否有啟用 Google AI Studio 的權限。</p>
             </div>`;
         solveBtn.disabled = false;
         solveBtn.innerHTML = '<i class="fas fa-redo"></i> 重試';
@@ -2935,6 +2957,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
