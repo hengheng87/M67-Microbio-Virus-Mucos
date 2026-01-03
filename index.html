@@ -8,36 +8,56 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-// [新增] 處理使用者點擊選項
-let userSelectedExamIdx = null; // 暫存使用者選了哪個
+// [修正版] 處理使用者點擊選項
+let userSelectedExamIdx = null; 
 
 function checkExamAnswer(qid, idx) {
+    // 1. 確保資料庫有抓到題目
     const q = pastExamDB.find(i => i.id === qid);
+    if (!q) {
+        console.error("找不到題目 ID:", qid);
+        return;
+    }
+    
     userSelectedExamIdx = idx;
 
-    // 重置所有選項樣式
-    document.querySelectorAll('[id^="exam-opt-"]').forEach(el => {
+    // 2. 重置所有選項樣式 (先全部變回白色/灰色)
+    // 我們使用更精確的選擇器，只抓取當前 Modal 內的選項
+    const optionsArea = document.getElementById('examOptionsArea');
+    if (!optionsArea) return;
+
+    const allOptions = optionsArea.querySelectorAll('div[id^="exam-opt-"]');
+    allOptions.forEach(el => {
+        // 恢復預設樣式
         el.className = "p-4 rounded-lg border border-gray-200 hover:bg-teal-50 hover:border-teal-300 transition cursor-pointer flex items-center gap-3 group relative overflow-hidden select-none";
-        el.querySelector('.status-icon').innerHTML = '';
-        el.querySelector('.status-icon').classList.add('hidden');
+        // 隱藏圖示
+        const iconDiv = el.querySelector('.status-icon');
+        if(iconDiv) {
+            iconDiv.innerHTML = '';
+            iconDiv.classList.add('hidden');
+        }
     });
 
+    // 3. 抓取被點擊的那個選項
     const selectedEl = document.getElementById(`exam-opt-${idx}`);
+    if (!selectedEl) return;
 
-    // 情境 A: 還不知道正確答案 (AI 尚未解題) -> 顯示「已選擇 (藍色)」
+    // 4. 判斷邏輯
+    // 情境 A: 還不知道正確答案 (AI 尚未解題) -> 顯示「藍色 (已選擇)」
     if (!q.correctAnswer) {
         selectedEl.className = "p-4 rounded-lg border-2 border-blue-500 bg-blue-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-        // 提示使用者去按 AI 解題
+        
+        // 提示使用者去按 AI 解題按鈕
         const solveBtn = document.getElementById('solveBtn');
         if(solveBtn) solveBtn.classList.add('animate-pulse');
     } 
-    // 情境 B: 已經知道答案 -> 直接批改
+    // 情境 B: 已經知道答案 -> 直接批改 (顯示綠色或紅色)
     else {
-        // 找出正確選項的 Index (假設選項格式為 "(A)..." 或 "A...")
-        // 這裡我們用簡單的比對：看看選項文字是否包含正確答案代號
+        // 找出正確選項的 Index
         let correctIdx = -1;
         q.options.forEach((opt, i) => {
-            if (opt.includes(`(${q.correctAnswer})`) || opt.startsWith(`${q.correctAnswer}.`)) {
+            // 比對選項文字是否包含答案代號 (如 "A", "(A)", "A.")
+            if (opt.toUpperCase().includes(`(${q.correctAnswer})`) || opt.startsWith(`${q.correctAnswer}.`)) {
                 correctIdx = i;
             }
         });
@@ -54,37 +74,18 @@ function checkExamAnswer(qid, idx) {
             selectedEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-times-circle text-red-600 text-xl"></i>';
             selectedEl.querySelector('.status-icon').classList.remove('hidden');
             
-            // 同時顯示正確答案
+            // 同時把正確答案標示出來 (綠色)
             if (correctIdx !== -1) {
                 const correctEl = document.getElementById(`exam-opt-${correctIdx}`);
-                correctEl.className = "p-4 rounded-lg border border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-                correctEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
-                correctEl.querySelector('.status-icon').classList.remove('hidden');
-            }
-        }
-    }
-}
-
-// 輔助：只顯示正確答案 (用於 AI 解題後的回饋)
-function highlightCorrectAnswer(correctIdx) {
-    const el = document.getElementById(`exam-opt-${correctIdx}`);
-    if (el) {
-        el.className = "p-4 rounded-lg border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-        el.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
-        el.querySelector('.status-icon').classList.remove('hidden');
-    }
-}
-        
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        medical: { 50: '#f0f9ff', 100: '#e0f2fe', 600: '#0284c7', 800: '#075985', 900: '#0c4a6e' },
-                        source: { gb: '#dbeafe', lec: '#fce7f3', txt: '#dcfce7', clin: '#fef3c7' }
-                    }
+                if (correctEl) {
+                    correctEl.className = "p-4 rounded-lg border border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+                    correctEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+                    correctEl.querySelector('.status-icon').classList.remove('hidden');
                 }
             }
         }
+    }
+}
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
@@ -3251,8 +3252,7 @@ function openQuestionModal(qid) {
     }
 }
 
-// 3. AI 解題核心函數 (The Brain) - V9.2 自動模型切換版
-// [更新版] AI 解題核心函數 (含自動答案解析)
+// [修正版] AI 解題核心函數 (修復閃退問題)
 async function callAIForExplanation(qid) {
     if (!userApiKey) {
         alert("請先在「AI 臨床實驗室」輸入 API Key 才能使用解題功能！");
@@ -3264,12 +3264,18 @@ async function callAIForExplanation(qid) {
     const aiArea = document.getElementById('aiAnalysisArea');
     const aiContent = document.getElementById('aiContent');
 
+    // UI 狀態更新
     solveBtn.disabled = true;
     solveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> AI 思考中...';
     aiArea.classList.remove('hidden');
-    setTimeout(() => aiArea.scrollIntoView({ behavior: 'smooth' }), 100);
+    
+    // 平滑滾動到底部
+    setTimeout(() => {
+        const modalContent = document.getElementById('modalContent');
+        modalContent.scrollTo({ top: modalContent.scrollHeight, behavior: 'smooth' });
+    }, 100);
 
-    // Prompt 保持不變
+    // Prompt 準備 (保持不變)
     let contextData = "";
     if (q.relatedPathogen && pathogenData[q.relatedPathogen]) {
         const pData = pathogenData[q.relatedPathogen];
@@ -3292,7 +3298,6 @@ async function callAIForExplanation(qid) {
     `;
 
     const models = ['gemini-flash-latest', 'gemini-pro-latest']; 
-    
     let success = false;
 
     for (const modelName of models) {
@@ -3315,8 +3320,7 @@ async function callAIForExplanation(qid) {
                 aiContent.innerHTML = marked.parse(aiText);
                 success = true;
 
-                // [新功能] 自動解析 AI 的答案並更新 UI
-                // 尋找格式： 正確答案：(A) 或 正確答案：A
+                // [解析答案]
                 const match = aiText.match(/正確答案[：:]\s*[（(]?([A-D])[）)]?/i);
                 if (match && match[1]) {
                     const ans = match[1].toUpperCase();
@@ -3324,25 +3328,37 @@ async function callAIForExplanation(qid) {
                     
                     // 1. 存入資料庫
                     q.correctAnswer = ans;
-                    q.userNote = "AI Solved"; // 標記為 AI 解過的
+                    q.userNote = "AI Solved"; 
 
-                    // 2. 更新列表頁面的標籤 (讓列表顯示「已解析」)
-                    renderExamDashboard(); // 注意：這會重繪列表，可能需要優化，但目前先這樣確保資料同步
+                    // 2. [關鍵] 不要呼叫 renderExamDashboard()，以免視窗關閉
+                    // 我們只更新按鈕狀態即可
                     
-                    // 3. 因為 renderExamDashboard 會關閉 Modal，我們需要重新打開 Modal 狀態
-                    // 或者更簡單：我們只更新 Modal 內的狀態，列表等關閉 Modal 再刷新
-                    
-                    // 觸發批改邏輯
+                    // 3. 如果使用者剛才已經選了選項，現在立刻批改
                     if (userSelectedExamIdx !== null) {
                         checkExamAnswer(qid, userSelectedExamIdx);
                     } else {
-                        // 如果使用者沒選，直接顯示正確答案
-                        const correctIdx = q.options.findIndex(opt => opt.includes(`(${ans})`) || opt.startsWith(`${ans}.`));
-                        if(correctIdx !== -1) highlightCorrectAnswer(correctIdx);
+                        // 如果沒選，直接亮出正確答案
+                        // 模擬 checkExamAnswer 的查找邏輯
+                        let correctIdx = -1;
+                        q.options.forEach((opt, i) => {
+                            if (opt.toUpperCase().includes(`(${ans})`) || opt.startsWith(`${ans}.`)) {
+                                correctIdx = i;
+                            }
+                        });
+                        if(correctIdx !== -1) {
+                            // 呼叫 highlight 輔助函數 (或直接用 checkExamAnswer 觸發)
+                             const correctEl = document.getElementById(`exam-opt-${correctIdx}`);
+                             if(correctEl) {
+                                 correctEl.className = "p-4 rounded-lg border border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+                                 correctEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+                                 correctEl.querySelector('.status-icon').classList.remove('hidden');
+                             }
+                        }
                     }
                 }
 
                 solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成`;
+                solveBtn.classList.remove('from-teal-600', 'to-emerald-600');
                 solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
             }
         } catch (e) { console.error(e); }
@@ -3531,6 +3547,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
