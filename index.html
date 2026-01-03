@@ -3126,7 +3126,7 @@ function logoutApiKey() {
 
 let currentExamQuestionId = null;
 
-// 1. 渲染考古題主畫面 (列表模式)
+// 1. 渲染考古題主畫面 (列表模式) - [V9.3 ID 修正版]
 function renderExamDashboard() {
     const container = document.getElementById('contentArea');
     const toc = document.getElementById('toc');
@@ -3141,8 +3141,9 @@ function renderExamDashboard() {
         <li><a href="#" class="text-xs text-gray-600 block py-1">113-微免期末 (${pastExamDB.length}題)</a></li>
     `;
 
-    // 計算統計 (如果有做題紀錄功能，未來可擴充)
     const totalQ = pastExamDB.length;
+    // 計算已解析題數
+    const solvedQ = pastExamDB.filter(q => q.correctAnswer).length;
 
     container.innerHTML = `
         <div class="animate-fade-in pb-20 max-w-5xl mx-auto">
@@ -3154,8 +3155,8 @@ function renderExamDashboard() {
                     <p class="text-sm text-gray-500 mt-2">113學年度 微生物免疫學期末考 (擬真訓練)</p>
                 </div>
                 <div class="text-right">
-                    <span class="text-2xl font-bold text-teal-600">${totalQ}</span>
-                    <span class="text-xs text-gray-400 uppercase font-bold">Total Questions</span>
+                    <span class="text-2xl font-bold text-teal-600" id="progress-text">${solvedQ}/${totalQ}</span>
+                    <span class="text-xs text-gray-400 uppercase font-bold">Solved</span>
                 </div>
             </div>
 
@@ -3164,7 +3165,7 @@ function renderExamDashboard() {
                     <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition group cursor-pointer relative overflow-hidden" onclick="openQuestionModal('${q.id}')">
                         <div class="flex justify-between items-start mb-2">
                             <span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Q${index + 1}</span>
-                            <span class="text-[10px] font-bold ${q.correctAnswer ? 'text-green-600 bg-green-50' : 'text-gray-400 bg-gray-50'} px-2 py-0.5 rounded border border-gray-100">
+                            <span id="status-badge-${q.id}" class="text-[10px] font-bold ${q.correctAnswer ? 'text-green-600 bg-green-50' : 'text-gray-400 bg-gray-50'} px-2 py-0.5 rounded border border-gray-100 transition-colors duration-300">
                                 ${q.correctAnswer ? '已解析' : '未解析'}
                             </span>
                         </div>
@@ -3192,19 +3193,16 @@ function renderExamDashboard() {
                         <i class="fas fa-times text-lg"></i>
                     </button>
                 </div>
-                
-                <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scroll" id="modalContent">
-                    </div>
-
-                <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3" id="modalFooter">
-                    </div>
+                <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scroll" id="modalContent"></div>
+                <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3" id="modalFooter"></div>
             </div>
         </div>
     `;
 }
-
+        
 // 2. 開啟單題視窗
 // [更新版] 開啟單題視窗
+// [修正版] 開啟單題視窗 (含詳解回填)
 function openQuestionModal(qid) {
     currentExamQuestionId = qid;
     const q = pastExamDB.find(i => i.id === qid);
@@ -3259,15 +3257,34 @@ function openQuestionModal(qid) {
         </button>
     `;
 
-    // 如果這一題之前已經有答案了 (pastExamDB 中已有 correctAnswer)，直接顯示對錯
+    // 1. 如果之前已經有詳解，直接顯示 (Persistence)
+    if (q.aiExplanation) {
+        document.getElementById('aiAnalysisArea').classList.remove('hidden');
+        document.getElementById('aiContent').innerHTML = marked.parse(q.aiExplanation);
+        
+        // 將按鈕設為「完成」狀態
+        const solveBtn = document.getElementById('solveBtn');
+        solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成`;
+        solveBtn.classList.remove('from-teal-600', 'to-emerald-600');
+        solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+        solveBtn.disabled = true;
+    }
+
+    // 2. 如果知道答案，標記對錯
     if (q.correctAnswer) {
-        // 模擬點擊正確答案來顯示狀態 (或是單純顯示正確答案)
-        const correctIdx = q.options.findIndex(opt => opt.startsWith(`(${q.correctAnswer})`) || opt.includes(`(${q.correctAnswer})`));
+        // 嘗試找出正確選項的 Index
+        let correctIdx = -1;
+        q.options.forEach((opt, i) => {
+             if (opt.toUpperCase().includes(`(${q.correctAnswer})`) || opt.startsWith(`${q.correctAnswer}.`)) {
+                correctIdx = i;
+            }
+        });
         if (correctIdx !== -1) highlightCorrectAnswer(correctIdx);
     }
 }
-
+        
 // [修正版] AI 解題核心函數 (修復閃退問題)
+// [修正版] AI 解題核心函數 (修復閃退 + 狀態更新 + 資料儲存)
 async function callAIForExplanation(qid) {
     if (!userApiKey) {
         alert("請先在「AI 臨床實驗室」輸入 API Key 才能使用解題功能！");
@@ -3290,12 +3307,8 @@ async function callAIForExplanation(qid) {
         modalContent.scrollTo({ top: modalContent.scrollHeight, behavior: 'smooth' });
     }, 100);
 
-    // Prompt 準備 (保持不變)
-    let contextData = "";
-    if (q.relatedPathogen && pathogenData[q.relatedPathogen]) {
-        const pData = pathogenData[q.relatedPathogen];
-        contextData = `Reference: ${pData.title}, Facts: ${pData.quickFacts.map(f => f.val).join(', ')}`;
-    }
+    const contextData = q.relatedPathogen && pathogenData[q.relatedPathogen] ? 
+        `Reference: ${pathogenData[q.relatedPathogen].title}, Facts: ${pathogenData[q.relatedPathogen].quickFacts.map(f => f.val).join(', ')}` : "";
 
     const prompt = `
         You are a medical professor explaining an exam question.
@@ -3339,36 +3352,38 @@ async function callAIForExplanation(qid) {
                 const match = aiText.match(/正確答案[：:]\s*[（(]?([A-D])[）)]?/i);
                 if (match && match[1]) {
                     const ans = match[1].toUpperCase();
-                    console.log("AI Parsed Answer:", ans);
                     
-                    // 1. 存入資料庫
+                    // 1. 存入資料庫 (關鍵！)
                     q.correctAnswer = ans;
+                    q.aiExplanation = aiText; // [新增] 儲存詳解文字
                     q.userNote = "AI Solved"; 
 
-                    // 2. [關鍵] 不要呼叫 renderExamDashboard()，以免視窗關閉
-                    // 我們只更新按鈕狀態即可
+                    // 2. [新增] 直接更新背景列表的「狀態標籤」，無需重繪
+                    const badge = document.getElementById(`status-badge-${qid}`);
+                    if (badge) {
+                        badge.innerText = '已解析';
+                        badge.className = "text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded border border-gray-100 transition-colors duration-300";
+                    }
                     
-                    // 3. 如果使用者剛才已經選了選項，現在立刻批改
+                    // 3. 更新上方進度文字 (Optional)
+                    const progressText = document.getElementById('progress-text');
+                    if (progressText) {
+                        const solvedCount = pastExamDB.filter(x => x.correctAnswer).length;
+                        progressText.innerText = `${solvedCount}/${pastExamDB.length}`;
+                    }
+
+                    // 4. 觸發批改邏輯
                     if (userSelectedExamIdx !== null) {
                         checkExamAnswer(qid, userSelectedExamIdx);
                     } else {
-                        // 如果沒選，直接亮出正確答案
-                        // 模擬 checkExamAnswer 的查找邏輯
+                        // 沒選則自動亮出正確答案
                         let correctIdx = -1;
                         q.options.forEach((opt, i) => {
                             if (opt.toUpperCase().includes(`(${ans})`) || opt.startsWith(`${ans}.`)) {
                                 correctIdx = i;
                             }
                         });
-                        if(correctIdx !== -1) {
-                            // 呼叫 highlight 輔助函數 (或直接用 checkExamAnswer 觸發)
-                             const correctEl = document.getElementById(`exam-opt-${correctIdx}`);
-                             if(correctEl) {
-                                 correctEl.className = "p-4 rounded-lg border border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-                                 correctEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
-                                 correctEl.querySelector('.status-icon').classList.remove('hidden');
-                             }
-                        }
+                        if(correctIdx !== -1) highlightCorrectAnswer(correctIdx);
                     }
                 }
 
@@ -3562,6 +3577,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
