@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M67 微免期末考衝刺系統 (V5.4 Full)</title>
+    <title>M67 微免期末考衝刺系統 (V8.0 Full)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -2070,20 +2070,24 @@ function renderQuizInterface(container) {
     `;
 }
 
-// E. 核心：呼叫 Gemini API 生成題目
+// E. [修正版] 核心：呼叫 Gemini API 生成題目 (含錯誤偵錯)
 async function generateClinicalCase() {
     if (isGenerating) return;
     isGenerating = true;
     
     // UI 更新
-    document.getElementById('loadingArea').classList.remove('hidden');
-    document.getElementById('questionArea').classList.add('hidden');
-    document.getElementById('generateBtn').disabled = true;
-    document.getElementById('generateBtn').classList.add('opacity-50', 'cursor-not-allowed');
+    const loadingArea = document.getElementById('loadingArea');
+    const questionArea = document.getElementById('questionArea');
+    const generateBtn = document.getElementById('generateBtn');
+    
+    loadingArea.classList.remove('hidden');
+    questionArea.classList.add('hidden');
+    generateBtn.disabled = true;
+    generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
     const topic = document.getElementById('topicSelect').value;
     
-    // --- PROMPT ENGINEERING (根據您的筆記內容設計) ---
+    // --- PROMPT ENGINEERING ---
     const prompt = `
         You are a medical professor creating a USMLE Step 1 style clinical vignette for medical students (M67).
         Topic: ${topic} (Focus on Virology and Mycology).
@@ -2092,29 +2096,26 @@ async function generateClinicalCase() {
         
         Structure:
         {
-            "scenario": "A detailed clinical description (Patient age, gender, chief complaint, symptoms, history, relevant lab findings). Include specific keywords like 'Koplik spots', 'Negri bodies', 'Owl's eye', 'Tzanck smear', 'Rose gardener', 'Spherule', 'Koilocytosis' where appropriate to hint at the diagnosis.",
-            "question": "The question stem (e.g., 'Which of the following is the most likely pathogen?', 'What is the primary mechanism of the drug of choice?', 'Which histological finding is expected?').",
-            "options": [
-                "Option A (Plausible distractor)",
-                "Option B (Correct Answer)",
-                "Option C (Plausible distractor)",
-                "Option D (Plausible distractor)"
-            ],
+            "scenario": "A detailed clinical description...",
+            "question": "The question stem...",
+            "options": ["A", "B", "C", "D"],
             "correctIndex": 1,
-            "explanation": "Detailed explanation of why the correct answer is right and why others are wrong. Reference specific virulence factors, structures (DNA/RNA, Envelope), or transmission modes found in standard microbiology textbooks."
+            "explanation": "Detailed explanation..."
         }
-
+        
         Constraints:
-        1. Language: Traditional Chinese (繁體中文) for the scenario and explanation. Medical terms can be in English or bilingual.
-        2. Content: Must be medically accurate based on: 
-           - DNA Viruses: Herpes (HSV, VZV, CMV, EBV), HPV, Adeno, Parvo B19, Pox.
-           - RNA Viruses: Flu (Ortho), Measles/Mumps (Paramyxo), Rabies (Rhabdo), HIV (Retro), Dengue/Zika (Flavi), Polio/Entero (Picorna), Rotavirus (Reo).
-           - Mycology: Dermatophytes, Sporothrix, Candida, Cryptococcus, Aspergillus, Dimorphic fungi (Histo/Coccidio).
-        3. Difficulty: Medical school exam level.
+        1. Language: Traditional Chinese (繁體中文) for scenario/explanation.
+        2. Content: Accurate M67 Virology/Mycology.
     `;
 
     try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${userApiKey}`, {
+        // 嘗試使用 gemini-1.5-flash，若您的帳號不支援此模型，可改為 gemini-pro
+        const modelName = 'gemini-1.5-flash'; 
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${userApiKey}`;
+
+        console.log(`正在請求 API: ${modelName}...`); // Debug Log
+
+        const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -2123,25 +2124,44 @@ async function generateClinicalCase() {
         });
 
         const data = await response.json();
+
+        // ★★★ 關鍵修正：檢查 API 是否回傳錯誤 ★★★
+        if (!response.ok) {
+            console.error("API Error Details:", data); // 在 Console 顯示完整錯誤
+            let errorMsg = data.error?.message || "Unknown API Error";
+            throw new Error(`API 請求失敗 (${response.status}): ${errorMsg}`);
+        }
+
+        // 檢查是否有候選內容
+        if (!data.candidates || data.candidates.length === 0) {
+            console.warn("API 回傳成功但無內容 (被安全設定阻擋?):", data);
+            throw new Error("模型未回傳任何內容，可能被安全性篩選 (Safety Filter) 阻擋。請重試。");
+        }
         
         // 解析 Gemini 回傳的 JSON 文字
         let rawText = data.candidates[0].content.parts[0].text;
+        console.log("Raw AI Response:", rawText); // Debug: 看看 AI 到底回傳了什麼
+
         // 清理可能存在的 markdown 符號
         rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
         
-        currentQuestionData = JSON.parse(rawText);
-        displayQuestion(currentQuestionData);
+        try {
+            currentQuestionData = JSON.parse(rawText);
+            displayQuestion(currentQuestionData);
+        } catch (parseError) {
+            console.error("JSON Parse Error:", parseError);
+            throw new Error("AI 回傳的格式無法解析，請再試一次 (JSON Parsing Failed)。");
+        }
 
     } catch (error) {
-        alert("生成失敗，請檢查 API Key 或網路連線。\n錯誤訊息: " + error.message);
-        document.getElementById('loadingArea').classList.add('hidden');
+        alert(`生成失敗！\n\n錯誤原因：${error.message}\n\n(您可以按 F12 開啟 Console 查看詳細錯誤)`);
+        loadingArea.classList.add('hidden');
     } finally {
         isGenerating = false;
-        document.getElementById('generateBtn').disabled = false;
-        document.getElementById('generateBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
     }
 }
-
 // F. 顯示題目
 function displayQuestion(data) {
     document.getElementById('loadingArea').classList.add('hidden');
