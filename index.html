@@ -2070,7 +2070,7 @@ function renderQuizInterface(container) {
     `;
 }
 
-// E. [修正版] 核心：呼叫 Gemini API 生成題目 (含錯誤偵錯)
+// E. [終極除錯版] 核心：呼叫 Gemini API 生成題目 (含自動模型切換與強力解析)
 async function generateClinicalCase() {
     if (isGenerating) return;
     isGenerating = true;
@@ -2087,80 +2087,121 @@ async function generateClinicalCase() {
 
     const topic = document.getElementById('topicSelect').value;
     
-    // --- PROMPT ENGINEERING ---
+    // --- PROMPT ---
     const prompt = `
-        You are a medical professor creating a USMLE Step 1 style clinical vignette for medical students (M67).
-        Topic: ${topic} (Focus on Virology and Mycology).
+        You are a medical professor creating a USMLE Step 1 style clinical vignette.
+        Topic: ${topic} (Focus on Virology/Mycology).
         
-        Generate a strictly valid JSON object. Do not include markdown code blocks (like \`\`\`json). Just the raw JSON.
+        STRICTLY RETURN ONLY A VALID JSON OBJECT. NO MARKDOWN. NO COMMENTS.
         
-        Structure:
+        Format:
         {
-            "scenario": "A detailed clinical description...",
-            "question": "The question stem...",
+            "scenario": "Clinical case description...",
+            "question": "Question stem...",
             "options": ["A", "B", "C", "D"],
-            "correctIndex": 1,
-            "explanation": "Detailed explanation..."
+            "correctIndex": 0,
+            "explanation": "Detailed rationale..."
         }
         
         Constraints:
-        1. Language: Traditional Chinese (繁體中文) for scenario/explanation.
-        2. Content: Accurate M67 Virology/Mycology.
+        1. Language: Traditional Chinese (繁體中文).
+        2. Content: Medical Microbiology (M67 level).
     `;
 
-    try {
-        // 嘗試使用 gemini-1.5-flash，若您的帳號不支援此模型，可改為 gemini-pro
-        const modelName = 'gemini-flash-latest'; 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${userApiKey}`;
+    // 定義模型列表 (如果第一個失敗，自動試下一個)
+    const models = ['gemini-1.5-flash', 'gemini-pro'];
+    
+    let success = false;
+    let finalErrorMsg = '';
 
-        console.log(`正在請求 API: ${modelName}...`); // Debug Log
+    for (const modelName of models) {
+        if (success) break; // 如果已經成功，跳出迴圈
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }]
-            })
-        });
-
-        const data = await response.json();
-
-        // ★★★ 關鍵修正：檢查 API 是否回傳錯誤 ★★★
-        if (!response.ok) {
-            console.error("API Error Details:", data); // 在 Console 顯示完整錯誤
-            let errorMsg = data.error?.message || "Unknown API Error";
-            throw new Error(`API 請求失敗 (${response.status}): ${errorMsg}`);
-        }
-
-        // 檢查是否有候選內容
-        if (!data.candidates || data.candidates.length === 0) {
-            console.warn("API 回傳成功但無內容 (被安全設定阻擋?):", data);
-            throw new Error("模型未回傳任何內容，可能被安全性篩選 (Safety Filter) 阻擋。請重試。");
-        }
-        
-        // 解析 Gemini 回傳的 JSON 文字
-        let rawText = data.candidates[0].content.parts[0].text;
-        console.log("Raw AI Response:", rawText); // Debug: 看看 AI 到底回傳了什麼
-
-        // 清理可能存在的 markdown 符號
-        rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-        
         try {
-            currentQuestionData = JSON.parse(rawText);
-            displayQuestion(currentQuestionData);
-        } catch (parseError) {
-            console.error("JSON Parse Error:", parseError);
-            throw new Error("AI 回傳的格式無法解析，請再試一次 (JSON Parsing Failed)。");
-        }
+            console.log(`[System] 嘗試請求模型: ${modelName}...`);
+            
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${userApiKey}`;
+            
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    // 加入安全性設定，降低醫學名詞被誤判為有害內容的機率
+                    safetySettings: [
+                        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
+                        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
+                        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
+                        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }
+                    ]
+                })
+            });
 
-    } catch (error) {
-        alert(`生成失敗！\n\n錯誤原因：${error.message}\n\n(您可以按 F12 開啟 Console 查看詳細錯誤)`);
-        loadingArea.classList.add('hidden');
-    } finally {
-        isGenerating = false;
-        generateBtn.disabled = false;
-        generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            const data = await response.json();
+
+            // 檢查 API 是否回傳錯誤
+            if (!response.ok) {
+                const errorDetail = data.error?.message || data.error?.status || "Unknown Error";
+                console.warn(`[System] ${modelName} 請求失敗: ${errorDetail}`);
+                finalErrorMsg = `${modelName} Error: ${errorDetail}`;
+                continue; // 嘗試下一個模型
+            }
+
+            // 檢查是否被 Safety Filter 攔截
+            if (!data.candidates || data.candidates.length === 0) {
+                console.warn(`[System] ${modelName} 回傳空內容 (可能被安全性阻擋)`);
+                if (data.promptFeedback) {
+                    console.warn("Safety Feedback:", data.promptFeedback);
+                }
+                finalErrorMsg = "內容被安全性篩選器 (Safety Filter) 阻擋，請重試。";
+                continue;
+            }
+
+            // 成功取得資料，開始解析
+            let rawText = data.candidates[0].content.parts[0].text;
+            console.log("[System] AI Raw Response:", rawText);
+
+            // 強力 JSON 萃取 (尋找最外層的 {})
+            const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+            if (!jsonMatch) {
+                throw new Error("無法從 AI 回應中提取 JSON (No JSON found)");
+            }
+            
+            const jsonStr = jsonMatch[0];
+            
+            try {
+                currentQuestionData = JSON.parse(jsonStr);
+                
+                // 簡單驗證資料結構
+                if(!currentQuestionData.options || !currentQuestionData.question) {
+                    throw new Error("JSON 結構缺損");
+                }
+
+                displayQuestion(currentQuestionData);
+                success = true; // 標記成功
+                
+            } catch (parseError) {
+                console.error("[System] JSON Parse Error:", parseError);
+                finalErrorMsg = "JSON 解析失敗 (Syntax Error)";
+                continue;
+            }
+
+        } catch (networkError) {
+            console.error(`[System] ${modelName} 网络错误:`, networkError);
+            finalErrorMsg = `網路連線錯誤: ${networkError.message}`;
+        }
     }
+
+    // 如果所有模型都失敗
+    if (!success) {
+        alert(`生成失敗 (所有嘗試均無效) 😫\n\n最後一次錯誤訊息：\n${finalErrorMsg}\n\n請按 F12 查看 Console 獲取詳細資訊。`);
+        loadingArea.classList.add('hidden');
+    }
+
+    // 無論成功失敗，最後都要恢復按鈕
+    isGenerating = false;
+    generateBtn.disabled = false;
+    generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
 }
 // F. 顯示題目
 function displayQuestion(data) {
@@ -2399,6 +2440,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
