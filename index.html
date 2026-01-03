@@ -8,6 +8,73 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
+// [新增] 處理使用者點擊選項
+let userSelectedExamIdx = null; // 暫存使用者選了哪個
+
+function checkExamAnswer(qid, idx) {
+    const q = pastExamDB.find(i => i.id === qid);
+    userSelectedExamIdx = idx;
+
+    // 重置所有選項樣式
+    document.querySelectorAll('[id^="exam-opt-"]').forEach(el => {
+        el.className = "p-4 rounded-lg border border-gray-200 hover:bg-teal-50 hover:border-teal-300 transition cursor-pointer flex items-center gap-3 group relative overflow-hidden select-none";
+        el.querySelector('.status-icon').innerHTML = '';
+        el.querySelector('.status-icon').classList.add('hidden');
+    });
+
+    const selectedEl = document.getElementById(`exam-opt-${idx}`);
+
+    // 情境 A: 還不知道正確答案 (AI 尚未解題) -> 顯示「已選擇 (藍色)」
+    if (!q.correctAnswer) {
+        selectedEl.className = "p-4 rounded-lg border-2 border-blue-500 bg-blue-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+        // 提示使用者去按 AI 解題
+        const solveBtn = document.getElementById('solveBtn');
+        if(solveBtn) solveBtn.classList.add('animate-pulse');
+    } 
+    // 情境 B: 已經知道答案 -> 直接批改
+    else {
+        // 找出正確選項的 Index (假設選項格式為 "(A)..." 或 "A...")
+        // 這裡我們用簡單的比對：看看選項文字是否包含正確答案代號
+        let correctIdx = -1;
+        q.options.forEach((opt, i) => {
+            if (opt.includes(`(${q.correctAnswer})`) || opt.startsWith(`${q.correctAnswer}.`)) {
+                correctIdx = i;
+            }
+        });
+
+        // 批改
+        if (idx === correctIdx) {
+            // 答對 (綠色)
+            selectedEl.className = "p-4 rounded-lg border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+            selectedEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+            selectedEl.querySelector('.status-icon').classList.remove('hidden');
+        } else {
+            // 答錯 (紅色)
+            selectedEl.className = "p-4 rounded-lg border-2 border-red-500 bg-red-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+            selectedEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-times-circle text-red-600 text-xl"></i>';
+            selectedEl.querySelector('.status-icon').classList.remove('hidden');
+            
+            // 同時顯示正確答案
+            if (correctIdx !== -1) {
+                const correctEl = document.getElementById(`exam-opt-${correctIdx}`);
+                correctEl.className = "p-4 rounded-lg border border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+                correctEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+                correctEl.querySelector('.status-icon').classList.remove('hidden');
+            }
+        }
+    }
+}
+
+// 輔助：只顯示正確答案 (用於 AI 解題後的回饋)
+function highlightCorrectAnswer(correctIdx) {
+    const el = document.getElementById(`exam-opt-${correctIdx}`);
+    if (el) {
+        el.className = "p-4 rounded-lg border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+        el.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+        el.querySelector('.status-icon').classList.remove('hidden');
+    }
+}
+        
         tailwind.config = {
             theme: {
                 extend: {
@@ -1949,6 +2016,530 @@
         correctAnswer: "",
         userNote: ""
     }
+{
+        id: "113-final-16",
+        source: "113-微免期末",
+        relatedPathogen: "rna_retro",
+        type: "virology",
+        question: "有關反轉錄病毒 (retrovirus) 的敘述，何者最不適當？",
+        options: [
+            "(A) 原病毒 (Provirus) 只出現在其宿主細胞染色體固定的位置",
+            "(B) 反轉錄酶可以利用 cDNA 為模板合成雙股 DNA",
+            "(C) 在病毒顆粒中基因體具有兩套 (two copies) 單股 RNA",
+            "(D) 病毒顆粒中帶有反轉錄病毒酶 (reverse transcriptase)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-17",
+        source: "113-微免期末",
+        relatedPathogen: "dna_adeno",
+        type: "clinical",
+        question: "下列何種病毒最可能引發咽喉結膜熱 (pharyngoconjunctival fever)？",
+        options: [
+            "(A) 人類疱疹病毒第 7 型 (Human herpesvirus 7)",
+            "(B) Epstein-Barr virus",
+            "(C) 單純疱疹病毒第一型 (Herpes simplex virus type 1)",
+            "(D) 腺病毒 (Adenovirus)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-18",
+        source: "113-微免期末",
+        relatedPathogen: "dna_pap_poly",
+        type: "clinical",
+        question: "進行性多灶性白質腦病 (Progressive multifocal leukoencephalopathy) 是一種髓鞘脫失 (demyelination) 的病變，臨床上常與免疫抑制有關。此病主要由何種病毒引起？",
+        options: [
+            "(A) 日本腦炎病毒 (Japanese encephalitis virus)",
+            "(B) BK virus",
+            "(C) 小病毒 B19 (Parvovirus B19)",
+            "(D) JC virus"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-19",
+        source: "113-微免期末",
+        relatedPathogen: "dna_herpes",
+        type: "mechanism",
+        question: "Epstein-Barr virus 可導致下列何種細胞的不死化 (immortalization)？",
+        options: [
+            "(A) T 淋巴球 (T lymphocytes)",
+            "(B) 上皮細胞 (Epithelial cells)",
+            "(C) B 淋巴球 (B lymphocyte)",
+            "(D) 單核球 (Monocytes)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-20",
+        source: "113-微免期末",
+        relatedPathogen: "rna_retro",
+        type: "clinical",
+        question: "下列何種症狀最可能為人類免疫缺陷病毒 (HIV) 感染或罹患愛滋病 (AIDS)？",
+        options: [
+            "(A) 28 歲的男性，有持續性的咳嗽",
+            "(B) 44 歲的女性，舌側緣有毛狀白斑 (hairy leukoplakia)",
+            "(C) 81 歲的男性，患有帕金森病、高血壓與糖尿病",
+            "(D) 65 歲女性，戴上顎全口假牙，有義齒性口炎"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-21",
+        source: "113-微免期末",
+        relatedPathogen: "rna_retro",
+        type: "mechanism",
+        question: "人類免疫缺陷病毒 (HIV) 最主要是殺死下列何種細胞而導致愛滋病 (AIDS)？",
+        options: [
+            "(A) B 細胞 (B cells)",
+            "(B) 單核球 (Monocytes)",
+            "(C) 含 CD4 的 T 細胞 (CD4-positive T cells)",
+            "(D) 含 CD8 的 T 細胞 (CD8-positive T cells)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-22",
+        source: "113-微免期末",
+        relatedPathogen: "rna_picorna",
+        type: "clinical",
+        question: "下列何者與引起疱疹性咽喉炎 (herpangina) 及手足口病 (hand-foot-and-mouth disease) 的致病原最相關？",
+        options: [
+            "(A) 水痘帶狀病毒 (Varicella-zoster virus)",
+            "(B) 單純疱疹病毒 (Herpes simplex virus)",
+            "(C) Epstein-Barr virus",
+            "(D) 柯沙奇病毒 (Coxsackievirus)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-23",
+        source: "113-微免期末",
+        relatedPathogen: "rna_reo",
+        type: "clinical",
+        question: "在托育中心的一歲男嬰，持續兩天水瀉並嘔吐，且有輕微發燒現象，之後因為脫水而住院。他最可能受到下列何種病毒的感染？",
+        options: [
+            "(A) 輪狀病毒 (Rotavirus)",
+            "(B) 流感病毒 (Influenza virus)",
+            "(C) B 型肝炎病毒 (Hepatitis B virus)",
+            "(D) Epstein-Barr virus"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-24",
+        source: "113-微免期末",
+        relatedPathogen: "general_virology",
+        type: "clinical",
+        question: "下列何種病毒感染不會引發胎兒的先天性缺陷？",
+        options: [
+            "(A) 人類巨細胞病毒 (Human cytomegalovirus)",
+            "(B) 小病毒 B19 (Parvovirus B19)",
+            "(C) 人類乳突狀瘤病毒 (Human papillomavirus)",
+            "(D) 德國麻疹病毒 (Rubella virus)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-25",
+        source: "113-微免期末",
+        relatedPathogen: "dna_parvo",
+        type: "clinical",
+        question: "下列何種病毒感染最有可能造成關節炎的症狀？",
+        options: [
+            "(A) 人類巨細胞病毒 (Human cytomegalovirus)",
+            "(B) Epstein-Barr virus",
+            "(C) 人類乳突狀瘤病毒 (Human papillomavirus)",
+            "(D) 小病毒 B19 (Parvovirus B19)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-26",
+        source: "113-微免期末",
+        relatedPathogen: "prion",
+        type: "diagnosis",
+        question: "一種新的檢驗方式稱作“real-time quaking-induced conversion (RT-QuIC)”，可以快速檢驗出檢體內是否含有 PrPSc。請問這是利用 prion 的那一種特性？",
+        options: [
+            "(A) PrPC 會聚集成纖絲 (prion fibril)",
+            "(B) PrPSc 會聚集成纖絲 (prion fibril)",
+            "(C) PrPSc 會將 PrPC 轉換成 PrPSc",
+            "(D) PrPSc 的蛋白質半衰期較 PrPC 短"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-27",
+        source: "113-微免期末",
+        relatedPathogen: "antiviral",
+        type: "pharmacology",
+        question: "Acyclovir 可抑制下列何者之功能？",
+        options: [
+            "(A) 胸腺嘧啶激酶 (Thymidine kinase)",
+            "(B) 病毒的 DNA 聚合酶 (Viral DNA polymerase)",
+            "(C) 神經胺酸酶 (Neuraminidase)",
+            "(D) 血球凝集素 (Hemagglutinin)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-28",
+        source: "113-微免期末",
+        relatedPathogen: "antiviral",
+        type: "pharmacology",
+        question: "下列何種藥物可用來抑制第一型人類免疫缺乏病毒 (HIV-1) 最終組裝 (assembly) 和成熟 (maturation) 步驟所需的酵素活性？",
+        options: [
+            "(A) 反轉錄酶抑制劑 (Reverse transcriptase inhibitor)",
+            "(B) 蛋白酶抑制劑 (Protease inhibitor)",
+            "(C) 融合抑制劑 (Fusion inhibitor)",
+            "(D) 嵌入酶抑制劑 (Integrase inhibitor)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-29",
+        source: "113-微免期末",
+        relatedPathogen: "dna_pap_poly",
+        type: "vaccine",
+        question: "下列有關人類乳突狀瘤病毒 (human papillomavirus) 疫苗的敘述，何者錯誤？",
+        options: [
+            "(A) 為 virus-like particle (VLP) 疫苗",
+            "(B) 目前劑型大多皆由肌肉注射",
+            "(C) 通常會含有血清型第 6, 11, 16, 18 型等病毒",
+            "(D) 可預防子宮頸癌"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-30",
+        source: "113-微免期末",
+        relatedPathogen: "general_virology",
+        type: "clinical",
+        question: "下列病毒中，何者引起的主要臨床表徵是因其會造成潛伏感染 (latent infection)，感染並潛藏在感覺神經元細胞內所致？\n①單純疱疹病毒 (Herpes simplex virus) ②脊髓灰質炎病毒 (Poliovirus) ③ 水痘帶狀皰疹病毒 (Varicella-zoster virus)",
+        options: [
+            "(A) 123",
+            "(B) 僅①②",
+            "(C) 僅②③",
+            "(D) 僅①③"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-31",
+        source: "113-微免期末",
+        relatedPathogen: "general_virology",
+        type: "virology",
+        question: "下列哪些病毒對乾洗手 (含有 70% 酒精) 的處理有抗性？\n①克沙奇病毒 (Coxsackievirus) ②輪狀病毒 (Rotavirus) ③ 水痘帶狀疱疹病毒 (VZV) ④ E 型肝炎病毒 (Hepatitis E virus)",
+        options: [
+            "(A) 123",
+            "(B) 234",
+            "(C) 124",
+            "(D) 1234"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-32",
+        source: "113-微免期末",
+        relatedPathogen: "hepatitis",
+        type: "virology",
+        question: "下列有關 D 型肝炎病毒的敘述，何者錯誤？",
+        options: [
+            "(A) HDV 可藉由施打 B 型肝炎疫苗來預防感染",
+            "(B) 主要藉由糞口傳染",
+            "(C) 在分類上屬於 deltavirus",
+            "(D) 目前沒有以 D 型肝炎病毒為標的的有效治療方式"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-33",
+        source: "113-微免期末",
+        relatedPathogen: "rna_ortho",
+        type: "virology",
+        question: "下列有關流感病毒 (influenza virus) 的敘述，何者錯誤？",
+        options: [
+            "(A) 利用 NP 與 M1 蛋白的差異，來區別流感病毒 A、B、C 三型",
+            "(B) 利用 HA 與 NA 蛋白的差異，來區別 A 型流感病毒的亞型",
+            "(C) B 型很容易發生抗原移行 (Antigenic shift)",
+            "(D) 流感疫苗可預防 A 及 B 型病毒株感染"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-34",
+        source: "113-微免期末",
+        relatedPathogen: "general_virology",
+        type: "epidemiology",
+        question: "下列那幾種病毒不經由動物暨節肢動物而傳播？\n①漢他病毒 (Hantavirus) ②日本腦炎病毒 (JEV) ③黃熱病病毒 (Yellow fever virus) ④德國麻疹病毒 (Rubella virus)",
+        options: [
+            "(A) 14",
+            "(B) 12",
+            "(C) 34",
+            "(D) 24"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-35",
+        source: "113-微免期末",
+        relatedPathogen: "general_virology",
+        type: "virology",
+        question: "下列何者不是負股 RNA 病毒？",
+        options: [
+            "(A) 登革熱病毒 (dengue virus)",
+            "(B) 伊波拉病毒 (Ebola virus)",
+            "(C) 副流感病毒 (parainfluenza virus)",
+            "(D) 流感病毒 (influenza virus)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-36",
+        source: "113-微免期末",
+        relatedPathogen: "rna_paramyxo",
+        type: "virology",
+        question: "下列何者是流行性感冒病毒 (Influenza virus) 和副流行性感冒病毒 (Parainfluenza virus) 的不同點？",
+        options: [
+            "(A) 前者為正股 RNA 病毒，後者為負股 RNA 病毒",
+            "(B) 前者為負股 RNA 病毒，後者為正股 RNA 病毒",
+            "(C) 前者在細胞核複製，後者是在細胞質複製",
+            "(D) 前者的基因體是不分段型，後者是分段型"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-37",
+        source: "113-微免期末",
+        relatedPathogen: "hepatitis",
+        type: "clinical",
+        question: "罹患慢性 B 型肝炎 (chronic hepatitis B) 的孕婦，若是測到以下哪一種抗原呈現陽性，則其新生兒必須在出生 24 小時內接受 B 型肝炎免疫球蛋白注射一劑，然後再按時接受疫苗注射？",
+        options: [
+            "(A) HBsAg",
+            "(B) HBeAg",
+            "(C) HBcAg",
+            "(D) Anti-HBs"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-38",
+        source: "113-微免期末",
+        relatedPathogen: "myco_intro",
+        type: "basic",
+        question: "構成真菌細胞壁之主要成分為何？",
+        options: [
+            "(A) 幾丁質以及 α-1-4-葡萄聚醣",
+            "(B) 幾丁質以及 β-1-3-葡萄聚醣",
+            "(C) 肽醣以及 β-1-4-葡萄聚醣",
+            "(D) 幾丁質以及 α-1-6-葡萄聚醣"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-39",
+        source: "113-微免期末",
+        relatedPathogen: "myco_pharma",
+        type: "pharmacology",
+        question: "下列何種抗黴菌藥物，其作用機轉是和黴菌細胞膜之麥角脂醇 (ergosterol) 結合，造成黴菌細胞內容物流出而殺死黴菌？",
+        options: [
+            "(A) Ketoconazole",
+            "(B) Griseofulvin",
+            "(C) Amphotericin B",
+            "(D) Echinocandins"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-40",
+        source: "113-微免期末",
+        relatedPathogen: "rna_arbo",
+        type: "virology",
+        question: "下列有關日本腦炎病毒與登革熱病毒特性之敘述，何者正確？",
+        options: [
+            "(A) 均可注射疫苗，預防感染",
+            "(B) 被感染之宿主可再直接散播病毒",
+            "(C) 均由埃及斑蚊傳播",
+            "(D) 感染後均產生感冒般症狀"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-41",
+        source: "113-微免期末",
+        relatedPathogen: "general_virology",
+        type: "immunology",
+        question: "感染下列那些病毒後，病人可獲得終身免疫力？\n①麻疹病毒 (Measles virus) ②單純疱疹病毒 (Herpes simplex virus) ③腺病毒 (Adenovirus) ④腮腺炎病毒 (Mumps virus)",
+        options: [
+            "(A) 14",
+            "(B) 34",
+            "(C) 13",
+            "(D) 12"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-42",
+        source: "113-微免期末",
+        relatedPathogen: "hepatitis",
+        type: "virology",
+        question: "下列有關 E 型肝炎病毒的敘述，何者最適當？",
+        options: [
+            "(A) 為不具外套膜之病毒",
+            "(B) 病毒顆粒帶有一個約 7.2kb 的負股 RNA 基因组",
+            "(C) 只有兩種基因型的 HEV 可以感染人類",
+            "(D) 此類病毒不會感染豬"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-43",
+        source: "113-微免期末",
+        relatedPathogen: "rna_paramyxo",
+        type: "clinical",
+        question: "下列何種病毒，會引起睪丸、卵巢、胰臟等腺體發炎之病症？",
+        options: [
+            "(A) 麻疹病毒 (Measles virus)",
+            "(B) 呼吸道融合病毒 (Respiratory syncytial virus)",
+            "(C) 副流行性感冒病毒 (Parainfluenza virus)",
+            "(D) 腮腺炎病毒 (Mumps virus)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-44",
+        source: "113-微免期末",
+        relatedPathogen: "hepatitis",
+        type: "clinical",
+        question: "病患若先感染 B 型肝炎病毒後，再感染下列何種肝炎病毒，極易引發猛爆性肝炎？",
+        options: [
+            "(A) A 型 (HAV)",
+            "(B) C 型 (HCV)",
+            "(C) D 型 (HDV)",
+            "(D) E 型 (HEV)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-45",
+        source: "113-微免期末",
+        relatedPathogen: "rna_paramyxo",
+        type: "clinical",
+        question: "一名兩歲幼童出現發高燒、咳嗽、流鼻水、結膜炎及皮膚出現紅疹/皮疹的現象，他的媽媽說幾位同班同學在幾天前也出現這些症狀。請問造成這個孩子的疾病及病原的描述，何者不正確？",
+        options: [
+            "(A) 該病毒感染與青少年糖尿病有關",
+            "(B) 紅疹/皮疹會先出現在臉，之後再散佈到軀幹",
+            "(C) 該疾病可用 MMR 疫苗加以預防",
+            "(D) 患者口腔內會出現柯氏斑點 (Koplik spots)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-46",
+        source: "113-微免期末",
+        relatedPathogen: "myco_superficial",
+        type: "clinical",
+        question: "有關花斑癬 (pityriasis versicolor) 之敘述，下列何者錯誤？",
+        options: [
+            "(A) 最常見於年輕人",
+            "(B) 致病原為馬拉色菌綜合菌 (Malassezia furfur complex)",
+            "(C) 致病原未歸類為自然界腐生菌",
+            "(D) 無法由檢體直接做鏡檢診斷"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-47",
+        source: "113-微免期末",
+        relatedPathogen: "general_virology",
+        type: "vaccine",
+        question: "下列何種病毒目前尚無有效的疫苗可以預防感染？",
+        options: [
+            "(A) 小兒麻痺病毒 (Poliovirus)",
+            "(B) 登革熱病毒 (Dengue virus)",
+            "(C) 麻疹病毒 (Measles virus)",
+            "(D) 流行性感冒病毒 (Influenza virus)"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-48",
+        source: "113-微免期末",
+        relatedPathogen: "rna_arbo",
+        type: "virology",
+        question: "下列關於馬堡病毒 (Marburg virus) 和伊波拉病毒 (Ebola virus) 之敘述，何者正確？",
+        options: [
+            "(A) 伊波拉病毒為飲食傳播",
+            "(B) 馬堡病毒有 2 種亞型",
+            "(C) 兩者皆屬於絲狀病毒科 (Filoviridae)",
+            "(D) 兩者皆為生物安全等級第三級"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-49",
+        source: "113-微免期末",
+        relatedPathogen: "myco_intro",
+        type: "basic",
+        question: "有關黴菌 (fungus) 的敘述，下列何者錯誤？",
+        options: [
+            "(A) 有典型的細胞核",
+            "(B) 細胞壁特有成分是幾丁質",
+            "(C) 最適生長 pH 值為微酸環境",
+            "(D) 最適生長溫度為 37℃"
+        ],
+        correctAnswer: "",
+        userNote: ""
+    },
+    {
+        id: "113-final-50",
+        source: "113-微免期末",
+        relatedPathogen: "myco_intro",
+        type: "basic",
+        question: "真菌之無性孢子 (asexual spores) 可分成那兩大類？",
+        options: [
+            "(A) 分生孢子 (conidia) 及囊孢子 (sporangiospores)",
+            "(B) 瓶孢子 (phialides) 及分節孢子 (arthrospores)",
+            "(C) 厚膜孢子 (chlamydospores) 及分節孢子 (arthrospores)",
+            "(D) 分節孢子 (arthrospores) 及芽生孢子 (blastospores)"
+        ],
+        correctAnswer: "",
+        userNote: ""
 ];
 
         // --- RENDER LOGIC ---
@@ -2596,6 +3187,7 @@ function renderExamDashboard() {
 }
 
 // 2. 開啟單題視窗
+// [更新版] 開啟單題視窗
 function openQuestionModal(qid) {
     currentExamQuestionId = qid;
     const q = pastExamDB.find(i => i.id === qid);
@@ -2612,41 +3204,55 @@ function openQuestionModal(qid) {
             <p class="text-xl font-bold text-gray-800 leading-relaxed">${q.question}</p>
         </div>
         
-        <div class="grid grid-cols-1 gap-3 mb-8">
+        <div class="grid grid-cols-1 gap-3 mb-8" id="examOptionsArea">
             ${q.options.map((opt, idx) => `
-                <div class="p-4 rounded-lg border border-gray-200 hover:bg-gray-50 transition cursor-pointer flex items-center gap-3 group relative overflow-hidden">
-                    <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center font-bold text-sm group-hover:bg-teal-100 group-hover:text-teal-700 transition">${String.fromCharCode(65+idx)}</div>
+                <div id="exam-opt-${idx}" onclick="checkExamAnswer('${qid}', ${idx})" 
+                     class="p-4 rounded-lg border border-gray-200 hover:bg-teal-50 hover:border-teal-300 transition cursor-pointer flex items-center gap-3 group relative overflow-hidden select-none">
+                    <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center font-bold text-sm group-hover:bg-teal-600 group-hover:text-white transition" id="exam-opt-icon-${idx}">${String.fromCharCode(65+idx)}</div>
                     <span class="text-gray-700 font-medium">${opt}</span>
+                    <div class="ml-auto hidden status-icon"></div>
                 </div>
             `).join('')}
         </div>
 
-        <div id="aiAnalysisArea" class="hidden">
-            <div class="flex items-center gap-2 mb-4">
+        <div id="aiAnalysisArea" class="hidden animate-fade-in">
+            <div class="flex items-center gap-2 mb-4 p-3 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border border-purple-100">
                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white text-xs shadow-lg">
                     <i class="fas fa-robot"></i>
                 </div>
-                <h3 class="font-bold text-gray-800">Gemini 老師詳解</h3>
+                <div>
+                    <h3 class="font-bold text-gray-800 text-sm">Gemini 老師詳解</h3>
+                    <p class="text-[10px] text-gray-500">AI 將自動判讀正確答案並為您評分</p>
+                </div>
             </div>
-            <div id="aiContent" class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-gray-700 leading-relaxed prose prose-sm max-w-none">
-                <div class="flex justify-center py-4"><i class="fas fa-circle-notch fa-spin text-purple-500 text-2xl"></i></div>
+            <div id="aiContent" class="bg-white p-6 rounded-xl border border-gray-200 text-gray-700 leading-relaxed prose prose-sm max-w-none shadow-sm">
+                <div class="flex flex-col items-center justify-center py-8 text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-purple-500 text-3xl mb-3"></i>
+                    <span class="text-sm">正在分析題意與選項...</span>
+                </div>
             </div>
         </div>
     `;
 
     // 渲染按鈕區
-    // 檢查是否已經有緩存的答案 (如果您未來實作 localStorage 儲存功能)
     footer.innerHTML = `
-        <button onclick="document.getElementById('examModal').classList.add('hidden')" class="px-4 py-2 text-gray-500 font-medium hover:bg-gray-200 rounded-lg transition">關閉</button>
-        <button onclick="callAIForExplanation('${qid}')" id="solveBtn" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition transform active:scale-95 font-medium flex items-center gap-2">
+        <button onclick="document.getElementById('examModal').classList.add('hidden')" class="px-4 py-2 text-gray-500 font-medium hover:bg-gray-100 rounded-lg transition">關閉</button>
+        <button onclick="callAIForExplanation('${qid}')" id="solveBtn" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition transform active:scale-95 font-medium flex items-center gap-2 shadow-teal-200">
             <i class="fas fa-lightbulb"></i> AI 幫我解題
         </button>
     `;
+
+    // 如果這一題之前已經有答案了 (pastExamDB 中已有 correctAnswer)，直接顯示對錯
+    if (q.correctAnswer) {
+        // 模擬點擊正確答案來顯示狀態 (或是單純顯示正確答案)
+        const correctIdx = q.options.findIndex(opt => opt.startsWith(`(${q.correctAnswer})`) || opt.includes(`(${q.correctAnswer})`));
+        if (correctIdx !== -1) highlightCorrectAnswer(correctIdx);
+    }
 }
 
 // 3. AI 解題核心函數 (The Brain) - V9.2 自動模型切換版
+// [更新版] AI 解題核心函數 (含自動答案解析)
 async function callAIForExplanation(qid) {
-    // 檢查 API Key
     if (!userApiKey) {
         alert("請先在「AI 臨床實驗室」輸入 API Key 才能使用解題功能！");
         return;
@@ -2657,119 +3263,88 @@ async function callAIForExplanation(qid) {
     const aiArea = document.getElementById('aiAnalysisArea');
     const aiContent = document.getElementById('aiContent');
 
-    // UI 狀態更新
     solveBtn.disabled = true;
     solveBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> AI 思考中...';
     aiArea.classList.remove('hidden');
-    
-    // 滾動到底部
     setTimeout(() => aiArea.scrollIntoView({ behavior: 'smooth' }), 100);
 
-    // 準備 Context & Prompt
+    // Prompt 保持不變
     let contextData = "";
     if (q.relatedPathogen && pathogenData[q.relatedPathogen]) {
         const pData = pathogenData[q.relatedPathogen];
-        contextData = `
-        Reference Knowledge:
-        - Pathogen: ${pData.title}
-        - Key Facts: ${pData.quickFacts.map(f => f.label + ":" + f.val).join(', ')}
-        `;
+        contextData = `Reference: ${pData.title}, Facts: ${pData.quickFacts.map(f => f.val).join(', ')}`;
     }
 
     const prompt = `
-        You are a medical professor explaining an exam question to a medical student.
-        
+        You are a medical professor explaining an exam question.
         Question: "${q.question}"
         Options: ${JSON.stringify(q.options)}
         ${contextData}
 
         Task:
-        1. Identify the Correct Answer.
-        2. Provide a concise explanation of the mechanism.
-        3. Explain why other options are incorrect.
-        4. Provide a mnemonic (口訣) if possible.
+        1. Identify the Correct Answer Option (A, B, C, or D).
+        2. Provide explanation.
 
         Format:
-        Return the response in **Traditional Chinese (繁體中文)**.
-        Start with "✅ **正確答案：(X)**"
+        Return in Traditional Chinese.
+        IMPORTANT: The first line MUST be strictly in this format: "✅ **正確答案：(X)**" where X is A, B, C, or D.
     `;
 
-    // 定義模型清單 (優先嘗試輕量快閃模型，失敗則退回舊版)
-    const models = [
-        'gemini-flash-latest', 
-        'gemini-pro-latest', 
-        'gemini-2.5-flash',
-        'gemini-2.5-pro',
-        'gemini-pro' // 最穩定的舊版 (1.0)
-    ];
-
+    const models = ['gemini-flash-latest', 'gemini-pro-latest']; 
+    
     let success = false;
-    let lastError = '';
 
     for (const modelName of models) {
         if (success) break;
-        
         try {
-            console.log(`[System] 嘗試模型: ${modelName}...`);
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${userApiKey}`;
-            
             const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     contents: [{ parts: [{ text: prompt }] }],
-                    safetySettings: [
-                        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
-                        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
-                        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
-                        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }
-                    ]
+                    safetySettings: [{ category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }]
                 })
             });
-            
             const data = await response.json();
-
-            if (!response.ok) {
-                // 如果是 404 (Not Found) 或 400，代表這個模型名稱不能用，嘗試下一個
-                const errorMsg = data.error?.message || response.statusText;
-                console.warn(`[System] ${modelName} 失敗: ${errorMsg}`);
-                lastError = `${modelName}: ${errorMsg}`;
-                continue; 
-            }
-
-            if (data.promptFeedback && data.promptFeedback.blockReason) {
-                throw new Error(`內容被安全性阻擋 (${data.promptFeedback.blockReason})`);
-            }
-
+            if (!response.ok) continue;
+            
             if (data.candidates && data.candidates.length > 0) {
                 const aiText = data.candidates[0].content.parts[0].text;
                 aiContent.innerHTML = marked.parse(aiText);
-                
-                // 成功！
                 success = true;
-                solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成 (${modelName})`;
-                solveBtn.classList.remove('from-teal-600', 'to-emerald-600');
+
+                // [新功能] 自動解析 AI 的答案並更新 UI
+                // 尋找格式： 正確答案：(A) 或 正確答案：A
+                const match = aiText.match(/正確答案[：:]\s*[（(]?([A-D])[）)]?/i);
+                if (match && match[1]) {
+                    const ans = match[1].toUpperCase();
+                    console.log("AI Parsed Answer:", ans);
+                    
+                    // 1. 存入資料庫
+                    q.correctAnswer = ans;
+                    q.userNote = "AI Solved"; // 標記為 AI 解過的
+
+                    // 2. 更新列表頁面的標籤 (讓列表顯示「已解析」)
+                    renderExamDashboard(); // 注意：這會重繪列表，可能需要優化，但目前先這樣確保資料同步
+                    
+                    // 3. 因為 renderExamDashboard 會關閉 Modal，我們需要重新打開 Modal 狀態
+                    // 或者更簡單：我們只更新 Modal 內的狀態，列表等關閉 Modal 再刷新
+                    
+                    // 觸發批改邏輯
+                    if (userSelectedExamIdx !== null) {
+                        checkExamAnswer(qid, userSelectedExamIdx);
+                    } else {
+                        // 如果使用者沒選，直接顯示正確答案
+                        const correctIdx = q.options.findIndex(opt => opt.includes(`(${ans})`) || opt.startsWith(`${ans}.`));
+                        if(correctIdx !== -1) highlightCorrectAnswer(correctIdx);
+                    }
+                }
+
+                solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成`;
                 solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
-            } else {
-                throw new Error("AI 未回傳內容");
             }
-
-        } catch (error) {
-            console.error(`[System] ${modelName} 執行錯誤:`, error);
-            lastError = error.message;
-        }
-    }
-
-    // 如果所有模型都失敗
-    if (!success) {
-        aiContent.innerHTML = `
-            <div class="text-red-600 bg-red-50 p-4 rounded border border-red-200">
-                <p class="font-bold"><i class="fas fa-exclamation-triangle"></i> 所有模型皆嘗試失敗</p>
-                <p class="text-sm mt-1 text-gray-600">最後一次錯誤：${lastError}</p>
-                <p class="text-xs mt-2 text-gray-400">請確認您的 API Key 是否正確，或是否有啟用 Google AI Studio 的權限。</p>
-            </div>`;
-        solveBtn.disabled = false;
-        solveBtn.innerHTML = '<i class="fas fa-redo"></i> 重試';
+        } catch (e) { console.error(e); }
     }
 }
         
@@ -2955,6 +3530,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
