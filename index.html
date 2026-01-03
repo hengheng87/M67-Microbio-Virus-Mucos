@@ -2037,8 +2037,6 @@
                     <span class="text-xs text-purple-600 font-medium bg-purple-50 px-2 py-1 rounded">點擊查看全類別整理</span>
                 </div>
 
-// ... (前面的代碼保持不變) ...
-
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 dash-card cursor-pointer group" onclick="renderCategoryOverview('Prions')">
                     <div class="flex items-center justify-between mb-4">
                         <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 text-xl group-hover:bg-purple-600 group-hover:text-white transition-colors"><i class="fas fa-brain"></i></div>
@@ -2647,6 +2645,7 @@ function openQuestionModal(qid) {
 }
 
 // 3. AI 解題核心函數 (The Brain)
+// 3. AI 解題核心函數 (The Brain) - V9.1 修正版
 async function callAIForExplanation(qid) {
     // 檢查 API Key
     if (!userApiKey) {
@@ -2667,14 +2666,13 @@ async function callAIForExplanation(qid) {
     // 滾動到底部
     setTimeout(() => aiArea.scrollIntoView({ behavior: 'smooth' }), 100);
 
-    // 準備 Prompt (包含來自 pathogenData 的上下文知識!)
+    // 準備 Prompt
     let contextData = "";
     if (q.relatedPathogen && pathogenData[q.relatedPathogen]) {
-        // 抓取 V8.0 資料庫中的 QuickFacts 和 Sections 標題作為背景知識，增加 AI 準確度
         const pData = pathogenData[q.relatedPathogen];
         contextData = `
-        Reference Knowledge from Database:
-        - Virus: ${pData.title}
+        Reference Knowledge:
+        - Pathogen: ${pData.title}
         - Key Facts: ${pData.quickFacts.map(f => f.label + ":" + f.val).join(', ')}
         `;
     }
@@ -2688,45 +2686,68 @@ async function callAIForExplanation(qid) {
 
         Task:
         1. Identify the Correct Answer.
-        2. Provide a concise explanation of the mechanism (Why is it correct?).
-        3. Explain why other options are incorrect (Differential Diagnosis).
-        4. If applicable, provide a short mnemonic (口訣) to help remember this.
+        2. Provide a concise explanation of the mechanism.
+        3. Explain why other options are incorrect.
+        4. Provide a mnemonic (口訣) if possible.
 
         Format:
         Return the response in **Traditional Chinese (繁體中文)**.
-        Use Markdown formatting (bolding key concepts).
         Start with "✅ **正確答案：(X)**"
     `;
 
-    // 呼叫 Gemini
     try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${userApiKey}`;
+        
         const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            body: JSON.stringify({ 
+                contents: [{ parts: [{ text: prompt }] }],
+                // [關鍵修正] 加入安全性設定，防止醫學內容被誤判為危險內容
+                safetySettings: [
+                    { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
+                    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
+                    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
+                    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }
+                ]
+            })
         });
         
         const data = await response.json();
+
+        // [關鍵修正] 詳細錯誤檢查
+        if (!response.ok) {
+            console.error("API Error Detail:", data);
+            throw new Error(data.error?.message || `API HTTP Error: ${response.status}`);
+        }
         
+        // 檢查是否因為安全性被阻擋 (Finish Reason)
+        if (data.promptFeedback && data.promptFeedback.blockReason) {
+            console.warn("Safety Block:", data.promptFeedback);
+            throw new Error(`內容被安全性篩選器阻擋 (Reason: ${data.promptFeedback.blockReason})`);
+        }
+
         if (data.candidates && data.candidates.length > 0) {
             const aiText = data.candidates[0].content.parts[0].text;
-            // 渲染結果 (使用 marked.js 解析 Markdown)
             aiContent.innerHTML = marked.parse(aiText);
             
-            // 更新按鈕狀態
+            // 成功狀態
             solveBtn.innerHTML = '<i class="fas fa-check"></i> 解析完成';
             solveBtn.classList.remove('from-teal-600', 'to-emerald-600');
             solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
-            
-            // TODO: 您可以在這裡加入將答案寫回 pastExamDB 的邏輯，這樣下次開啟就不用重跑 AI
         } else {
-            throw new Error("No content generated");
+            console.warn("Empty Candidates:", data);
+            throw new Error("AI 未回傳任何內容 (No content generated)");
         }
 
     } catch (error) {
-        console.error(error);
-        aiContent.innerHTML = `<div class="text-red-500 bg-red-50 p-4 rounded">解題失敗：${error.message} <br>請檢查 API Key 或網路連線。</div>`;
+        console.error("Call AI Error:", error);
+        aiContent.innerHTML = `
+            <div class="text-red-600 bg-red-50 p-4 rounded border border-red-200">
+                <p class="font-bold"><i class="fas fa-exclamation-triangle"></i> 解題失敗</p>
+                <p class="text-sm mt-1 text-gray-600">${error.message}</p>
+                <p class="text-xs mt-2 text-gray-400">建議：請按 F12 開啟 Console 查看詳細錯誤。</p>
+            </div>`;
         solveBtn.disabled = false;
         solveBtn.innerHTML = '<i class="fas fa-redo"></i> 重試';
     }
@@ -2914,6 +2935,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
