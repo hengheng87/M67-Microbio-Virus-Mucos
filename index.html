@@ -2365,7 +2365,7 @@ async function generateClinicalCase() {
     `;
 
     // 定義模型列表 (如果第一個失敗，自動試下一個)
-    const models = ['gemini-1.5-flash', 'gemini-pro'];
+    const models = ['gemini-flash-latest', 'gemini-pro-latest'];
     
     let success = false;
     let finalErrorMsg = '';
@@ -2644,8 +2644,6 @@ function openQuestionModal(qid) {
     `;
 }
 
-// 3. AI 解題核心函數 (The Brain)
-// 3. AI 解題核心函數 (The Brain) - V9.1 修正版
 // 3. AI 解題核心函數 (The Brain) - V9.2 自動模型切換版
 async function callAIForExplanation(qid) {
     // 檢查 API Key
@@ -2698,10 +2696,10 @@ async function callAIForExplanation(qid) {
 
     // 定義模型清單 (優先嘗試輕量快閃模型，失敗則退回舊版)
     const models = [
-        'gemini-1.5-flash', 
-        'gemini-1.5-flash-001', 
-        'gemini-1.5-flash-latest',
-        'gemini-1.5-pro',
+        'gemini-flash-latest', 
+        'gemini-pro-latest', 
+        'gemini-2.5-flash',
+        'gemini-2.5-pro',
         'gemini-pro' // 最穩定的舊版 (1.0)
     ];
 
@@ -2957,6 +2955,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
