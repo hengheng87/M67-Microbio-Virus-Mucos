@@ -1419,7 +1419,7 @@ const pastExamDB = [
             "(C) 病毒表面突出的蛋白質可能會負責吸附",
             "(D) RNA(+)病毒必須攜帶 RdRp (RNA-dependent RNA polymerase)"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "RNA(+) 病毒基因體本身可作為 mRNA，故不需攜帶 RdRp。"
     },
     {
@@ -1433,7 +1433,7 @@ const pastExamDB = [
             "(C) 2,6,5,3,4,1",
             "(D) 5,2,6,3,4,1"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: ""
     },
     {
@@ -1447,7 +1447,7 @@ const pastExamDB = [
             "(C) 80倍/640倍",
             "(D) 80倍/20倍"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "抗體效價上升 4 倍 (4-fold rise) 以上視為近期感染。"
     },
     {
@@ -1461,7 +1461,7 @@ const pastExamDB = [
             "(C) Oseltamivir / 釋放",
             "(D) neutralizing / 附著"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: "Interferon (干擾素) 主要抑制病毒蛋白合成 (Translation) 或降解 mRNA。"
     },
     {
@@ -1475,7 +1475,7 @@ const pastExamDB = [
             "(C) 可用一般之滅菌方式消滅",
             "(D) Prion 是一種有套膜的 dsRNA 病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "Prion 不誘發發炎反應 (No inflammation)，也不含核酸。"
     },
     {
@@ -1489,7 +1489,7 @@ const pastExamDB = [
             "(C) 脊髓",
             "(D) 眼睛"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "特定風險物質 (SRM) 包括腦、眼、脊髓、扁桃腺、迴腸末端。"
     },
     {
@@ -1503,7 +1503,7 @@ const pastExamDB = [
             "(C) 雞眼與此病毒無關",
             "(D) 臨床上是利用抗原性不同進行分型"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "HPV 分型是依據 DNA 序列差異。"
     },
     {
@@ -1517,7 +1517,7 @@ const pastExamDB = [
             "(C) 疫苗對已經受感染病人並無任何治療效果",
             "(D) 此病毒可能存在被感染動物的唾液中"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "狂犬病暴露後預防 (PEP) 包含疫苗與免疫球蛋白，及時施打有效。"
     },
     {
@@ -1531,7 +1531,7 @@ const pastExamDB = [
             "(C) 耐酸性環境，可在腸胃道複製",
             "(D) 感染不限於嬰幼兒，也可以感染成人"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "Rhinovirus 不耐酸 (Acid labile)。"
     },
     {
@@ -1545,7 +1545,7 @@ const pastExamDB = [
             "(C) 大部分的疱疹性咽峡炎症狀都很輕微，且潰瘍常出現在前硬顎",
             "(D) 所有腸病毒的感染都需要積極治療，包括使用抗病毒藥物"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: "A: B19病毒。 C: 軟顎。 D: 無特效藥，採支持療法。"
     },
     {
@@ -1559,7 +1559,7 @@ const pastExamDB = [
             "(C) 人類乳突病毒透過接觸傳染，可能會造成疣或癌",
             "(D) B19 病毒會感染紅血球造成貧血"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "B19 感染「紅血球前驅細胞」，而非成熟紅血球。"
     },
     {
@@ -1573,7 +1573,7 @@ const pastExamDB = [
             "(C) 水痘-帶狀疱疹病毒",
             "(D) 單純疱疹病毒第一型 (HSV-1)"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: ""
     },
     {
@@ -1587,7 +1587,7 @@ const pastExamDB = [
             "(C) 紅疹",
             "(D) 腸胃道感染"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: ""
     },
     {
@@ -1601,7 +1601,7 @@ const pastExamDB = [
             "(C) 病灶常侷限於胸或腹部的一側",
             "(D) 可能出現帶狀疱疹後神經痛"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "初次感染是水痘，帶狀疱疹是復發。"
     },
     {
@@ -1615,7 +1615,7 @@ const pastExamDB = [
             "(C) 腸病毒",
             "(D) 腺病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: ""
     },
     {
@@ -1629,7 +1629,7 @@ const pastExamDB = [
             "(C) 血紅素下降",
             "(D) 肝脾腫大"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "除非併發溶血性貧血，否則 EBV 通常不造成血紅素下降。"
     },
     {
@@ -1643,7 +1643,7 @@ const pastExamDB = [
             "(C) BK 病毒",
             "(D) 小病毒 B19"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: ""
     },
     {
@@ -1657,7 +1657,7 @@ const pastExamDB = [
             "(C) 水痘帶狀疱疹病毒",
             "(D) 巨細胞病毒 (CMV)"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: ""
     },
     {
@@ -1671,7 +1671,7 @@ const pastExamDB = [
             "(C) 卡波西肉瘤",
             "(D) 生殖道疱疹"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "針對 HPV 6, 11 型可預防菜花。"
     },
     {
@@ -1685,7 +1685,7 @@ const pastExamDB = [
             "(C) 單純疱疹病毒",
             "(D) 巨細胞病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: ""
     },
     {
@@ -1699,7 +1699,7 @@ const pastExamDB = [
             "(C) 不會突變為野生型病毒",
             "(D) 為台灣現在主要的小兒麻痺疫苗"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "台灣目前主要使用 IPV (注射型)。"
     },
     {
@@ -1713,7 +1713,7 @@ const pastExamDB = [
             "(C) 124",
             "(D) 1234"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "無套膜病毒 (1, 2, 4) 對酒精有抗性；VZV (3) 有套膜。"
     },
     {
@@ -1727,7 +1727,7 @@ const pastExamDB = [
             "(C) 人體免疫缺乏病毒",
             "(D) 巨細胞病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: ""
     },
     {
@@ -1741,7 +1741,7 @@ const pastExamDB = [
             "(C) Penicillin",
             "(D) Rifampin"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: ""
     },
     {
@@ -1755,7 +1755,7 @@ const pastExamDB = [
             "(C) HIV DNA 會插到宿主染色體中，進而導致腫瘤的發生",
             "(D) 目前利用 HAART 的療法 (雞尾酒療法) 可以延緩抗藥性病毒株的出現"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "HIV 有套膜，對酒精敏感。gp120 吸附，gp41 穿透。"
     },
     {
@@ -1769,7 +1769,7 @@ const pastExamDB = [
             "(C) 巨噬細胞 (Macrophage)",
             "(D) 樹突細胞 (Dendritic cells)"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: "HIV 感染帶有 CD4 的細胞。"
     },
     {
@@ -1783,7 +1783,7 @@ const pastExamDB = [
             "(C) CD4+ T 細胞數目小於 500 個/µl，比較容易有伺機性感染",
             "(D) HIV 的 RT-PCR 檢驗可以用來確診新生兒 HIV 感染"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "AIDS 定義通常為 CD4 < 200/µl。"
     },
     {
@@ -1797,7 +1797,7 @@ const pastExamDB = [
             "(C) pol",
             "(D) vif"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "Pol 基因編碼反轉錄酶 (RT)。"
     },
     {
@@ -1811,7 +1811,7 @@ const pastExamDB = [
             "(C) 3,2,4,1",
             "(D) 4,1,2,3"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: "病毒核酸(RNA) -> 抗原(p24) -> IgM -> IgG。"
     },
     {
@@ -1825,7 +1825,7 @@ const pastExamDB = [
             "(C) 手指頭上的 Orf 病灶",
             "(D) 疱疹性膿性指頭 (Herpetic Whitlow)"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "Herpetic Whitlow 由 HSV 引起。"
     },
     {
@@ -1839,7 +1839,7 @@ const pastExamDB = [
             "(C) 只對 influenza A 有效",
             "(D) 感染後 48 小時內服用可以預防或縮短症狀時間"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "對 A 型與 B 型流感皆有效。"
     },
     {
@@ -1853,7 +1853,7 @@ const pastExamDB = [
             "(C) A、B、C 三型中，抗原變異最大的是 A 型",
             "(D) C 型曾造成大流行"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "C 型流感較穩定，極少造成大流行。"
     },
     {
@@ -1867,7 +1867,7 @@ const pastExamDB = [
             "(C) 感染了 B 型及 C 型肝炎病毒",
             "(D) 此檢驗結果顯然是偽陽性"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "HBeAg 陽性代表高傳染力。"
     },
     {
@@ -1881,7 +1881,7 @@ const pastExamDB = [
             "(C) 均由埃及斑蚊傳播",
             "(D) 感染後均產生感冒般症狀"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: ""
     },
     {
@@ -1895,7 +1895,7 @@ const pastExamDB = [
             "(C) HBsAg",
             "(D) X protein"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: ""
     },
     {
@@ -1909,7 +1909,7 @@ const pastExamDB = [
             "(C) 前者在細胞核複製，後者是在細胞質複製",
             "(D) 前者的基因體是不分段型，後者是分段型"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: ""
     },
     {
@@ -1923,7 +1923,7 @@ const pastExamDB = [
             "(C) 排放的廢氣不再循環",
             "(D) 正壓氣流進入實驗室"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "BSL-3 需維持負壓。"
     },
     {
@@ -1937,7 +1937,7 @@ const pastExamDB = [
             "(C) 肽醣以及 β-1-4-葡萄聚醣",
             "(D) 幾丁質以及 α-1-6-葡萄聚醣"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: ""
     },
     {
@@ -1951,7 +1951,7 @@ const pastExamDB = [
             "(C) 金黃色葡萄球菌",
             "(D) 淋病雙球菌"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: ""
     },
     {
@@ -1965,7 +1965,7 @@ const pastExamDB = [
             "(C) 副流行性感冒病毒",
             "(D) 麻疹病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "RSV 不具 HA 蛋白。"
     },
     {
@@ -1979,7 +1979,7 @@ const pastExamDB = [
             "(C) 13",
             "(D) 14"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "Measles (1) 和 Mumps (4) 感染後通常終身免疫。"
     },
     {
@@ -1993,7 +1993,7 @@ const pastExamDB = [
             "(C) 腮腺炎病毒 (Mumps)",
             "(D) 副流行性感冒病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: ""
     },
     {
@@ -2007,7 +2007,7 @@ const pastExamDB = [
             "(C) D 型 (HDV)",
             "(D) E 型"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: ""
     },
     {
@@ -2021,7 +2021,7 @@ const pastExamDB = [
             "(C) HCV",
             "(D) HEV"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: "HAV 屬於 Picornaviridae (微小 RNA 病毒科)。"
     },
     {
@@ -2035,7 +2035,7 @@ const pastExamDB = [
             "(C) 致病原未歸類為自然界腐生菌",
             "(D) 無法由檢體直接做鏡檢診斷"
         ],
-        correctAnswer: "",
+        correctAnswer: "D",
         userNote: "鏡檢可見 Spaghetti and Meatballs 特徵。"
     },
     {
@@ -2049,7 +2049,7 @@ const pastExamDB = [
             "(C) 兩者皆屬於絲狀病毒科 (Filoviridae)",
             "(D) 兩者皆為生物安全等級第三級"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: "兩者皆屬 Filoviridae，且為 BSL-4 病原。"
     },
     {
@@ -2063,7 +2063,7 @@ const pastExamDB = [
             "(C) 流感病毒 (Influenza virus)",
             "(D) 狂犬病病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "C",
         userNote: ""
     },
     {
@@ -2077,7 +2077,7 @@ const pastExamDB = [
             "(C) 茲卡病毒 (Zika virus) 屬於 flavivirus",
             "(D) 為具有套膜的 RNA 病毒"
         ],
-        correctAnswer: "",
+        correctAnswer: "B",
         userNote: "NS1 為早期非結構蛋白。"
     },
     {
@@ -2091,8 +2091,7 @@ const pastExamDB = [
             "(C) 厚膜孢子 (chlamydospores) 及分節孢子 (arthrospores)",
             "(D) 分節孢子 (arthrospores) 及芽生孢子 (blastospores)"
         ],
-        correctAnswer: "",
+        correctAnswer: "A",
         userNote: ""
     }
 ];
-
