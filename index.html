@@ -21,113 +21,6 @@
         }
     </script>
 
-    <script>
-        // [V11.0 新增] ID 解析器：自動從 ID (如 113-final-01) 產生試卷資訊
-function parseExamInfo(id) {
-    const parts = id.split('-'); // 切割 ID
-    if (parts.length < 2) return { year: 'Unknown', type: 'Exam', title: '未知試卷' };
-
-    const year = parts[0];     // "113"
-    const typeCode = parts[1]; // "final"
-
-    // 定義類型對照表 (可隨時擴充)
-    const typeMap = {
-        'final': '期末考',
-        'midterm': '期中考',
-        'quiz': '小考'
-    };
-
-    const typeName = typeMap[typeCode] || '考試';
-    
-    return {
-        year: year,
-        type: typeCode, // 用於樣式判斷
-        title: `${year}學年度 微免${typeName}`, // 自動生成標題：113學年度 微免期末考
-        groupKey: `${year}-${typeCode}` // 分組用的唯一 Key
-    };
-}
-        
-        // [新增] 處理使用者點擊選項 (修正版)
-        let userSelectedExamIdx = null; 
-
-        function checkExamAnswer(qid, idx) {
-            // 1. 確保資料庫有抓到題目
-            const q = pastExamDB.find(i => i.id === qid);
-            if (!q) {
-                console.error("找不到題目 ID:", qid);
-                return;
-            }
-            
-            userSelectedExamIdx = idx;
-
-            // 2. 重置所有選項樣式
-            const optionsArea = document.getElementById('examOptionsArea');
-            if (!optionsArea) return;
-
-            const allOptions = optionsArea.querySelectorAll('div[id^="exam-opt-"]');
-            allOptions.forEach(el => {
-                el.className = "p-4 rounded-lg border border-gray-200 hover:bg-teal-50 hover:border-teal-300 transition cursor-pointer flex items-center gap-3 group relative overflow-hidden select-none";
-                const iconDiv = el.querySelector('.status-icon');
-                if(iconDiv) {
-                    iconDiv.innerHTML = '';
-                    iconDiv.classList.add('hidden');
-                }
-            });
-
-            // 3. 抓取被點擊的選項
-            const selectedEl = document.getElementById(`exam-opt-${idx}`);
-            if (!selectedEl) return;
-
-            // 4. 判斷邏輯
-            if (!q.correctAnswer) {
-                // A. 還不知道正確答案 -> 顯示藍色
-                selectedEl.className = "p-4 rounded-lg border-2 border-blue-500 bg-blue-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-                const solveBtn = document.getElementById('solveBtn');
-                if(solveBtn) solveBtn.classList.add('animate-pulse');
-            } else {
-                // B. 已經知道答案 -> 直接批改
-                let correctIdx = -1;
-                q.options.forEach((opt, i) => {
-                    if (opt.toUpperCase().includes(`(${q.correctAnswer})`) || opt.startsWith(`${q.correctAnswer}.`)) {
-                        correctIdx = i;
-                    }
-                });
-
-                if (idx === correctIdx) {
-                    // 答對 (綠色)
-                    selectedEl.className = "p-4 rounded-lg border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-                    selectedEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
-                    selectedEl.querySelector('.status-icon').classList.remove('hidden');
-                } else {
-                    // 答錯 (紅色)
-                    selectedEl.className = "p-4 rounded-lg border-2 border-red-500 bg-red-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-                    selectedEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-times-circle text-red-600 text-xl"></i>';
-                    selectedEl.querySelector('.status-icon').classList.remove('hidden');
-                    
-                    // 顯示正確答案
-                    if (correctIdx !== -1) {
-                        const correctEl = document.getElementById(`exam-opt-${correctIdx}`);
-                        if (correctEl) {
-                            correctEl.className = "p-4 rounded-lg border border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-                            correctEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
-                            correctEl.querySelector('.status-icon').classList.remove('hidden');
-                        }
-                    }
-                }
-            }
-        }
-
-        // 輔助：只顯示正確答案
-        function highlightCorrectAnswer(correctIdx) {
-            const el = document.getElementById(`exam-opt-${correctIdx}`);
-            if (el) {
-                el.className = "p-4 rounded-lg border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
-                el.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
-                el.querySelector('.status-icon').classList.remove('hidden');
-            }
-        }
-    </script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; }
@@ -1415,6 +1308,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
