@@ -160,7 +160,7 @@
         if (parts.length < 2) return { year: 'Unknown', type: 'Exam', title: '未知試卷', groupKey: 'unknown' };
         const year = parts[0];     
         const typeCode = parts[1]; 
-        const typeMap = { 'final': '期末考', 'midterm': '期中考', 'quiz': '小考' };
+        const typeMap = { 'final': '期末考', 'midterm': '期中考', 'quiz': '小考', 'national': '醫師國考'};
         const typeName = typeMap[typeCode] || '考試';
         return {
             year: year,
@@ -825,31 +825,52 @@ let currentExamSource = null;
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         ${sortedGroups.map(g => `
-                            <div class="bg-white rounded-xl p-5 md:p-6 border border-gray-200 shadow-sm hover:shadow-lg active:scale-[0.98] transition cursor-pointer group relative overflow-hidden" 
-                                 onclick="renderExamDashboard('${g.year}-${g.type}')">
-                                <div class="absolute top-0 right-0 w-20 h-20 ${g.type === 'midterm' ? 'bg-purple-50 group-hover:bg-purple-100' : 'bg-teal-50 group-hover:bg-teal-100'} rounded-bl-full -mr-4 -mt-4 transition"></div>
-                                
-                                <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-12 h-12 rounded-full ${g.type === 'midterm' ? 'bg-purple-100 text-purple-600' : 'bg-teal-100 text-teal-600'} flex items-center justify-center text-lg font-bold shrink-0">
-                                        ${g.year}
-                                    </div>
-                                    <div class="min-w-0">
-                                        <h3 class="text-lg font-bold text-gray-800 truncate pr-2">${g.title}</h3>
-                                        <div class="flex gap-2 mt-1">
-                                            <span class="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full uppercase">共 ${g.questions.length} 題</span>
-                                            ${g.aiCount > 0 ? `<span class="text-[10px] text-green-600 bg-green-50 px-2 py-0.5 rounded-full uppercase font-bold">AI 已解 ${g.aiCount}</span>` : ''}
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="w-full bg-gray-100 h-1 mt-4 rounded-full overflow-hidden">
-                                    <div class="${g.type === 'midterm' ? 'bg-purple-500' : 'bg-teal-500'} h-full rounded-full" style="width: ${(g.aiCount/g.questions.length)*100}%"></div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
+                            let themeColor = '';
+let iconColor = '';
+let btnColor = '';
+let barColor = '';
+
+if (g.type === 'midterm') {
+    // 期中考 (紫色)
+    themeColor = 'bg-purple-50 group-hover:bg-purple-100';
+    iconColor = 'bg-purple-100 text-purple-600';
+    btnColor = 'bg-purple-600 hover:bg-purple-700 shadow-purple-200';
+    barColor = 'bg-purple-500';
+} else if (g.type === 'national') {
+    // [新增] 國考題 (深藍色/Indigo) - 讓它看起來更專業
+    themeColor = 'bg-indigo-50 group-hover:bg-indigo-100';
+    iconColor = 'bg-indigo-100 text-indigo-600';
+    btnColor = 'bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200';
+    barColor = 'bg-indigo-500';
+} else {
+    // 期末考/預設 (青色)
+    themeColor = 'bg-teal-50 group-hover:bg-teal-100';
+    iconColor = 'bg-teal-100 text-teal-600';
+    btnColor = 'bg-teal-600 hover:bg-teal-700 shadow-teal-200';
+    barColor = 'bg-teal-500';
+}
+
+// 2. 將變數套用到 HTML 樣板中 (取代原本寫死的 ternary operator)
+return `
+    <div class="bg-white rounded-xl ... (略) ...">
+        <div class="absolute top-0 right-0 w-20 h-20 ${themeColor} rounded-bl-full ..."></div>
+        
+        <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 rounded-full ${iconColor} flex items-center justify-center text-lg font-bold shrink-0">
+                ${g.year}
+            </div>
+            </div>
+        
+        <div class="flex justify-between items-end">
+            <button class="${btnColor} text-white px-4 py-2 rounded-lg ...">
+                練習 <i class="fas fa-arrow-right ml-1"></i>
+            </button>
+        </div>
+        <div class="w-full bg-gray-100 h-1 mt-4 rounded-full overflow-hidden">
+            <div class="${barColor} h-full rounded-full" style="width: ..."></div>
+        </div>
+    </div>
+`;
         } else {
             // --- 模式 B: 刷題介面 (這部分您之前的程式碼可能缺了 examModal 的內容) ---
             const targetGroup = examGroups[groupFilter];
@@ -1385,6 +1406,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
