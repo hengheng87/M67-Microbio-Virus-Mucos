@@ -200,76 +200,83 @@
     </div>
 
     <script>
-<script>
-        // --- V9.9 Navigation & System Logic ---
-        
-        let viewHistory = [];        // 歷史紀錄堆疊
-        let currentViewRestorer = null; // 當前畫面的「還原函數」
-        let isNavigatingBack = false;   // 是否正在執行「返回」動作
+// --- V9.9 System Core & Navigation (修復版) ---
+    
+    // 1. 全局變數定義 (為了安全起見，將 Key 變數提升至頂端)
+    // 如果您原本的程式碼下方還有 let userApiKey = ... 的宣告，請稍後將其刪除，以免重複宣告報錯
+    // 若不確定，可暫時保留此行註解，沿用下方的宣告，但 initSystem 需確保在 DOMContentLoaded 後執行
+    let viewHistory = [];        
+    let currentViewRestorer = null; 
+    let isNavigatingBack = false;   
 
-        // 1. 初始化系統 (綁定 Header Key, 設定初始狀態)
-        function initSystem() {
-            // 讀取並填入 API Key
-            const savedKey = localStorage.getItem('gemini_api_key');
-            if (savedKey) {
-                const input = document.getElementById('headerApiKey');
-                if(input) input.value = savedKey;
+    // 2. 初始化系統
+    function initSystem() {
+        // 讀取並填入 API Key
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) {
+            const input = document.getElementById('headerApiKey');
+            if(input) input.value = savedKey;
+            
+            // 嘗試同步給下方的 userApiKey (若變數已存在)
+            if (typeof userApiKey !== 'undefined') {
                 userApiKey = savedKey;
             }
-            // 設定起點為儀表板
-            currentViewRestorer = () => renderDashboard();
-            updateBackButtonState();
         }
-
-        // 2. 視圖追蹤器 (Hook) - 每次切換畫面時呼叫此函數
-        function updateView(restorerFunc) {
-            if (isNavigatingBack) {
-                // 如果是按上一頁回來的：不推入歷史，只更新當前狀態
-                currentViewRestorer = restorerFunc;
-                isNavigatingBack = false; 
-            } else {
-                // 如果是新進入的頁面：把「上一個頁面」存入歷史
-                if (currentViewRestorer) {
-                    viewHistory.push(currentViewRestorer);
-                }
-                currentViewRestorer = restorerFunc;
-            }
-            updateBackButtonState();
-        }
-
-        // 3. 執行「返回上一頁」
-        function goBack() {
-            if (viewHistory.length === 0) return;
-            
-            const previousView = viewHistory.pop(); // 取出上一個狀態
-            isNavigatingBack = true; // 標記為返回模式 (避免重複 Push)
-            previousView(); // 執行還原
-        }
-
-        // 4. 更新按鈕顯示狀態
-        function updateBackButtonState() {
-            const btn = document.getElementById('globalBackBtn');
-            if (!btn) return;
-            
-            if (viewHistory.length > 0) {
-                btn.classList.remove('hidden');
-            } else {
-                btn.classList.add('hidden'); // 在首頁時隱藏
-            }
-        }
-
-        // 5. Header API Key 同步
-        function updateGlobalApiKey(val) {
-            userApiKey = val.trim();
-            localStorage.setItem('gemini_api_key', userApiKey);
-            // 視覺回饋：閃爍一下邊框代表儲存成功
-            const input = document.getElementById('headerApiKey');
-            input.parentElement.classList.add('ring-2', 'ring-green-400');
-            setTimeout(() => input.parentElement.classList.remove('ring-2', 'ring-green-400'), 500);
-        }
-
-        // --- 以下接續原本的 Data Store (pathogenData) ---
         
+        // 設定起點
+        currentViewRestorer = () => renderDashboard();
+        updateBackButtonState();
+    }
+
+    // 3. 視圖追蹤
+    function updateView(restorerFunc) {
+        if (isNavigatingBack) {
+            currentViewRestorer = restorerFunc;
+            isNavigatingBack = false; 
+        } else {
+            if (currentViewRestorer) {
+                viewHistory.push(currentViewRestorer);
+            }
+            currentViewRestorer = restorerFunc;
+        }
+        updateBackButtonState();
+    }
+
+    // 4. 返回功能
+    function goBack() {
+        if (viewHistory.length === 0) return;
+        const previousView = viewHistory.pop();
+        isNavigatingBack = true; 
+        previousView(); 
+    }
+
+    // 5. 更新按鈕狀態
+    function updateBackButtonState() {
+        const btn = document.getElementById('globalBackBtn');
+        if (!btn) return;
+        if (viewHistory.length > 0) {
+            btn.classList.remove('hidden');
+        } else {
+            btn.classList.add('hidden');
+        }
+    }
+
+    // 6. Header API Key 同步
+    function updateGlobalApiKey(val) {
+        const cleanVal = val.trim();
+        localStorage.setItem('gemini_api_key', cleanVal);
+        
+        // 更新全局變數
+        if (typeof userApiKey !== 'undefined') {
+            userApiKey = cleanVal;
+        }
+        
+        // 視覺回饋
+        const input = document.getElementById('headerApiKey');
+        input.parentElement.classList.add('ring-2', 'ring-green-400');
+        setTimeout(() => input.parentElement.classList.remove('ring-2', 'ring-green-400'), 500);
+    }
+
         // --- DATA STORE ---
         const pathogenData = {
             'dna_pap_poly': {
@@ -3661,6 +3668,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
