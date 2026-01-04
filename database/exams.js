@@ -2796,6 +2796,2265 @@ const pastExamDB = [
         ],
         correctAnswer: "A",
         userNote: "無性孢子主要依據是否生成於囊內 (Sporangium) 區分為 Conidia (外生) 與 Sporangiospores (內生) [cite: 48]。"
+    },
+
+    // -------國考考古題總彙編------- //
+
+    {
+        id: "999-national-01",
+        relatedPathogen: "clostridium_tetani",
+        type: "basic",
+        question: "下列各類致病菌中，何者只需中和抗體（neutralizing antibody）就可中和毒素而不致病？",
+        options: [
+            "(A) 金黃色葡萄球菌（Staphylococcus aureus）",
+            "(B) 白色念珠菌（Candida albicans）",
+            "(C) 麻瘋桿菌（Mycobacterium leprae）",
+            "(D) 破傷風桿菌（Clostridium tetani）"
+        ],
+        correctAnswer: "D",
+        userNote: "國考重點題：外毒素致病只需中和抗體"
+    },
+    {
+        id: "999-national-02",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "在流行性感冒病毒（influenza virus）感染時，下列何種抗原所誘發的抗體較具保護性：",
+        options: [
+            "(A) M protein",
+            "(B) non-structural protein",
+            "(C) haemagglutinin (HA)",
+            "(D) nucleocapsid"
+        ],
+        correctAnswer: "C",
+        userNote: "HA 抗體具中和病毒進入細胞的能力"
+    },
+    {
+        id: "999-national-03",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "下列關於流行性感冒病毒（Influenza virus）的抗原大變異（antigenic shift）之敘述，何者錯誤？",
+        options: [
+            "(A) 是指不同病毒株之各段 RNA 基因體間的交換所造成的變異",
+            "(B) 又稱為基因重組（genetic reassortment）",
+            "(C) 是造成流行性感冒病毒世界性大流行（pandemic）的主要原因",
+            "(D) 可見於 A 型及 B 型流行性感冒病毒"
+        ],
+        correctAnswer: "D",
+        userNote: "Shift 只發生在 A 型（因其宿主範圍廣且具片段基因）"
+    },
+    {
+        id: "999-national-04",
+        relatedPathogen: "measles_mumps_rubella",
+        type: "basic",
+        question: "MMR 為混合疫苗，不能對抗下列何種病毒？",
+        options: [
+            "(A) 腮腺炎病毒（Mumps virus）",
+            "(B) 麻疹病毒（Measles virus）",
+            "(C) 輪狀病毒（Rotavirus）",
+            "(D) 德國麻疹病毒（Rubella virus）"
+        ],
+        correctAnswer: "C",
+        userNote: "MMR 包含 Measles, Mumps, Rubella"
+    },
+    {
+        id: "999-national-05",
+        relatedPathogen: "hbv",
+        type: "basic",
+        question: "目前國內接種的 B 型肝炎疫苗是屬於：",
+        options: [
+            "(A) 死病毒（Killed virus）",
+            "(B) 活減毒疫苗（Live attenuated virus）",
+            "(C) 活病毒（Live virus）",
+            "(D) 基因重組次單位疫苗（subunit vaccine）"
+        ],
+        correctAnswer: "D",
+        userNote: "HBsAg 重組蛋白疫苗"
+    },
+    {
+        id: "999-national-06",
+        relatedPathogen: "jev",
+        type: "virology",
+        question: "日本腦炎病毒（Japanese encephalitis virus）藉由下列何者媒介傳播？",
+        options: [
+            "(A) 三斑家蚊",
+            "(B) 采采蠅",
+            "(C) 白蛉子",
+            "(D) 老鼠"
+        ],
+        correctAnswer: "A",
+        userNote: "三斑家蚊為主要病媒"
+    },
+    {
+        id: "999-national-07",
+        relatedPathogen: "measles_virus",
+        type: "clinical",
+        question: "在嬰幼兒時感染下列何種病毒，於年長時會造成腦炎，其症狀是癡呆、智力退化、甚至死亡，此症狀稱亞急性硬化泛腦炎（subacute sclerosing panencephalitis, SSPE）？",
+        options: [
+            "(A) 感冒病毒",
+            "(B) 腮腺炎病毒",
+            "(C) 麻疹病毒",
+            "(D) 小兒麻痺症病毒"
+        ],
+        correctAnswer: "C",
+        userNote: "SSPE 為麻疹病毒的長期併發症"
+    },
+    {
+        id: "999-national-08",
+        relatedPathogen: "hepatitis_virus",
+        type: "virology",
+        question: "下列那一種敘述符合 HAV、HCV、HDV 及 HEV 的共同特徵？",
+        options: [
+            "(A) 含單股（single-stranded）RNA 基因體",
+            "(B) 是糞-口（fecal-oral route）傳播路徑",
+            "(C) 造成猛爆性肝炎",
+            "(D) 在慢性感染時易造成宿主基因序列變異"
+        ],
+        correctAnswer: "A",
+        userNote: "除了 HBV 是 DNA 外，其餘肝炎病毒皆為 RNA 病毒"
+    },
+    {
+        id: "999-national-09",
+        relatedPathogen: "fungi_dermatophytes",
+        type: "mycology",
+        question: "下列那一種真菌屬於淺部皮膚感染真菌？",
+        options: [
+            "(A) 白色念珠菌（Candida albicans）",
+            "(B) 新形隱球菌（Cryptococcus neoformans）",
+            "(C) 白癬菌（Trichophyton tonsurans）",
+            "(D) 申克氏孢絲菌（Sporothrix schenckii）"
+        ],
+        correctAnswer: "C",
+        userNote: "Trichophyton 為典型皮癬菌"
+    },
+    {
+        id: "999-national-10",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "致病性黴菌在分類學上多屬於何種亞門？",
+        options: [
+            "(A) 不完全菌亞門 (Deuteromycotina)",
+            "(B) 擔子菌亞門 (Basidiomycotina)",
+            "(C) 子囊菌亞門 (Ascomycotina)",
+            "(D) 接合菌亞門 (Zygomycotina)"
+        ],
+        correctAnswer: "A",
+        userNote: "許多致病真菌尚未發現有性世代，歸類於不完全菌"
+    },
+    {
+        id: "999-national-11",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "Amphotericin B 破壞真菌細胞的主要標的是下列那一項？",
+        options: [
+            "(A) 細胞壁",
+            "(B) 細胞膜",
+            "(C) 核酸",
+            "(D) 能量傳遞"
+        ],
+        correctAnswer: "B",
+        userNote: "與細胞膜上的麥角固醇 (ergosterol) 結合造成孔洞"
+    },
+    {
+        id: "999-national-12",
+        relatedPathogen: "candida_albicans",
+        type: "mycology",
+        question: "白色念珠菌（Candida albicans）可引起的感染不包括下列那一項？",
+        options: [
+            "(A) 黏膜感染",
+            "(B) 皮膚感染",
+            "(C) 產毒性感染",
+            "(D) 臟器感染"
+        ],
+        correctAnswer: "C",
+        userNote: "念珠菌主要引起侵入性感染而非產生毒素中毒"
+    },
+    {
+        id: "999-national-13",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "下列有關流行性感冒病毒（Influenza virus）之敘述，何者錯誤？",
+        options: [
+            "(A) 其外套膜上有兩個基因產物：血球凝集素（HA）以及神經胺酸酶（NA）",
+            "(B) HA 及 NA 可以決定流行性感冒病毒的抗原性",
+            "(C) HA 可以造成紅血球凝集",
+            "(D) NA 可以和此病毒之細胞受器（receptor）即唾液酸（sialic acid）結合"
+        ],
+        correctAnswer: "D",
+        userNote: "結合受器的是 HA，NA 是負責水解唾液酸讓病毒釋放"
+    },
+    {
+        id: "999-national-14",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "在細胞核內進行複製之 RNA 病毒為何種病毒？",
+        options: [
+            "(A) 流行性感冒病毒（Influenza virus）",
+            "(B) 小兒麻痺病毒（Poliovirus）",
+            "(C) 疱疹病毒（Herpesvirus）",
+            "(D) 登革熱病毒（Dengue virus）"
+        ],
+        correctAnswer: "A",
+        userNote: "Orthomyxovirus 是少數在核內複製的 RNA 病毒"
+    },
+    {
+        id: "999-national-15",
+        relatedPathogen: "arboviruses",
+        type: "virology",
+        question: "下列那一種病毒不屬於節肢動物媒介（Arthropod-borne）感染？",
+        options: [
+            "(A) 披膜病毒（Togaviruses）",
+            "(B) 黃病毒（Flaviviruses）",
+            "(C) α 病毒（Alphaviruses）",
+            "(D) 沙狀病毒（Arenaviruses）"
+        ],
+        correctAnswer: "A/D",
+        userNote: "Arenaviruses 為齧齒類傳播；Togaviruses 中的 Rubella 非節肢動物傳播"
+    },
+    {
+        id: "999-national-16",
+        relatedPathogen: "mycotoxicosis",
+        type: "mycology",
+        question: "下列有關真菌中毒症（Mycotoxicosis）的特徵，何者錯誤？",
+        options: [
+            "(A) 真菌產生的毒素所引起",
+            "(B) 發病有地區性",
+            "(C) 發病有季節性",
+            "(D) 具有傳染性"
+        ],
+        correctAnswer: "D",
+        userNote: "中毒症是食入毒素，不具人傳人性"
+    },
+    {
+        id: "999-national-17",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "真菌菌絲的細胞壁結構不包括：",
+        options: [
+            "(A) 葡聚糖層（polysaccharide layer）",
+            "(B) 脂多醣層（lipopolysaccharide layer）",
+            "(C) 糖蛋白（glycoprotein）",
+            "(D) 幾丁質層（chitin layer）"
+        ],
+        correctAnswer: "B",
+        userNote: "LPS 是革蘭氏陰性菌的特徵"
+    },
+    {
+        id: "999-national-18",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "唑（Azole）類抗黴菌劑的作用機轉是：",
+        options: [
+            "(A) 抑制蛋白質合成",
+            "(B) 抑制細胞膜生成",
+            "(C) 抑制核酸合成",
+            "(D) 抑制細胞壁生成"
+        ],
+        correctAnswer: "B",
+        userNote: "抑制 ergosterol 的生合成步驟"
+    },
+    {
+        id: "999-national-19",
+        relatedPathogen: "pneumocystis_jirovecii",
+        type: "clinical",
+        question: "愛滋病（AIDS）患者最常見的條件致病性真菌感染為：",
+        options: [
+            "(A) 白色念珠菌（Candida albicans）引起的肺部感染",
+            "(B) 新型隱球菌（Cryptococcus neoformans）引起的肺部感染",
+            "(C) 卡氏肺囊蟲肺炎（Pneumocystis carinii pneumonia, PCP）",
+            "(D) 毛癬菌（Trichophyton）引起的組織性壞死"
+        ],
+        correctAnswer: "C",
+        userNote: "PCP 為 AIDS 典型的定義疾病"
+    },
+    {
+        id: "999-national-20",
+        relatedPathogen: "yeast",
+        type: "mycology",
+        question: "單細胞真菌（Yeast）的繁殖方式是：",
+        options: [
+            "(A) 二分裂",
+            "(B) 出芽 (Budding)",
+            "(C) 由孢子囊釋放孢子",
+            "(D) 接合"
+        ],
+        correctAnswer: "A/B",
+        userNote: "主要是出芽生殖，部分可二分裂"
+    },
+    {
+        id: "999-national-21",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "下列關於流行性感冒病毒（Influenza virus）之敘述，何者為錯？",
+        options: [
+            "(A) 分類上屬於正黏液病毒科（Orthomyxoviridae）",
+            "(B) 其基因體由八段單股 RNA 組成",
+            "(C) 包括 A、B、C 三型",
+            "(D) 其中只有 A 型造成人類疾病"
+        ],
+        correctAnswer: "B/D",
+        userNote: "A/B/C 皆可感染人；C 型基因體僅七段"
+    },
+    {
+        id: "999-national-22",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "真菌細胞壁特有的成分是：",
+        options: [
+            "(A) 麥角醇 (Ergosterol)",
+            "(B) 幾丁質 (Chitin)",
+            "(C) 角質",
+            "(D) 醣苷類"
+        ],
+        correctAnswer: "B",
+        userNote: "注意！細胞壁是幾丁質，細胞膜是麥角醇"
+    },
+    {
+        id: "999-national-23",
+        relatedPathogen: "fungi_immunity",
+        type: "basic",
+        question: "抗真菌感染最主要的天然防禦因素是：",
+        options: [
+            "(A) 皮膚與黏膜",
+            "(B) 嗜中性白血球（neutrophil）",
+            "(C) 巨噬細胞（macrophage）",
+            "(D) 補體（complement）"
+        ],
+        correctAnswer: "A",
+        userNote: "第一道物理防線最為重要"
+    },
+    {
+        id: "999-national-24",
+        relatedPathogen: "cryptococcus_neoformans",
+        type: "mycology",
+        question: "常存在鴿糞中，會造成腦膜炎之致病菌為：",
+        options: [
+            "(A) 申克氏孢絲菌（Sporothrix schenckii）",
+            "(B) 黃色麴菌（Aspergillus flavus）",
+            "(C) 新型隱球菌（Cryptococcus neoformans）",
+            "(D) 白色念珠菌（Candida albicans）"
+        ],
+        correctAnswer: "C",
+        userNote: "隱球菌常見於鴿糞，具寬厚莢膜"
+    },
+    {
+        id: "999-national-25",
+        relatedPathogen: "hiv_aids",
+        type: "clinical",
+        question: "以下何者容易出現病毒相關性腫瘤？",
+        options: [
+            "(A) Leishmaniasis 患者",
+            "(B) Legionella pneumonia 患者",
+            "(C) IgA nephropathy 患者",
+            "(D) AIDS 患者"
+        ],
+        correctAnswer: "D",
+        userNote: "如 Kaposi sarcoma (HHV-8)"
+    },
+    {
+        id: "999-national-26",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "關於流行性感冒病毒 A/Bangkok/1/79（H3N2）之命名，下列敘述何者錯誤？",
+        options: [
+            "(A) A 代表此為 A 型",
+            "(B) Bangkok 代表其最早分離的地點",
+            "(C) 1/79 代表此病毒株之序號",
+            "(D) H3N2 代表 HA 抗原為第三型，NA 為第二型"
+        ],
+        correctAnswer: "C",
+        userNote: "1/79 中，1 是序號，79 是分離年份"
+    },
+    {
+        id: "999-national-27",
+        relatedPathogen: "ebola_virus",
+        type: "virology",
+        question: "關於伊波拉病毒（Ebola virus）之敘述，何者為錯？",
+        options: [
+            "(A) 是 RNA 病毒",
+            "(B) 可引起病毒性出血熱",
+            "(C) 流行於非洲",
+            "(D) 處理此病毒需要第三級的生物安全實驗室"
+        ],
+        correctAnswer: "D",
+        userNote: "需要最高等級 BSL-4"
+    },
+    {
+        id: "999-national-28",
+        relatedPathogen: "fungi_reproduction",
+        type: "mycology",
+        question: "真菌中最常見的無性孢子是何種孢子？",
+        options: [
+            "(A) 分生孢子 (Conidia)",
+            "(B) 芽生孢子 (Blastoconidia)",
+            "(C) 孢子囊孢子 (Sporangiospores)",
+            "(D) 厚膜孢子 (Chlamydospores)"
+        ],
+        correctAnswer: "A",
+        userNote: "Conidia 是大多數絲狀真菌的無性產物"
+    },
+    {
+        id: "999-national-29",
+        relatedPathogen: "cryptococcus_neoformans",
+        type: "mycology",
+        question: "新型隱球菌（Cryptococcus neoformans）的特徵，不包括下列那一項？",
+        options: [
+            "(A) 有莢膜 (Capsule)",
+            "(B) 能形成厚膜孢子",
+            "(C) 引起皮膚黏膜感染",
+            "(D) 通過呼吸道侵入人體"
+        ],
+        correctAnswer: "C",
+        userNote: "主要引起肺部感染與腦膜炎"
+    },
+    {
+        id: "999-national-30",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "培養真菌常用何種培養基？",
+        options: [
+            "(A) 巧克力培養基",
+            "(B) 沙保羅氏（Sabouraud's dextrose agar, SDA）培養基",
+            "(C) Thioglycollate 培養基",
+            "(D) 血清培養基"
+        ],
+        correctAnswer: "B",
+        userNote: "SDA 低 pH 值適合真菌生長"
+    },
+    {
+        id: "999-national-31",
+        relatedPathogen: "candida_albicans",
+        type: "clinical",
+        question: "白色念珠菌（Candida albicans）可引起下列何種疾病？",
+        options: [
+            "(A) 肺炎",
+            "(B) 鵝口瘡 (Thrush)",
+            "(C) 紅疹",
+            "(D) 咽喉炎"
+        ],
+        correctAnswer: "B",
+        userNote: "口腔念珠菌症稱為鵝口瘡"
+    },
+    {
+        id: "999-national-32",
+        relatedPathogen: "virology_general",
+        type: "virology",
+        question: "下列何種病毒具有血球凝集性（hemagglutination）？",
+        options: [
+            "(A) EB 病毒",
+            "(B) 小兒麻痺病毒",
+            "(C) 小 DNA 病毒（Parvovirus）B19",
+            "(D) 流行性感冒病毒（Influenza virus）"
+        ],
+        correctAnswer: "C/D",
+        userNote: "Flu 與 B19 皆具備此特性"
+    },
+    {
+        id: "999-national-33",
+        relatedPathogen: "arenavirus",
+        type: "virology",
+        question: "下列有關沙狀病毒（Arenavirus）之敘述，何者正確？",
+        options: [
+            "(A) 以節肢動物為媒介",
+            "(B) 感染腸胃道",
+            "(C) 以囓齒動物為媒介的 RNA 病毒",
+            "(D) 以狗為媒介"
+        ],
+        correctAnswer: "C",
+        userNote: "如 Lassa virus，宿主為老鼠"
+    },
+    {
+        id: "999-national-34",
+        relatedPathogen: "hev",
+        type: "virology",
+        question: "有關 E 型肝炎病毒（HEV）之敘述，下列何者正確？",
+        options: [
+            "(A) 對孕婦造成高死亡率",
+            "(B) 經由血液傳播",
+            "(C) 是黃熱病病毒的一種",
+            "(D) 是一種負股 RNA 病毒"
+        ],
+        correctAnswer: "A",
+        userNote: "HEV 在孕婦感染時死亡率可達 20%"
+    },
+    {
+        id: "999-national-35",
+        relatedPathogen: "mycotoxicosis",
+        type: "mycology",
+        question: "真菌毒素對人類的危害通常不包括：",
+        options: [
+            "(A) 致癌作用",
+            "(B) 過敏反應",
+            "(C) 慢性中毒",
+            "(D) 致畸胎作用"
+        ],
+        correctAnswer: "D",
+        userNote: "主要為致癌（如黃麴毒素）或急性中毒"
+    },
+    {
+        id: "999-national-36",
+        relatedPathogen: "candida_albicans",
+        type: "clinical",
+        question: "白色念珠菌（Candida albicans）引起的病變，不包括下列那一項？",
+        options: [
+            "(A) 濕疹",
+            "(B) 鵝口瘡",
+            "(C) 陰道炎",
+            "(D) 腦膜炎"
+        ],
+        correctAnswer: "A",
+        userNote: "濕疹通常非真菌直接引起"
+    },
+    {
+        id: "999-national-37",
+        relatedPathogen: "cryptococcus_neoformans",
+        type: "mycology",
+        question: "關於新型隱球菌（Cryptococcus neoformans）致病性的描述，下列何者錯誤？",
+        options: [
+            "(A) 主要致病物質是莢膜多糖",
+            "(B) 大多數感染者症狀不明顯",
+            "(C) 主要經腸胃道入侵人體",
+            "(D) 抵抗力降低時，才易侵入人體"
+        ],
+        correctAnswer: "C",
+        userNote: "主要是經由呼吸道吸入孢子"
+    },
+    {
+        id: "999-national-38",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "關於“真菌”的敘述，下列何者錯誤？",
+        options: [
+            "(A) 有典型的細胞核",
+            "(B) 細胞壁特有成分是幾丁質",
+            "(C) 最適生長 pH 值為 4.0~6.0",
+            "(D) 最適生長溫度為 37°C"
+        ],
+        correctAnswer: "D",
+        userNote: "多數真菌生長最適溫為 25-30°C（除了一些兩型性真菌在人體內）"
+    },
+    {
+        id: "999-national-39",
+        relatedPathogen: "ortho_paramyxoviridae",
+        type: "virology",
+        question: "有關正黏液病毒（Orthomyxoviridae）及副黏液病毒（Paramyxoviridae）比較之敘述，何者正確？",
+        options: [
+            "(A) 兩者都會造成細胞融合（Syncytium）",
+            "(B) 基因體皆有分段（segmented）",
+            "(C) 兩者 RNA splicing 皆發生在核內",
+            "(D) 兩者皆可經由呼吸道傳染"
+        ],
+        correctAnswer: "D",
+        userNote: "Paramyxo 才有細胞融合 (F protein)；Ortho 才有分段基因"
+    },
+    {
+        id: "999-national-40",
+        relatedPathogen: "jev",
+        type: "clinical",
+        question: "某國小女童，農村背景（雞鴨豬），八月突然高燒、抽筋、意識不清、角弓反張、牙關緊閉。可能病原？",
+        options: [
+            "(A) 登革病毒",
+            "(B) 禽流感病毒",
+            "(C) 日本腦炎病毒（JEV）",
+            "(D) C 型肝炎病毒"
+        ],
+        correctAnswer: "C",
+        userNote: "夏季流行、豬為中間宿主、典型中樞神經症狀"
+    },
+    {
+        id: "999-national-41",
+        relatedPathogen: "cryptococcus_neoformans",
+        type: "mycology",
+        question: "新型隱球菌（Cryptococcus neoformans）形態上之特徵為何？",
+        options: [
+            "(A) 無莢膜之兩型性圓球狀酵母菌",
+            "(B) 雪茄型酵母菌，不具兩型性",
+            "(C) 中裂型具有薄層莢膜兩型性橢圓形酵母菌",
+            "(D) 具寬厚莢膜圓球狀酵母菌"
+        ],
+        correctAnswer: "D",
+        userNote: "India ink 染色可見明顯莢膜負染"
+    },
+    {
+        id: "999-national-42",
+        relatedPathogen: "zygomycosis",
+        type: "mycology",
+        question: "病患肺部檢體 PAS 染色發現寬闊帶狀（Broad, ribbon-like），無隔膜菌絲（Coenocytic hyphae），診斷為：",
+        options: [
+            "(A) 新型隱球菌症",
+            "(B) 麴菌症",
+            "(C) 孢子絲菌症",
+            "(D) 接合菌症 (Zygomycosis)"
+        ],
+        correctAnswer: "D",
+        userNote: "Zygomycetes (如 Rhizopus) 的特徵：無隔膜、直角分枝"
+    },
+    {
+        id: "999-national-43",
+        relatedPathogen: "parainfluenza_rsv",
+        type: "clinical",
+        question: "25 歲護士，咳嗽發出“吠”聲 (barking cough)，X 光見下聲門明顯變窄 (steeple sign)。病原？",
+        options: [
+            "(A) 副流行性感冒病毒 (Parainfluenza virus)",
+            "(B) 流行性感冒病毒",
+            "(C) 呼吸道細胞融合病毒 (RSV)",
+            "(D) 鼻病毒"
+        ],
+        correctAnswer: "A/C",
+        userNote: "吠聲咳嗽為哮吼 (Croup) 典型特徵，主因副流感"
+    },
+    {
+        id: "999-national-44",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "構成真菌細胞壁之主要成分為何？",
+        options: [
+            "(A) 幾丁質以及 α-1-4-葡萄聚醣",
+            "(B) 幾丁質以及 β-1-3-葡萄聚醣 (β-1-3-glucan)",
+            "(C) 肽醣以及 β-1-4-葡萄聚醣",
+            "(D) 幾丁質以及 α-1-6-葡萄聚醣"
+        ],
+        correctAnswer: "B",
+        userNote: "Chitin + Glucan 為真菌壁核心結構"
+    },
+    {
+        id: "999-national-45",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "下列何者屬於 Azoles 類中的 Imidazoles？",
+        options: [
+            "(A) Fluconazole",
+            "(B) Ketoconazole",
+            "(C) Itraconazole",
+            "(D) Voriconazole"
+        ],
+        correctAnswer: "B",
+        userNote: "Keto 是 Imidazole，其餘多為 Triazole"
+    },
+    {
+        id: "999-national-46",
+        relatedPathogen: "candida_albicans",
+        type: "clinical",
+        question: "指甲中有酵母菌及菌絲，培養見乳白色菌落，具假菌絲及芽管 (Germ tube) 產生。病原？",
+        options: [
+            "(A) Trichophyton rubrum",
+            "(B) Epidermophyton floccosum",
+            "(C) Microsporum canis",
+            "(D) Candida albicans"
+        ],
+        correctAnswer: "D",
+        userNote: "Germ tube test (+) 是 C. albicans 的黃金標準"
+    },
+    {
+        id: "999-national-47",
+        relatedPathogen: "hcv",
+        type: "virology",
+        question: "有關 C 型肝炎病毒的敘述，何者錯誤？",
+        options: [
+            "(A) 屬於 Flaviviridae",
+            "(B) 具有 envelope",
+            "(C) 已經有疫苗可以預防感染",
+            "(D) 與肝癌有關"
+        ],
+        correctAnswer: "C",
+        userNote: "HCV 目前尚無疫苗可供使用"
+    },
+    {
+        id: "999-national-48",
+        relatedPathogen: "rubella_virus",
+        type: "clinical",
+        question: "孕婦感染下列何種病毒，最容易造成胎兒先天性畸形？",
+        options: [
+            "(A) 單純疱疹病毒一型",
+            "(B) 帶狀疱疹病毒",
+            "(C) 德國麻疹病毒 (Rubella virus)",
+            "(D) 麻疹病毒"
+        ],
+        correctAnswer: "C",
+        userNote: "Congenital Rubella Syndrome (CRS)"
+    },
+    {
+        id: "999-national-49",
+        relatedPathogen: "orthomyxovirus",
+        type: "virology",
+        question: "下列那一種病毒需進入寄主細胞之細胞核進行基因體複製？",
+        options: [
+            "(A) Poxvirus",
+            "(B) Paramyxovirus",
+            "(C) Bunyavirus",
+            "(D) Orthomyxovirus"
+        ],
+        correctAnswer: "D",
+        userNote: "與第 14 題重複重點：流感病毒在核內複製"
+    },
+    {
+        id: "999-national-50",
+        relatedPathogen: "measles_mumps_rubella",
+        type: "basic",
+        question: "使用於孩童之 MMR 三合一減毒疫苗，包含那三種病毒？",
+        options: [
+            "(A) Measles-Mumps-Rubella",
+            "(B) Measles-Mumps-Rotavirus",
+            "(C) Measles-Mumps-Reovirus",
+            "(D) Measles-Mumps-Rhinovirus"
+        ],
+        correctAnswer: "A",
+        userNote: "與第 4 題重複重點"
+    },
+    {
+        id: "999-national-51",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "下列有關流行性感冒病毒的敘述，何者錯誤？",
+        options: [
+            "(A) 基因含多段，因此重組現象普遍發生",
+            "(B) 共分 A、B、C 三型",
+            "(C) B 型常造成全世界大流行",
+            "(D) 病毒感染後，續發性細菌感染常引起肺炎"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "全世界大流行 (Pandemic) 主要由 A 型引起 [cite: 51]"
+    },
+    {
+        id: "999-national-52",
+        relatedPathogen: "dengue_virus",
+        type: "clinical",
+        question: "診斷為登革病毒（dengue viruses）感染的臨床症狀包含：①紅疹 ②關節炎 ③血小板減少 ④出血熱",
+        options: [
+            "(A) ①②③",
+            "(B) ①②④",
+            "(C) ②③④",
+            "(D) ①③④",
+            "(全) 以上皆是"
+        ],
+        correctAnswer: "全",
+        [cite_start]userNote: "登革熱典型症狀包含發燒、出疹、骨頭痛及血小板低下 [cite: 52]"
+    },
+    {
+        id: "999-national-53",
+        relatedPathogen: "talaromyces_marneffei",
+        type: "mycology",
+        question: "目前唯一會對人類造成全身性感染之青黴菌屬（Penicillium），其兩型性（Dimorphic）病原為何？",
+        options: [
+            "(A) P. marneffei",
+            "(B) P. notutum",
+            "(C) P. chrysogenum",
+            "(D) P. claviformes"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "現已改名為 Talaromyces marneffei，東南亞愛滋病患常見 [cite: 53]"
+    },
+    {
+        id: "999-national-54",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "抑制真菌 DNA 及 RNA 合成之抗真菌藥物為何？",
+        options: [
+            "(A) Terbinafine",
+            "(B) Amphotericin B",
+            "(C) Flucytosine",
+            "(D) Fluconazole"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "Flucytosine (5-FC) 會轉化為 5-FU 抑制核酸合成 [cite: 54]"
+    },
+    {
+        id: "999-national-55",
+        relatedPathogen: "sporothrix_schenckii",
+        type: "clinical",
+        question: "右手肘被樹枝穿刺後出現直線排列之潰瘍及節瘤，25°C 培養長出玫瑰花飾（Rosette）排列之分生孢子，病原為何？",
+        options: [
+            "(A) Conidiobolus coronatus",
+            "(B) Sporothrix schenckii",
+            "(C) Mycobacterium marinum",
+            "(D) Staphylococcus aureus"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "孢子絲菌症 (Sporotrichosis)，典型臨床表現為沿淋巴管排列之結節 [cite: 55]"
+    },
+    {
+        id: "999-national-56",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "下列何者不是導致流感病毒產生抗原飄移（antigenic drift）之原因？",
+        options: [
+            "(A) 當兩種病毒發生基因重分配（genetic reassortment）所致",
+            "(B) 因為病毒合成 RNA 常發生錯誤、引起突變所致",
+            "(C) 常發生於血球凝集素基因",
+            "(D) 常發生於神經胺酸酶基因"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "基因重分配 (Reassortment) 是造成抗原大變異 (Shift) 的原因 [cite: 56]"
+    },
+    {
+        id: "999-national-57",
+        relatedPathogen: "rubella_virus",
+        type: "clinical",
+        question: "孕婦何時感染 rubella virus 最容易造成先天性胎兒畸形？",
+        options: [
+            "(A) 懷孕初期三個月",
+            "(B) 懷孕中期三個月",
+            "(C) 懷孕後期三個月",
+            "(D) 周產期"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "懷孕首三月 (First trimester) 感染風險最高 [cite: 57]"
+    },
+    {
+        id: "999-national-58",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "下列何種黴菌為主要病原菌（primary pathogen）？",
+        options: [
+            "(A) Aspergillus niger",
+            "(B) Cryptococcus neoformans",
+            "(C) Candida albicans",
+            "(D) Paracoccidioides brasiliensis"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "Paracoccidioides 屬於地方性兩型性真菌，為主要病原 [cite: 58]"
+    },
+    {
+        id: "999-national-59",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "下列何者不是導致伺機性黴菌感染疾病之重要誘導因素（predisposing factor）？",
+        options: [
+            "(A) 服用抗微生物藥物",
+            "(B) 惡性腫瘤",
+            "(C) 外科手術或燒傷",
+            "(D) 男女性別"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "性別通常不影響伺機性感染的發生 [cite: 59]"
+    },
+    {
+        id: "999-national-60",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "抗黴菌藥物 terbinafine 之作用機轉為抑制下列何者之生成？",
+        options: [
+            "(A) 蛋白質",
+            "(B) 核酸",
+            "(C) 麥角固醇（ergosterol）",
+            "(D) β-聚葡萄糖（β-glucan）"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "Terbinafine 抑制 Squalene epoxidase，阻斷麥角固醇合成路徑 [cite: 60]"
+    },
+    {
+        id: "999-national-61",
+        relatedPathogen: "hhv6",
+        type: "clinical",
+        question: "嬰兒玫瑰疹（roseola infantum）在發疹前會突然高燒，由何種病毒造成？",
+        options: [
+            "(A) Parvovirus B19",
+            "(B) Human herpesvirus-6",
+            "(C) Rubella virus",
+            "(D) Varicella-zoster virus"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "HHV-6 造成嬰兒玫瑰疹，典型症狀為燒退才出疹 [cite: 61]"
+    },
+    {
+        id: "999-national-62",
+        relatedPathogen: "jev",
+        type: "virology",
+        question: "下列病毒與其自然宿主之配對，何者錯誤？",
+        options: [
+            "(A) 黃熱病病毒與鳥類",
+            "(B) 登革熱病毒與人類、猴子",
+            "(C) 日本腦炎病毒與鳥類、豬",
+            "(D) 聖路易斯腦炎病毒與鳥類"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "註：講義答案給 C，但 A 選項中黃熱病宿主主要為靈長類亦有爭議 [cite: 62, 63]"
+    },
+    {
+        id: "999-national-63",
+        relatedPathogen: "rubella_virus",
+        type: "virology",
+        question: "下列何者為德國麻疹病毒（Rubella virus）的致病機制？",
+        options: [
+            "(A) 經消化道感染柱狀上皮細胞",
+            "(B) 先在呼吸道增殖，再感染網狀內皮系統",
+            "(C) 經蚊子叮咬直接產生病毒血症",
+            "(D) 先在肌肉增殖，並擴散到中樞神經"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "註：依講義為 D。一般常規知識為 B 路徑 [cite: 64]"
+    },
+    {
+        id: "999-national-64",
+        relatedPathogen: "hbv",
+        type: "basic",
+        question: "醫院臨床工作者預防 B 型肝炎病毒感染的常用方法？",
+        options: [
+            "(A) 施打 B 型肝炎疫苗",
+            "(B) 注射干擾素",
+            "(C) 注射 B 型肝炎免疫球蛋白",
+            "(D) 主動感染 B 型肝炎病毒"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "註：常規應為疫苗 A，但講義標示 B (可能指暴露後治療) [cite: 65]"
+    },
+    {
+        id: "999-national-65",
+        relatedPathogen: "candida_glabrata",
+        type: "mycology",
+        question: "下列何種黴菌主要感染途徑不是吸入感染？",
+        options: [
+            "(A) Coccidioides immitis",
+            "(B) Candida glabrata",
+            "(C) Histoplasma capsulatum",
+            "(D) Blastomyces dermatitidis"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "Candida 多為內源性或接觸感染 [cite: 66]"
+    },
+    {
+        id: "999-national-66",
+        relatedPathogen: "histoplasma_capsulatum",
+        type: "mycology",
+        question: "關節孢子（arthroconidia）是下列何種黴菌之鑑定特徵？",
+        options: [
+            "(A) Coccidioides immitis",
+            "(B) Fusarium solani",
+            "(C) Histoplasma capsulatum",
+            "(D) Malassezia furfur"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "註：常規球黴菌為 A，講義標示 C [cite: 67]"
+    },
+    {
+        id: "999-national-67",
+        relatedPathogen: "measles_virus",
+        type: "clinical",
+        question: "何種病毒感染有機會經多年後復發引起亞急性硬化全腦炎 (SSPE)？",
+        options: [
+            "(A) 麻疹病毒 (Measles virus)",
+            "(B) 腮腺炎病毒",
+            "(C) 立百病毒",
+            "(D) 亨得拉病毒"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "重複重點：SSPE 是麻疹病毒感染後的罕見遠期併發症 [cite: 68]"
+    },
+    {
+        id: "999-national-68",
+        relatedPathogen: "hepatitis_virus",
+        type: "virology",
+        question: "關於肝炎病毒之敘述，下列何者錯誤？",
+        options: [
+            "(A) A 型和 E 型傳染途徑為糞口傳染",
+            "(B) A、C、D、E 核酸均為 RNA，B 型為部分雙股 DNA",
+            "(C) B 和 C 型可導致慢性肝炎",
+            "(D) D 型肝炎需 A 型之幫助來傳染和複製"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "HDV 是缺陷病毒，需要 HBV 提供外套膜 (HBsAg) [cite: 69]"
+    },
+    {
+        id: "999-national-69",
+        relatedPathogen: "mycetoma",
+        type: "mycology",
+        question: "關於 subcutaneous mycoses 及其致病原之關聯，下列何者正確？",
+        options: [
+            "(A) Sporotrichosis- Chaetomium spp.",
+            "(B) Chromoblastomycosis- Madurella spp.",
+            "(C) Eumycotic mycetoma- Aspergillus nidulans",
+            "(D) Subcutaneous zygomycosis- Sporothrix schenckii"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "真菌性足菌腫 (Eumycotic mycetoma) 可由 A. nidulans 引起 [cite: 70, 71]"
+    },
+    {
+        id: "999-national-70",
+        relatedPathogen: "dengue_virus",
+        type: "clinical",
+        question: "欲由登革熱患者身上分離病毒時，取患者下列那種檢體最適合？",
+        options: [
+            "(A) 喉頭拭子",
+            "(B) 血液",
+            "(C) 皮膚",
+            "(D) 肛門拭子"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "登革熱主要引起病毒血症，血液檢體分離率最高 [cite: 72]"
+    },
+    {
+        id: "999-national-71",
+        relatedPathogen: "coccidioidomycosis",
+        type: "mycology",
+        question: "病理組織觀察到 3~6 μm 大小之桶狀關節孢子（barrel-shaped arthroconidia），可能罹患：",
+        options: [
+            "(A) 芽生黴菌症",
+            "(B) 球黴菌症 (Coccidioidomycosis)",
+            "(C) 莢膜組織胞漿菌症",
+            "(D) 副球黴菌症"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "Coccidioides immitis 的典型特徵為桶狀關節孢子 [cite: 73]"
+    },
+    {
+        id: "999-national-72",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "關於抗黴菌（antifungal）藥物之主要作用機制的敘述，下列何者正確？",
+        options: [
+            "(A) 氟胞嘧啶（Flucytosine）抑制核酸合成",
+            "(B) 糞殼菌素（Sordarins）抑制細胞壁合成",
+            "(C) 華光黴素（Nikkomycin）抑制細胞膜合成",
+            "(D) 聚乙烯（Polyenes）抑制蛋白質合成"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "Nikkomycin 抑制幾丁質 (Chitin) 合成；Polyene 破壞細胞膜 [cite: 74]"
+    },
+    {
+        id: "999-national-73",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "透明黴菌（hyaline molds）是指在病灶組織中具有哪種性質？",
+        options: [
+            "(A) 產生有分隔之菌絲",
+            "(B) 產生無分枝之菌絲",
+            "(C) 與青黴菌屬形態相似",
+            "(D) 產生具色素之菌絲"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "Hyaline 指透明、無色，且具備橫隔 (Septate) [cite: 75]"
+    },
+    {
+        id: "999-national-74",
+        relatedPathogen: "sporothrix_schenckii",
+        type: "mycology",
+        question: "下列何者為皮下真菌病（subcutaneous mycosis）中具兩型性（dimorphic）之病原？",
+        options: [
+            "(A) 疣狀毛癬菌",
+            "(B) 申克孢子絲菌 (Sporothrix schenckii)",
+            "(C) 副冠耳黴",
+            "(D) 蛙糞黴"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "Sporothrix 為典型的兩型性皮下真菌 [cite: 76]"
+    },
+    {
+        id: "999-national-75",
+        relatedPathogen: "hantaan_virus",
+        type: "virology",
+        question: "布尼亞病毒（Bunyaviruses）大多藉由節肢動物傳播，何者例外？",
+        options: [
+            "(A) 漢坦病毒（Hantaan virus）",
+            "(B) 裂谷熱病毒",
+            "(C) 加利福尼亞腦炎病毒",
+            "(D) 克里米亞-剛果出血熱病毒"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "Hantavirus 由齧齒動物（如老鼠）尿液糞便傳播，非節肢動物 [cite: 77]"
+    },
+    {
+        id: "999-national-76",
+        relatedPathogen: "aspergillus",
+        type: "mycology",
+        question: "下列何者為麴菌（Aspergillus spp.）之形態特徵？",
+        options: [
+            "(A) 具假根 (rhizoid)",
+            "(B) 具厚壁孢子",
+            "(C) 菌絲無分隔",
+            "(D) 具瓶狀 (flask-shaped) 孢子梗 (phialides)"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "麴菌的分生孢子頭 (Conidial head) 具有瓶狀小梗 [cite: 78]"
+    },
+    {
+        id: "999-national-77",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "抗真菌藥物在合成葡聚醣（glucan）相關基因上產生突變而具抗藥性的是？",
+        options: [
+            "(A) 氟胞嘧啶",
+            "(B) 棘白素類（Echinocandins）",
+            "(C) 丙烯胺類",
+            "(D) 兩性黴素 B"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "Echinocandins (如 Caspofungin) 抑制 1,3-β-glucan 合成 [cite: 79]"
+    },
+    {
+        id: "999-national-78",
+        relatedPathogen: "lassa_virus",
+        type: "virology",
+        question: "下列何種病毒有兩條單股 RNA 基因體，其中一條為雙義（ambisense）RNA？",
+        options: [
+            "(A) 拉薩病毒（Lassa virus）",
+            "(B) 登革病毒",
+            "(C) 中東呼吸症候群冠狀病毒",
+            "(D) 克里米亞-剛果出血熱病毒"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "沙狀病毒 (Arenaviruses) 具兩段環狀 RNA，且帶有雙義性 [cite: 80]"
+    },
+    {
+        id: "999-national-79",
+        relatedPathogen: "talaromyces_marneffei",
+        type: "mycology",
+        question: "有關馬爾尼菲青黴菌（Talaromyces marneffei）之敘述何者正確？",
+        options: [
+            "(A) 37°C 呈絲狀菌形態",
+            "(B) 具關節孢子",
+            "(C) 不會呈現類酵母菌型態",
+            "(D) 主要感染途徑為呼吸道"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "兩型性真菌在 37°C 為酵母狀；主要吸入感染 [cite: 81]"
+    },
+    {
+        id: "999-national-80",
+        relatedPathogen: "histoplasma_capsulatum",
+        type: "mycology",
+        question: "培養莢膜組織胞漿菌（Histoplasma capsulatum）時加入何者可防止汙染？",
+        options: [
+            "(A) 環絲胺酸",
+            "(B) 放線菌酮 (Cycloheximide)",
+            "(C) 氯法齊明",
+            "(D) 奎奴普丁"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "Cycloheximide 可抑制伺機性真菌生長 [cite: 82]"
+    },
+    {
+        id: "999-national-81",
+        relatedPathogen: "hbv",
+        type: "virology",
+        question: "下列那一種病毒會以反轉錄酶（reverse transcriptase）複製病毒基因體？",
+        options: [
+            "(A) 乳突瘤病毒",
+            "(B) 西尼羅河病毒",
+            "(C) B 型肝炎病毒 (HBV)",
+            "(D) 呼吸道細胞融合病毒"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "HBV 為 Hepadnavirus，利用 RT 進行 DNA 複製 [cite: 83]"
+    },
+    {
+        id: "999-national-82",
+        relatedPathogen: "malassezia_furfur",
+        type: "mycology",
+        question: "培養糠秕馬拉癬菌（Malassezia furfur）時最常加入何者提高培養率？",
+        options: [
+            "(A) 澱粉",
+            "(B) L-半胱胺酸",
+            "(C) 橄欖油 (Olive oil)",
+            "(D) N-乙醯葡萄胺糖"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "Malassezia 為嗜脂性真菌 (Lipophilic) [cite: 84]"
+    },
+    {
+        id: "999-national-83",
+        relatedPathogen: "candida_glabrata",
+        type: "mycology",
+        question: "下列那一種真菌（fungi）通常不形成菌絲（hyphae）構造？",
+        options: [
+            "(A) 熱帶念珠菌",
+            "(B) 白色念珠菌",
+            "(C) 光滑念珠菌 (Candida glabrata)",
+            "(D) 近平滑念珠菌"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "C. glabrata 僅以酵母型存在，不產生假菌絲 [cite: 85]"
+    },
+    {
+        id: "999-national-84",
+        relatedPathogen: "retrovirus",
+        type: "virology",
+        question: "下列何者不屬於反轉錄病毒科（Retrovirus family）？",
+        options: [
+            "(A) 腫瘤病毒亞科",
+            "(B) 環狀病毒亞科 (Orbivirinae)",
+            "(C) 慢病毒亞科",
+            "(D) 泡沫病毒亞科"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "Orbivirus 屬於 Reoviridae [cite: 86]"
+    },
+    {
+        id: "999-national-85",
+        relatedPathogen: "prion",
+        type: "basic",
+        question: "下列何項最不能去除普里昂（prion）之感染能力？",
+        options: [
+            "(A) 高壓滅菌 121℃ 1 小時",
+            "(B) 浸泡於 5% 次氯酸溶液",
+            "(C) 浸泡於 1 M NaOH 溶液",
+            "(D) 紫外線消毒"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "Prion 不含核酸，對紫外線照射不敏感 [cite: 87]"
+    },
+    {
+        id: "999-national-86",
+        relatedPathogen: "hpv",
+        type: "virology",
+        question: "關於人類乳突瘤病毒（HPV）的敘述何者錯誤？",
+        options: [
+            "(A) 可感染皮膚及黏膜",
+            "(B) 沒有外套膜",
+            "(C) 其 E1A 與 E1B 蛋白質可以活化致癌基因",
+            "(D) HPV-16 和 HPV-18 與癌症有關"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "HPV 的致癌蛋白是 E6 (接 p53) 與 E7 (接 pRb) [cite: 88]"
+    },
+    {
+        id: "999-national-87",
+        relatedPathogen: "hepatitis_virus",
+        type: "virology",
+        question: "關於肝炎病毒之敘述何者錯誤？",
+        options: [
+            "(A) HAV 與 HCV 皆為正股 RNA 病毒",
+            "(B) HBV 與 HCV 皆有外套膜",
+            "(C) HAV 與 E 型肝炎病毒常透過血液傳染",
+            "(D) B 型肝炎病毒在細胞核內複製"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "HAV 與 HEV 主要傳染途徑為糞口 (Fecal-oral) [cite: 89]"
+    },
+    {
+        id: "999-national-88",
+        relatedPathogen: "hiv",
+        type: "virology",
+        question: "人類免疫缺陷病毒（HIV）之套膜蛋白質（envelope protein）為何？",
+        options: [
+            "(A) gp120",
+            "(B) gp21",
+            "(C) p66",
+            "(D) p55"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "gp120 負責與 CD4 受體結合 [cite: 90]"
+    },
+    {
+        id: "999-national-89",
+        relatedPathogen: "dermatophytes",
+        type: "mycology",
+        question: "關於致病性皮癬菌（Dermatophytes）之敘述正確者？",
+        options: [
+            "(A) 不會人傳人",
+            "(B) 表皮癬菌屬（Epidermophyton）不產生小分生孢子",
+            "(C) 小孢癬菌屬（Microsporum）極少產生大分生孢子",
+            "(D) 毛癬菌屬（Trichophyton）產生大量大分生孢子"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "Epidermophyton 僅產生棒狀大分生孢子，不具小分生孢子 [cite: 91]"
+    },
+    {
+        id: "999-national-90",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "多烯類（polyenes）藥物抑制真菌之主要機轉？",
+        options: [
+            "(A) 與麥角固醇結合，破壞細胞膜",
+            "(B) 抑制 14-α-脫甲基酶",
+            "(C) 抑制鯊烯環氧酶",
+            "(D) 抑制 1,3-β-葡聚醣之合成"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "與第 11 題重複重點：Polyenes (如 AmB) 直接破壞細胞膜 [cite: 92]"
+    },
+    {
+        id: "999-national-91",
+        relatedPathogen: "fungi_general",
+        type: "mycology",
+        question: "真菌菌絲（hyphae）之兩種基本形態為何？",
+        options: [
+            "(A) 隔菌絲 (septate hyphae) 和多核體菌絲 (coenocytic hyphae)",
+            "(B) 隔菌絲和發芽管",
+            "(C) 假菌絲和多核體菌絲",
+            "(D) 假菌絲和鎖狀連接菌絲"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "真菌基本形態為有隔膜與無隔膜 (多核體) [cite: 93]"
+    },
+    {
+        id: "999-national-92",
+        relatedPathogen: "hiv",
+        type: "virology",
+        question: "何種病毒感染後會引發細胞融合（syncytia）並形成巨大細胞？",
+        options: [
+            "(A) 腸病毒",
+            "(B) 登革病毒",
+            "(C) 人類免疫缺失病毒 (HIV)",
+            "(D) 狂犬病病毒"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "HIV 可透過套膜蛋白與 CD4 細胞交互作用形成多核巨大細胞 [cite: 94]"
+    },
+    {
+        id: "999-national-93",
+        relatedPathogen: "rubella_virus",
+        type: "clinical",
+        question: "下列何種病毒感染最容易引起嬰兒先天性白內障（congenital cataract）？",
+        options: [
+            "(A) 單純疱疹病毒",
+            "(B) 腸病毒",
+            "(C) 腺病毒",
+            "(D) 德國麻疹病毒 (Rubella virus)"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "CRS 典型三大症狀：心臟畸形、耳聾、白內障 [cite: 95]"
+    },
+    {
+        id: "999-national-94",
+        relatedPathogen: "virology_general",
+        type: "clinical",
+        question: "下列那幾種病毒最可能經由性行為感染？①HAV ②HSV ③Zika virus ④Measles virus",
+        options: [
+            "(A) ①②",
+            "(B) ②③",
+            "(C) ③④",
+            "(D) ①③"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "HSV 與 Zika 皆可透過性行為傳播 [cite: 96]"
+    },
+    {
+        id: "999-national-95",
+        relatedPathogen: "hiv",
+        type: "clinical",
+        question: "目前對愛滋病的治療用藥不包含下列何種？",
+        options: [
+            "(A) Reverse transcriptase inhibitor",
+            "(B) Protease inhibitor",
+            "(C) Integrase inhibitor",
+            "(D) Neuraminidase inhibitor"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "Neuraminidase inhibitor (如奧司他韋) 用於治療流感 [cite: 97]"
+    },
+    {
+        id: "999-national-96",
+        relatedPathogen: "paramyxovirus",
+        type: "virology",
+        question: "下列有關副黏液病毒（paramyxovirus）的敘述何者最適當？",
+        options: [
+            "(A) 基因體即是 mRNA",
+            "(B) 病毒顆粒中並未包裹 RNA 聚合酶",
+            "(C) 病毒感染後引發細胞融合 (syncytium)",
+            "(D) 病毒蛋白產量是一致的"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "與第 39 題呼應：Paramyxo 具 F protein 造成細胞融合 [cite: 98]"
+    },
+    {
+        id: "999-national-97",
+        relatedPathogen: "picornaviridae",
+        type: "virology",
+        question: "下列何種病毒不屬於小 RNA 病毒科（Picornaviridae）？",
+        options: [
+            "(A) A 型肝炎病毒",
+            "(B) 腸病毒",
+            "(C) 鼻病毒",
+            "(D) 冠狀病毒 (Coronavirus)"
+        ],
+        correctAnswer: "D",
+        [cite_start]userNote: "Coronavirus 屬於 Coronaviridae [cite: 99]"
+    },
+    {
+        id: "999-national-98",
+        relatedPathogen: "filovirus",
+        type: "virology",
+        question: "下列有關絲狀病毒（filovirus）的敘述何者正確？",
+        options: [
+            "(A) 病毒可經由蝙蝠及猴子感染人，也可人傳人",
+            "(B) 2018 年伊波拉大流行發生在海地",
+            "(C) 病毒基因為正股 RNA",
+            "(D) 伊波拉病毒顆粒是子彈型"
+        ],
+        correctAnswer: "A",
+        [cite_start]userNote: "伊波拉病毒為 (-)ssRNA，形狀為長絲狀 [cite: 100]"
+    },
+    {
+        id: "999-national-99",
+        relatedPathogen: "virology_immunity",
+        type: "basic",
+        question: "哪項因子最有可能造成第四型過敏及發炎反應？",
+        options: [
+            "(A) 病毒抗體",
+            "(B) 干擾素",
+            "(C) 多形核白血球 (PMN)",
+            "(D) 細胞激素"
+        ],
+        correctAnswer: "C",
+        [cite_start]userNote: "註：依講義給 C。一般第四型應與 T 細胞、巨噬細胞較有關 [cite: 101]"
+    },
+    {
+        id: "999-national-100",
+        relatedPathogen: "hiv",
+        type: "virology",
+        question: "下列何種細胞不是愛滋病毒（HIV）主要感染的對象？",
+        options: [
+            "(A) CD4 T 細胞",
+            "(B) 嗜中性白血球 (neutrophil)",
+            "(C) 巨噬細胞",
+            "(D) 樹突細胞"
+        ],
+        correctAnswer: "B",
+        [cite_start]userNote: "HIV 感染帶有 CD4 與 CCR5/CXCR4 的細胞 [cite: 102]"
+    },
+    {
+        id: "999-national-101",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "新型抗流感病毒藥物紓伏效（baloxavir marboxil）抑制對象為何？",
+        options: [
+            "(A) PB2",
+            "(B) M2",
+            "(C) HA",
+            "(D) NA"
+        ],
+        correctAnswer: "A",
+        userNote: "Baloxavir 抑制 Cap-snatching 過程中的內切酶 [cite: 103]"
+    },
+    {
+        id: "999-national-102",
+        relatedPathogen: "herpesvirus",
+        type: "clinical",
+        question: "有關疱疹病毒（Herpesvirus）與其相關疾病之配對，下列何者錯誤？",
+        options: [
+            "(A) HSV-1：疱疹性腦炎",
+            "(B) EB 病毒：單核球增多症",
+            "(C) 水痘病毒（VZV）：帶狀疱疹",
+            "(D) 人類疱疹病毒六型（HHV-6）：疱疹性咽峽炎"
+        ],
+        correctAnswer: "D",
+        userNote: "疱疹性咽峽炎 (Herpangina) 多由 Coxsackievirus A 引起 [cite: 104]"
+    },
+    {
+        id: "999-national-103",
+        relatedPathogen: "ebola_virus",
+        type: "virology",
+        question: "有關伊波拉病毒（Ebola virus）的敘述，下列何者錯誤？",
+        options: [
+            "(A) 病毒穩定，主要透過腸胃道傳染",
+            "(B) 感染內皮細胞、單核球等造成細胞壞死",
+            "(C) 會引起細胞激素風暴 (cytokine storm)",
+            "(D) 導致血管通透性增加，造成內出血"
+        ],
+        correctAnswer: "A",
+        userNote: "主要透過接觸受感染者的血液或體液傳播 [cite: 105]"
+    },
+    {
+        id: "999-national-104",
+        relatedPathogen: "dengue_virus",
+        type: "virology",
+        question: "有關登革病毒（dengue virus）的敘述，下列何者正確？",
+        options: [
+            "(A) 無法以乙醚去其活性",
+            "(B) 與 C 型肝炎病毒同屬於黃病毒科（Flaviviridae）",
+            "(C) 可以血球凝集抑制實驗區分四種型別",
+            "(D) 臨床已有抗登革熱藥物"
+        ],
+        correctAnswer: "B",
+        userNote: "Dengue 與 HCV 皆屬 Flaviviridae [cite: 106]"
+    },
+    {
+        id: "999-national-105",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "下列何種藥物的作用機轉為阻斷真菌微小管（microtubule）？",
+        options: [
+            "(A) itraconazole",
+            "(B) griseofulvin",
+            "(C) nystatin",
+            "(D) terbinafine"
+        ],
+        correctAnswer: "B",
+        userNote: "Griseofulvin 抑制有絲分裂的微小管功能 [cite: 107]"
+    },
+    {
+        id: "999-national-106",
+        relatedPathogen: "cryptococcus_neoformans",
+        type: "mycology",
+        question: "新型隱球菌在何種培養基菌落呈咖啡色？",
+        options: [
+            "(A) BCYE agar",
+            "(B) CHROMagar",
+            "(C) cornmeal agar",
+            "(D) niger seed agar"
+        ],
+        correctAnswer: "D",
+        userNote: "Niger seed agar (鳥糞石培養基) 偵測 Phenoloxidase 活性 [cite: 108]"
+    },
+    {
+        id: "999-national-107",
+        relatedPathogen: "sars_cov_2",
+        type: "virology",
+        question: "下列有關病毒的敘述，何者正確？",
+        options: [
+            "(A) HIV 之酵素均由宿主基因轉譯",
+            "(B) 茲卡病毒為負股 RNA 病毒",
+            "(C) 新型冠狀病毒（SARS-CoV-2）之複製在細胞質中進行",
+            "(D) 腸病毒具有外套膜"
+        ],
+        correctAnswer: "C",
+        userNote: "SARS-CoV-2 為 (+)ssRNA，在細胞質複製 [cite: 109]"
+    },
+    {
+        id: "999-national-108",
+        relatedPathogen: "virology_general",
+        type: "virology",
+        question: "下列那幾種病毒可經由動物暨節肢動物而傳播？①漢他病毒 ②日本腦炎病毒 ③黃熱病病毒 ④狂犬病病毒",
+        options: [
+            "(A) ①②",
+            "(B) ②③",
+            "(C) ③④",
+            "(D) ②④"
+        ],
+        correctAnswer: "B",
+        userNote: "JEV (蚊) 與 Yellow fever (蚊) 為節肢動物媒介 [cite: 110]"
+    },
+    {
+        id: "999-national-109",
+        relatedPathogen: "bunyavirus_arenavirus",
+        type: "virology",
+        question: "下列何者不是 Bunyavirus 與 Arenavirus 共同具有的特性？",
+        options: [
+            "(A) 為人畜共同傳染的病毒",
+            "(B) 基因體為片段 RNA 組成",
+            "(C) 可能造成出血熱",
+            "(D) 病毒顆粒中都沒有包裹核糖體"
+        ],
+        correctAnswer: "D",
+        userNote: "Arenavirus 顆粒中含有宿主的核糖體 (Sandy appearance) [cite: 111, 119]"
+    },
+    {
+        id: "999-national-110",
+        relatedPathogen: "dengue_virus",
+        type: "virology",
+        question: "下列何者不是負股 RNA 病毒（negative-sense RNA virus）？",
+        options: [
+            "(A) 流感病毒",
+            "(B) 伊波拉病毒",
+            "(C) 狂犬病毒",
+            "(D) 登革熱病毒"
+        ],
+        correctAnswer: "D",
+        userNote: "登革熱病毒為正股 (+)ssRNA [cite: 112]"
+    },
+    {
+        id: "999-national-111",
+        relatedPathogen: "herpes_simplex_virus",
+        type: "clinical",
+        question: "下列疾病何者不是由痘科病毒（Poxvirus）引起？",
+        options: [
+            "(A) 天花",
+            "(B) 傳染性軟疣",
+            "(C) 手指頭上的 Orf 病灶",
+            "(D) 疱疹性膿性指頭疽（whitlow）"
+        ],
+        correctAnswer: "D",
+        userNote: "Herpetic whitlow 由 HSV 引起 [cite: 113]"
+    },
+    {
+        id: "999-national-112",
+        relatedPathogen: "hcv",
+        type: "virology",
+        question: "下列那一種藥物，主要抑制 C 型肝炎病毒的聚合酶（polymerase）？",
+        options: [
+            "(A) 索華迪（sofosbuvir）",
+            "(B) 波普瑞韋（boceprevir）",
+            "(C) 拉米夫定（lamivudine）",
+            "(D) 聚乙二醇干擾素"
+        ],
+        correctAnswer: "A",
+        userNote: "Sofosbuvir 是 NS5B 聚合酶抑制劑 [cite: 114]"
+    },
+    {
+        id: "999-national-113",
+        relatedPathogen: "microbiology_id",
+        type: "basic",
+        question: "MALDI-TOF MS 廣泛應用在微生物鑑定上，其主要偵測標的物為何？",
+        options: [
+            "(A) 蛋白質",
+            "(B) 核酸",
+            "(C) 粒線體",
+            "(D) 微量元素"
+        ],
+        correctAnswer: "A",
+        userNote: "偵測細菌/真菌之蛋白質譜圖以鑑定種類 [cite: 115]"
+    },
+    {
+        id: "999-national-114",
+        relatedPathogen: "rhizopus",
+        type: "mycology",
+        question: "下列何者具有寬大菌絲，且沒有或較少細胞中隔（septum）？",
+        options: [
+            "(A) Fusarium spp.",
+            "(B) Trichosporon spp.",
+            "(C) Rhizopus spp.",
+            "(D) Scedosporium spp."
+        ],
+        correctAnswer: "C",
+        userNote: "接合菌門 (Zygomycetes) 特徵：寬大無隔膜菌絲 [cite: 116, 117]"
+    },
+    {
+        id: "999-national-115",
+        relatedPathogen: "hcv",
+        type: "virology",
+        question: "抗 C 肝藥物雷巴威林（Ribavirin）是抑制病毒複製的那一項步驟？",
+        options: [
+            "(A) 接觸",
+            "(B) 穿過細胞膜及解散外殼",
+            "(C) 病毒 RNA 的生合成",
+            "(D) 蛋白質合成"
+        ],
+        correctAnswer: "C",
+        userNote: "Ribavirin 是鳥苷類似物，干擾 RNA 聚合酶 [cite: 118]"
+    },
+    {
+        id: "999-national-116",
+        relatedPathogen: "arenavirus",
+        type: "virology",
+        question: "下列有關沙狀病毒（arenavirus）的敘述何者最不適當？",
+        options: [
+            "(A) 病毒顆粒中含核糖體",
+            "(B) 病毒經由蚊子傳播",
+            "(C) 病毒可經由空氣傳播",
+            "(D) 感染會造成腦膜炎及出血性症狀"
+        ],
+        correctAnswer: "B",
+        userNote: "重複重點：沙狀病毒是由齧齒動物媒介 [cite: 119]"
+    },
+    {
+        id: "999-national-117",
+        relatedPathogen: "hbv",
+        type: "basic",
+        question: "如何區分「疫苗接種者」與「自然感染康復者」？",
+        options: [
+            "(A) Anti-HBc 抗體陽性",
+            "(B) Anti-HBs 抗體陽性",
+            "(C) HBs 抗原陰性",
+            "(D) HBe 抗原陰性"
+        ],
+        correctAnswer: "A",
+        userNote: "Anti-HBc (+) 代表曾受自然感染 (含有核心抗體) [cite: 120]"
+    },
+    {
+        id: "999-national-118",
+        relatedPathogen: "parvovirus_b19",
+        type: "virology",
+        question: "下列何者不屬於小 RNA 病毒科（Picornaviridae）？",
+        options: [
+            "(A) Poliovirus",
+            "(B) B19 virus",
+            "(C) Hepatitis A virus",
+            "(D) Rhinovirus"
+        ],
+        correctAnswer: "B",
+        userNote: "B19 屬於 Parvoviridae (DNA 病毒) [cite: 121]"
+    },
+    {
+        id: "999-national-119",
+        relatedPathogen: "dengue_virus",
+        type: "virology",
+        question: "有關登革熱病毒的敘述，下列何者最不適當？",
+        options: [
+            "(A) 是一個 arbovirus",
+            "(B) 與茲卡病毒屬相同病毒科",
+            "(C) 患者將獲終身免疫",
+            "(D) 可能引起出血熱"
+        ],
+        correctAnswer: "C",
+        userNote: "有四種血清型，感染其中一型僅具該型終身免疫，對他型不具備 [cite: 122]"
+    },
+    {
+        id: "999-national-120",
+        relatedPathogen: "hdv",
+        type: "virology",
+        question: "有關人類 D 型肝炎病毒的敘述，下列何者正確？",
+        options: [
+            "(A) 主要藉由糞口傳染",
+            "(B) 可藉由施打 B 型肝炎疫苗來預防感染",
+            "(C) HDV 感染會促進 HBsAg 抗體陽轉",
+            "(D) 需要 HBV 的 HBc 蛋白才能產生顆粒"
+        ],
+        correctAnswer: "B",
+        userNote: "沒 HBV 就沒 HDV，所以防 HBV 就能防 HDV [cite: 123]"
+    },
+    {
+        id: "999-national-121",
+        relatedPathogen: "aspergillus",
+        type: "mycology",
+        question: "麴菌 CYP51A 基因突變是產生下列何種藥物抗藥性的主因？",
+        options: [
+            "(A) 三唑 (triazole)",
+            "(B) 棘白菌素",
+            "(C) 多烯",
+            "(D) 烯丙胺"
+        ],
+        correctAnswer: "A",
+        userNote: "CYP51 突變會改變 Azole 類的接合位點 [cite: 124]"
+    },
+    {
+        id: "999-national-122",
+        relatedPathogen: "talaromyces_marneffei",
+        type: "mycology",
+        question: "HIV 患者血培：25℃ 絲狀且生鮮紅色色素，35℃ 為酵母狀，最可能是：",
+        options: [
+            "(A) Emergomyces pasteurianus",
+            "(B) Scedosporium apiospermum",
+            "(C) Paracoccidioides brasiliensis",
+            "(D) Talaromyces marneffei"
+        ],
+        correctAnswer: "D",
+        userNote: "關鍵字：紅色素、兩型性、HIV [cite: 125]"
+    },
+    {
+        id: "999-national-123",
+        relatedPathogen: "virology_general",
+        type: "virology",
+        question: "下列有關病毒的敘述，何者最適當？",
+        options: [
+            "(A) RNA 病毒複製時錯誤率大於 DNA 病毒",
+            "(B) 病毒複製以等比級數增加",
+            "(C) 流感病毒耐受性比腸病毒強",
+            "(D) 所有 RNA 病毒均在細胞質中完成複製"
+        ],
+        correctAnswer: "A",
+        userNote: "RNA 聚合酶缺乏校對 (Proofreading) 功能 [cite: 126]"
+    },
+    {
+        id: "999-national-124",
+        relatedPathogen: "virology_immunity",
+        type: "basic",
+        question: "下列那一個最有可能是引發「全身性類感冒症狀」之因子？",
+        options: [
+            "(A) T 細胞",
+            "(B) 干擾素 (Interferon)",
+            "(C) 抗體",
+            "(D) 免疫複合物"
+        ],
+        correctAnswer: "B",
+        userNote: "Interferon (IFN-α/β) 常引起發燒、疲倦等症狀 [cite: 127]"
+    },
+    {
+        id: "999-national-125",
+        relatedPathogen: "bunyaviridae",
+        type: "virology",
+        question: "下列有關布尼亞科（bunyaviridae）病毒的敘述，何者最適當？",
+        options: [
+            "(A) 為正股 (+)RNA 病毒",
+            "(B) 在細胞核中複製",
+            "(C) 漢他病毒主要以老鼠為媒介傳播",
+            "(D) 以人傳人方式傳播"
+        ],
+        correctAnswer: "C",
+        userNote: "Bunyaviridae 為負股 RNA 病毒 [cite: 128]"
+    },
+    {
+        id: "999-national-126",
+        relatedPathogen: "eb_virus",
+        type: "clinical",
+        question: "下列疾病與 EB 病毒（Epstein-Barr virus）感染較無關？",
+        options: [
+            "(A) 愛滋病患口腔毛狀白斑",
+            "(B) 新生兒先天性聽力受損",
+            "(C) 鼻咽癌",
+            "(D) 單核球增多症"
+        ],
+        correctAnswer: "B",
+        userNote: "先天聽損主要與 CMV (巨細胞病毒) 感染有關 [cite: 129]"
+    },
+    {
+        id: "999-national-127",
+        relatedPathogen: "retrovirus",
+        type: "virology",
+        question: "有關反轉錄病毒（retrovirus）的敘述，何者最不適當？",
+        options: [
+            "(A) 原病毒 (provirus) 只出現在宿主染色體固定位置",
+            "(B) 利用宿主的 tRNA 為引子",
+            "(C) 病毒顆粒中有兩套單股 RNA",
+            "(D) 帶有反轉錄病毒酶"
+        ],
+        correctAnswer: "A",
+        userNote: "整合 (Integration) 位置通常是隨機的 [cite: 130]"
+    },
+    {
+        id: "999-national-128",
+        relatedPathogen: "sars_cov_2",
+        type: "virology",
+        question: "SARS-CoV2 最初如何被鑑定出與蝙蝠冠狀病毒相近？",
+        options: [
+            "(A) 電子顯微鏡",
+            "(B) 病毒序列與蝙蝠冠狀病毒序列極高相似度",
+            "(C) 臨床症狀",
+            "(D) 抗體交叉反應"
+        ],
+        correctAnswer: "B",
+        userNote: "透過基因體定序分析完成 [cite: 131]"
+    },
+    {
+        id: "999-national-129",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "下列抗黴菌藥物中，何者作用部位與其他三者不同？",
+        options: [
+            "(A) 三唑 (triazole)",
+            "(B) 棘白菌素 (echinocandin)",
+            "(C) 烯丙胺 (allylamine)",
+            "(D) 多烯 (polyenes)"
+        ],
+        correctAnswer: "B",
+        userNote: "Echinocandins 作用於細胞壁，其餘作用於細胞膜 [cite: 132]"
+    },
+    {
+        id: "999-national-130",
+        relatedPathogen: "rhodotorula",
+        type: "mycology",
+        question: "下列何者會合成類胡蘿蔔素，使菌落呈粉紅至紅色？",
+        options: [
+            "(A) Trichosporon spp.",
+            "(B) Rhodotorula spp.",
+            "(C) Cryptococcus spp.",
+            "(D) Malassezia spp."
+        ],
+        correctAnswer: "B",
+        userNote: "紅酵母屬 (Rhodotorula) 是典型的產色素酵母 [cite: 133, 134]"
+    },
+    {
+        id: "999-national-131",
+        relatedPathogen: "prion",
+        type: "basic",
+        question: "有關普里昂（prion）的敘述，何者最不適當？",
+        options: [
+            "(A) 只能在腦部測到其存在",
+            "(B) 抗病毒化學及物理方法無法抑制其活性",
+            "(C) 會產生海綿狀腦病變",
+            "(D) 以蛋白質形式進行感染"
+        ],
+        correctAnswer: "A",
+        userNote: "淋巴組織如扁桃腺也可能測得 [cite: 135]"
+    },
+    {
+        id: "999-national-132",
+        relatedPathogen: "parvovirus_b19",
+        type: "clinical",
+        question: "有關 parvovirus B19 的敘述，下列何者最適當？",
+        options: [
+            "(A) 為雙股 DNA 病毒",
+            "(B) 糞口傳染",
+            "(C) 引起紅血球先驅細胞溶解",
+            "(D) 造成嬰兒玫瑰疹"
+        ],
+        correctAnswer: "C",
+        userNote: "Parvovirus B19 專一感染紅血球母細胞 [cite: 136]"
+    },
+    {
+        id: "999-national-133",
+        relatedPathogen: "prion",
+        type: "basic",
+        question: "RT-QuIC 快速檢驗是利用 prion 的何種特性？",
+        options: [
+            "(A) PrPC 會聚集成纖絲",
+            "(B) PrPSC 會聚集成纖絲",
+            "(C) PrPC 會將 PrPSC 轉換成 PrPC",
+            "(D) PrPSC 半衰期較短"
+        ],
+        correctAnswer: "B",
+        userNote: "PrPSC (致病型) 會誘導聚集形成澱粉樣纖維 [cite: 137]"
+    },
+    {
+        id: "999-national-134",
+        relatedPathogen: "poxvirus",
+        type: "virology",
+        question: "痘病毒（poxvirus）與大多數人類 DNA 病毒之差異為：",
+        options: [
+            "(A) 在細胞質複製",
+            "(B) 基因體為線型雙股 DNA",
+            "(C) 有自己的 DNA 聚合酶",
+            "(D) 利用 strand-displacement"
+        ],
+        correctAnswer: "A",
+        userNote: "Poxvirus 帶有完整酵素系統，可在胞質獨立複製 [cite: 138]"
+    },
+    {
+        id: "999-national-135",
+        relatedPathogen: "anti_viral_drugs",
+        type: "clinical",
+        question: "有關病毒感染治療藥物之敘述，何者最不適當？",
+        options: [
+            "(A) 茚地那韋（indinavir）常用來治療 HSV 感染",
+            "(B) 利巴韋林合併干擾素可用於治療 C 肝",
+            "(C) 狂犬病需施打抗體及疫苗",
+            "(D) 金剛烷胺可抑制流感 A 型"
+        ],
+        correctAnswer: "A",
+        userNote: "Indinavir 是 HIV 蛋白酶抑制劑，非 HSV 用藥 [cite: 139]"
+    },
+    {
+        id: "999-national-136",
+        relatedPathogen: "rotavirus",
+        type: "clinical",
+        question: "一歲男嬰水瀉嘔吐兩天，最可能感染：",
+        options: [
+            "(A) 輪狀病毒 (rotavirus)",
+            "(B) 流感病毒",
+            "(C) B 型肝炎病毒",
+            "(D) EB 病毒"
+        ],
+        correctAnswer: "A",
+        userNote: "嬰幼兒病毒性腸胃炎的首要原因 [cite: 140]"
+    },
+    {
+        id: "999-national-137",
+        relatedPathogen: "emergomyces",
+        type: "mycology",
+        question: "關於 Emergomyces 之敘述，下列何者最不適當？",
+        options: [
+            "(A) 為溫度雙型性真菌",
+            "(B) 經由呼吸道感染，常出現皮膚病灶",
+            "(C) 多數被感染者都是健康人",
+            "(D) 可使用 AmB 和 triazole 治療"
+        ],
+        correctAnswer: "C",
+        userNote: "主要好發於免疫功能低下 (如 AIDS) 的病患 [cite: 141]"
+    },
+    {
+        id: "999-national-138",
+        relatedPathogen: "antifungal_drugs",
+        type: "mycology",
+        question: "棘白菌素（Echinocandin）對下列何種真菌治療效果最好？",
+        options: [
+            "(A) 毛黴菌",
+            "(B) 隱球菌",
+            "(C) 鐮孢菌",
+            "(D) 麴菌 (Aspergillus spp.)"
+        ],
+        correctAnswer: "D",
+        userNote: "Echinocandins 對 Aspergillus 與 Candida 有效 [cite: 142]"
+    },
+    {
+        id: "999-national-139",
+        relatedPathogen: "virology_general",
+        type: "virology",
+        question: "病毒感染時最常利用何種蛋白質進入細胞內？",
+        options: [
+            "(A) 基質蛋白",
+            "(B) 蛋白水解酶",
+            "(C) 醣蛋白 (glycoprotein)",
+            "(D) 核心蛋白"
+        ],
+        correctAnswer: "C",
+        userNote: "套膜病毒表面的醣蛋白負責識別受體 [cite: 143]"
+    },
+    {
+        id: "999-national-140",
+        relatedPathogen: "hiv",
+        type: "virology",
+        question: "何種病毒比較不會直接造成細胞增生形成腫瘤？",
+        options: [
+            "(A) HBV",
+            "(B) HTLV-1",
+            "(C) HPV",
+            "(D) HIV"
+        ],
+        correctAnswer: "D",
+        userNote: "HIV 引起腫瘤多屬間接因素 (免疫抑制) [cite: 144]"
+    },
+    {
+        id: "999-national-141",
+        relatedPathogen: "norovirus",
+        type: "clinical",
+        question: "郵輪上一群人上吐下瀉，2-3 天自癒。病原？",
+        options: [
+            "(A) 腺病毒 40 型",
+            "(B) 諾羅病毒 (Norovirus)",
+            "(C) 輪狀病毒",
+            "(D) 腸病毒 D68"
+        ],
+        correctAnswer: "B",
+        userNote: "關鍵字：郵輪、集體暴發、自限性 [cite: 145]"
+    },
+    {
+        id: "999-national-142",
+        relatedPathogen: "measles_virus",
+        type: "clinical",
+        question: "下列臨床症狀，何者與麻疹病毒感染較無關？",
+        options: [
+            "(A) 腦炎",
+            "(B) 畏光",
+            "(C) 科氏斑點 (Koplik spots)",
+            "(D) 進行性多灶性白質腦病 (PML)"
+        ],
+        correctAnswer: "D",
+        userNote: "PML 由 JC 病毒 (Polyomavirus) 引起 [cite: 146]"
+    },
+    {
+        id: "999-national-143",
+        relatedPathogen: "mers_cov",
+        type: "virology",
+        question: "有關人類中東呼吸症候群（MERS）病毒，何者最適當？",
+        options: [
+            "(A) 產生出血及休克",
+            "(B) 遺傳基因為正股 (+)RNA",
+            "(C) 以果子狸為中間宿主",
+            "(D) 25℃ 複製生長"
+        ],
+        correctAnswer: "B",
+        userNote: "MERS 中間宿主是駱駝 [cite: 147]"
+    },
+    {
+        id: "999-national-144",
+        relatedPathogen: "hiv",
+        type: "virology",
+        question: "有關人類免疫缺陷病毒（HIV）的敘述，何者最不適當？",
+        options: [
+            "(A) 蛋白酶主要作用於宿主蛋白質",
+            "(B) Rev 蛋白質可調控 mRNA 轉送",
+            "(C) Tat 為強轉活化因子",
+            "(D) 早期會產生多種剪接 mRNA"
+        ],
+        correctAnswer: "A",
+        userNote: "HIV 蛋白酶主要水解病毒本身的 Gag-Pol 前驅蛋白 [cite: 148]"
+    },
+    {
+        id: "999-national-145",
+        relatedPathogen: "candida_krusei",
+        type: "mycology",
+        question: "何種念珠菌對 fluconazole 具有先天的抗藥性？",
+        options: [
+            "(A) Candida albicans",
+            "(B) Candida tropicalis",
+            "(C) Candida krusei",
+            "(D) Candida parapsilosis"
+        ],
+        correctAnswer: "C",
+        userNote: "C. krusei 對 Fluconazole 為先天性 (Intrinsic) 抗藥 [cite: 149]"
+    },
+    {
+        id: "999-national-146",
+        relatedPathogen: "coccidioides_immitis",
+        type: "mycology",
+        question: "下列何者在感染組織中較常形成酵母團（spherule）？",
+        options: [
+            "(A) Histoplasma capsulatum",
+            "(B) Blastomyces dermatitidis",
+            "(C) Paracoccidioides brasiliensis",
+            "(D) Coccidioides immitis"
+        ],
+        correctAnswer: "D",
+        userNote: "Spherule 內含 Endospores 是球黴菌的特徵 [cite: 150]"
+    },
+    {
+        id: "999-national-147",
+        relatedPathogen: "herpes_simplex_virus",
+        type: "virology",
+        question: "有關病毒感染細胞之病變機制，何者最適當？",
+        options: [
+            "(A) HSV 感染細胞核內可見 Cowdry type A 包涵體",
+            "(B) 腸病毒會發生細胞融合",
+            "(C) 德國麻疹病毒形成 Negri body",
+            "(D) 腺病毒透過膜融合入侵"
+        ],
+        correctAnswer: "A",
+        userNote: "Negri body 與 Rabies 有關；腺病毒不具外套膜 [cite: 151]"
+    },
+    {
+        id: "999-national-148",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "金剛烷胺（amantadine）主要抑制複製的何項步驟？",
+        options: [
+            "(A) 接觸",
+            "(B) 進入細胞及解散外殼 (uncoating)",
+            "(C) 病毒轉錄",
+            "(D) 蛋白質合成"
+        ],
+        correctAnswer: "B",
+        userNote: "抑制 M2 離子通道，防止病毒去殼 [cite: 152, 162]"
+    },
+    {
+        id: "999-national-149",
+        relatedPathogen: "hev",
+        type: "virology",
+        question: "哪個肝炎病毒感染在懷孕婦女致死率高達 20%？",
+        options: [
+            "(A) HAV",
+            "(B) HCV",
+            "(C) HDV",
+            "(D) HEV"
+        ],
+        correctAnswer: "D",
+        userNote: "重複重點：HEV 對孕婦具高致死率 [cite: 153]"
+    },
+    {
+        id: "999-national-150",
+        relatedPathogen: "vzv",
+        type: "clinical",
+        question: "有關水痘病毒的敘述，下列何者最不適當？",
+        options: [
+            "(A) 終身只會得到一次帶狀疱疹",
+            "(B) 有抗病毒藥物可治療",
+            "(C) 有疫苗可預防",
+            "(D) 潛伏在神經細胞中"
+        ],
+        correctAnswer: "A",
+        userNote: "雖然少見，但免疫低下時帶狀疱疹仍可能復發 [cite: 154]"
+    },
+    {
+        id: "999-national-151",
+        relatedPathogen: "enterovirus",
+        type: "virology",
+        question: "有關腸病毒（enterovirus）的敘述，何者最不適當？",
+        options: [
+            "(A) 只在腸胃道細胞複製",
+            "(B) 屬於小 RNA 病毒科",
+            "(C) 糞口為主要傳染管道",
+            "(D) 大部分不會造成重症"
+        ],
+        correctAnswer: "A",
+        userNote: "會經由血行擴散至神經系統或心臟 [cite: 155]"
+    },
+    {
+        id: "999-national-152",
+        relatedPathogen: "rabies_virus",
+        type: "clinical",
+        question: "關於狂犬病病毒（Rabies virus）的敘述，何者最適當？",
+        options: [
+            "(A) 不會在肌肉細胞複製",
+            "(B) 被咬後施打免疫球蛋白配疫苗可有效防止",
+            "(C) 基因體為環狀 DNA",
+            "(D) 犬類是唯一宿主"
+        ],
+        correctAnswer: "B",
+        userNote: "狂犬病是少數可進行暴露後預防的疾病 [cite: 156]"
+    },
+    {
+        id: "999-national-153",
+        relatedPathogen: "candida_albicans",
+        type: "mycology",
+        question: "下列何種念珠菌芽管測試（germ tube test）為陽性？",
+        options: [
+            "(A) Candida tropicalis",
+            "(B) Candida albicans",
+            "(C) Candida parapsilosis",
+            "(D) Candida krusei"
+        ],
+        correctAnswer: "B",
+        userNote: "重複重點：C. albicans 鑑定的必考題 [cite: 157]"
+    },
+    {
+        id: "999-national-154",
+        relatedPathogen: "ketoconazole",
+        type: "mycology",
+        question: "何種藥物抑制真菌細胞麥角固醇（ergosterol）的合成？",
+        options: [
+            "(A) nikkomycin Z",
+            "(B) caspofungin",
+            "(C) ketoconazole",
+            "(D) nystatin"
+        ],
+        correctAnswer: "C",
+        userNote: "重複重點：Azole 抑制合成，Polyene 破壞膜結構 [cite: 158]"
+    },
+    {
+        id: "999-national-155",
+        relatedPathogen: "virology_general",
+        type: "virology",
+        question: "下列有關病毒複製之敘述，何者最不適當？",
+        options: [
+            "(A) 基因體複製在結構蛋白合成之後才進行",
+            "(B) 複製過程中均需合成 RNA",
+            "(C) HBV 之外套膜來自寄主膜",
+            "(D) 隱蝕期 (eclipse period) 測不到病毒"
+        ],
+        correctAnswer: "A",
+        userNote: "通常早期蛋白 (如聚合酶) 合成後就開始基因體複製 [cite: 159]"
+    },
+    {
+        id: "999-national-156",
+        relatedPathogen: "oncogenic_virus",
+        type: "virology",
+        question: "下列有關致癌性病毒的敘述，何者最適當？",
+        options: [
+            "(A) SV40 之 T 抗原可與腫瘤抑制蛋白結合",
+            "(B) SV40 可在人類形成腫瘤",
+            "(C) HPV E7 蛋白與 p53 結合",
+            "(D) 腺病毒 E1B 與 p105RB 結合"
+        ],
+        correctAnswer: "A",
+        userNote: "HPV E6 結 p53；E7 結 pRb [cite: 160]"
+    },
+    {
+        id: "999-national-157",
+        relatedPathogen: "hcv",
+        type: "virology",
+        question: "哪個肝炎病毒尚未有疫苗，但已有藥物可痊癒？",
+        options: [
+            "(A) HAV",
+            "(B) HBV",
+            "(C) HCV",
+            "(D) HDV"
+        ],
+        correctAnswer: "C",
+        userNote: "HCV 透過 DAA 藥物治癒率已極高 [cite: 161]"
+    },
+    {
+        id: "999-national-158",
+        relatedPathogen: "influenza_virus",
+        type: "virology",
+        question: "有關流感病毒蛋白 NA 的敘述，何者最不適當？",
+        options: [
+            "(A) 幫助病毒離開宿主細胞",
+            "(B) A 型流感具有多種 NA 亞型",
+            "(C) 為金剛烷胺 (amantadine) 主要抑制對象",
+            "(D) 在外套膜上形成四倍體"
+        ],
+        correctAnswer: "C",
+        userNote: "Amantadine 抑制 M2；NA 抑制劑是 Oseltamivir [cite: 162]"
+    },
+    {
+        id: "999-national-159",
+        relatedPathogen: "rotavirus",
+        type: "virology",
+        question: "有關輪狀病毒的特色，下列敘述何者最不適當？",
+        options: [
+            "(A) 是一個雙股 RNA 病毒",
+            "(B) ISVP 不具感染力",
+            "(C) 基因體由多段 RNA 組成",
+            "(D) 對腸胃道環境耐受性高"
+        ],
+        correctAnswer: "B",
+        userNote: "ISVP 在腸道中反而更具穿透力與感染力 [cite: 163]"
+    },
+    {
+        id: "999-national-160",
+        relatedPathogen: "measles_virus",
+        type: "clinical",
+        question: "關於麻疹（Measles）的敘述，下列何者最適當？",
+        options: [
+            "(A) 屬黏液病毒 (Myxovirus)",
+            "(B) 基因體為八段單股 RNA",
+            "(C) 具有多種血清型",
+            "(D) T 細胞攻擊被感染細胞造成大塊紅斑 (rash)"
+        ],
+        correctAnswer: "D",
+        userNote: "疹子是免疫系統 (CTL) 對抗病毒造成的發炎反應 [cite: 164]"
+    },
+    {
+        id: "999-national-161",
+        relatedPathogen: "zika_virus",
+        type: "virology",
+        question: "有關茲卡（Zika）病毒的敘述何者最不適當？",
+        options: [
+            "(A) 猴子是宿主之一",
+            "(B) 可以直接人傳人",
+            "(C) 遺傳基因為負股 (-)RNA",
+            "(D) 懷孕感染會造成小腦症"
+        ],
+        correctAnswer: "C",
+        userNote: "Zika 屬於 Flaviviridae，為正股 (+)ssRNA [cite: 165]"
     }
 ];
+
 
