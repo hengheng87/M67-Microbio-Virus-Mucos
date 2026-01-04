@@ -843,7 +843,7 @@ let currentExamSource = null;
                                 </div>
                                 
                                 <div class="w-full bg-gray-100 h-1 mt-4 rounded-full overflow-hidden">
-                                    <div class="${g.type === 'midterm' ? 'bg-purple-500' : 'bg-teal-500'} h-full rounded-full" style="width: ${(g.solvedCount/g.questions.length)*100}%"></div>
+                                    <div class="${g.type === 'midterm' ? 'bg-purple-500' : 'bg-teal-500'} h-full rounded-full" style="width: ${(g.aiCount/g.questions.length)*100}%"></div>
                                 </div>
                             </div>
                         `).join('')}
@@ -991,8 +991,83 @@ function openQuestionModal(qid) {
     }
 }
         
-// [修正版] AI 解題核心函數 (修復閃退問題)
-// [修正版] AI 解題核心函數 (修復閃退 + 狀態更新 + 資料儲存)
+// [V11.0 補回遺失功能] 檢查答案邏輯
+    function checkExamAnswer(qid, idx) {
+        // 1. 鎖定當前題目資料
+        const q = pastExamDB.find(i => i.id === qid);
+        if (!q) return;
+        
+        userSelectedExamIdx = idx; // 記錄使用者選擇
+
+        // 2. 重置所有選項樣式 (變回預設白底)
+        const optionsArea = document.getElementById('examOptionsArea');
+        if (!optionsArea) return;
+
+        optionsArea.querySelectorAll('div[id^="exam-opt-"]').forEach(el => {
+            el.className = "p-4 rounded-xl border border-gray-200 bg-white hover:bg-teal-50 hover:border-teal-300 transition cursor-pointer flex items-center gap-3 group relative overflow-hidden select-none opacity-50";
+            const icon = el.querySelector('.status-icon');
+            if(icon) { icon.innerHTML = ''; icon.classList.add('hidden'); }
+        });
+
+        // 3. 抓取被點擊的選項
+        const selectedEl = document.getElementById(`exam-opt-${idx}`);
+        if (!selectedEl) return;
+        selectedEl.classList.remove('opacity-50');
+
+        // 4. 判斷邏輯
+        if (!q.correctAnswer) {
+            // A. 若無標準答案 (且 AI 尚未解題) -> 僅顯示藍色選取狀態
+            selectedEl.className = "p-4 rounded-xl border-2 border-blue-500 bg-blue-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+            
+            // 提示 AI 解題按鈕
+            const solveBtn = document.getElementById('solveBtn');
+            if(solveBtn && !solveBtn.disabled) solveBtn.classList.add('animate-pulse');
+        
+        } else {
+            // B. 若有標準答案 (111年考題 或 AI 已解出) -> 直接批改
+            let correctIdx = -1;
+            // 比對答案 (例如 "A" 對應 index 0)
+            q.options.forEach((opt, i) => {
+                if (opt.toUpperCase().includes(`(${q.correctAnswer})`) || opt.startsWith(`${q.correctAnswer}.`)) {
+                    correctIdx = i;
+                }
+            });
+
+            if (idx === correctIdx) {
+                // 答對 (綠色)
+                selectedEl.className = "p-4 rounded-xl border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+                selectedEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+                selectedEl.querySelector('.status-icon').classList.remove('hidden');
+            } else {
+                // 答錯 (紅色)
+                selectedEl.className = "p-4 rounded-xl border-2 border-red-500 bg-red-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+                selectedEl.querySelector('.status-icon').innerHTML = '<i class="fas fa-times-circle text-red-600 text-xl"></i>';
+                selectedEl.querySelector('.status-icon').classList.remove('hidden');
+                
+                // 自動亮出正確答案
+                if (correctIdx !== -1) highlightCorrectAnswer(correctIdx);
+            }
+        }
+    }
+
+    // [V11.0 補回遺失功能] 輔助：亮出正確答案 (用於答錯時或開啟已解題目時)
+    function highlightCorrectAnswer(correctIdx) {
+        const el = document.getElementById(`exam-opt-${correctIdx}`);
+        if (el) {
+            el.classList.remove('opacity-50');
+            el.className = "p-4 rounded-xl border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+            
+            // 確保有地方放 icon
+            let iconDiv = el.querySelector('.status-icon');
+            if (!iconDiv) {
+                iconDiv = document.createElement('div');
+                iconDiv.className = "ml-auto status-icon self-center pl-2";
+                el.appendChild(iconDiv);
+            }
+            iconDiv.innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+            iconDiv.classList.remove('hidden');
+        }
+    }
 async function callAIForExplanation(qid) {
     if (!userApiKey) {
         alert("請先在「AI 臨床實驗室」輸入 API Key 才能使用解題功能！");
@@ -1310,6 +1385,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
