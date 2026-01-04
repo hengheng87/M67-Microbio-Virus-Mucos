@@ -1539,7 +1539,7 @@ const pathogenData = {
             },
             'prion': {
                 category: 'Prions',
-                title: "普利昂蛋白 (Prions) [Updated]",
+                title: "普利昂蛋白 (Prions)",
                 family: "Proteinaceous Infectious Particle",
                 color: "purple",
                 tags: { genome: "Protein Only (No Nucleic Acid)", envelope: "N/A", disease: "CJD, Kuru, BSE" },
@@ -1611,3 +1611,4 @@ const pathogenData = {
                 ]
             }
         };
+
