@@ -349,11 +349,7 @@ function parseExamInfo(id) {
             headerInput.parentElement.classList.add('ring-2', 'ring-green-400');
             setTimeout(() => headerInput.parentElement.classList.remove('ring-2', 'ring-green-400'), 500);
         }
-    }
-
-// 將精選題目加入總題庫 (請確保這裡只有加入這一個陣列)
-pastExamDB.push(...pastExamDB_112_Filtered);
-       
+    }     
         // --- RENDER LOGIC ---
         function renderSidebar() {
             const nav = document.getElementById('sidebarNav');
@@ -1429,6 +1425,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
