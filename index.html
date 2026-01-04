@@ -22,6 +22,31 @@
     </script>
 
     <script>
+        // [V11.0 新增] ID 解析器：自動從 ID (如 113-final-01) 產生試卷資訊
+function parseExamInfo(id) {
+    const parts = id.split('-'); // 切割 ID
+    if (parts.length < 2) return { year: 'Unknown', type: 'Exam', title: '未知試卷' };
+
+    const year = parts[0];     // "113"
+    const typeCode = parts[1]; // "final"
+
+    // 定義類型對照表 (可隨時擴充)
+    const typeMap = {
+        'final': '期末考',
+        'midterm': '期中考',
+        'quiz': '小考'
+    };
+
+    const typeName = typeMap[typeCode] || '考試';
+    
+    return {
+        year: year,
+        type: typeCode, // 用於樣式判斷
+        title: `${year}學年度 微免${typeName}`, // 自動生成標題：113學年度 微免期末考
+        groupKey: `${year}-${typeCode}` // 分組用的唯一 Key
+    };
+}
+        
         // [新增] 處理使用者點擊選項 (修正版)
         let userSelectedExamIdx = null; 
 
@@ -893,63 +918,77 @@ let currentExamQuestionId = null;
 // --- V10.6 Exam Library (Android Back Support) ---
 let currentExamSource = null;
 
-function renderExamDashboard(sourceFilter = null) {
-    updateView(() => renderExamDashboard(sourceFilter));
-    currentExamSource = sourceFilter;
+function renderExamDashboard(groupFilter = null) {
+    updateView(() => renderExamDashboard(groupFilter));
     const container = document.getElementById('contentArea');
     const toc = document.getElementById('toc');
     
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-medical-50', 'text-medical-800', 'ring-1', 'ring-medical-200'));
+    // 1. [關鍵] 自動將所有題目分組
+    // 我們不依賴 source 欄位，而是現場解析 ID
+    const examGroups = {}; 
+    
+    pastExamDB.forEach(q => {
+        const info = parseExamInfo(q.id);
+        const key = info.groupKey; // e.g., "113-final"
+        
+        if (!examGroups[key]) {
+            examGroups[key] = {
+                title: info.title,  // "113學年度 微免期末考"
+                year: info.year,    // "113"
+                type: info.type,    // "final"
+                questions: [],
+                solvedCount: 0
+            };
+        }
+        examGroups[key].questions.push(q);
+        if (q.correctAnswer) examGroups[key].solvedCount++;
+    });
 
-    // --- 模式 A: 試卷選擇大廳 ---
-    if (!sourceFilter) {
-        const sources = [...new Set(pastExamDB.map(q => q.source))];
-        const stats = sources.map(src => {
-            const questions = pastExamDB.filter(q => q.source === src);
-            return { src, total: questions.length, solved: questions.filter(q => q.correctAnswer).length };
-        });
+    // 轉換成陣列並排序 (讓新的年份排前面)
+    const sortedGroups = Object.values(examGroups).sort((a, b) => b.year - a.year);
 
+    // --- 模式 A: 試卷大廳 (顯示所有試卷卡片) ---
+    if (!groupFilter) {
         toc.innerHTML = `
             <li><a href="#" onclick="renderDashboard(); return false;" class="text-medical-600 font-bold block py-1 hover:underline mb-2"><i class="fas fa-arrow-left mr-1"></i>回儀表板</a></li>
             <li class="border-t border-gray-100 my-2"></li>
             <li class="text-xs font-bold text-gray-400 uppercase mb-2">試卷列表</li>
-            ${stats.map(s => `<li><span class="text-xs text-gray-600 block py-1 truncate">${s.src}</span></li>`).join('')}
+            ${sortedGroups.map(g => `<li><span class="text-xs text-gray-600 block py-1 truncate">${g.title}</span></li>`).join('')}
         `;
 
         container.innerHTML = `
             <div class="animate-fade-in pb-24 max-w-5xl mx-auto px-1 md:px-0">
                 <div class="mb-6 md:mb-10 text-center px-4">
                     <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2"><i class="fas fa-archive text-teal-600"></i> 考古題圖書館</h1>
-                    <p class="text-sm text-gray-500">AI 助教隨時待命，請選擇試卷。</p>
+                    <p class="text-sm text-gray-500">ID 自動歸檔系統運作中</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    ${stats.map(s => `
+                    ${sortedGroups.map(g => `
                         <div class="bg-white rounded-xl p-5 md:p-6 border border-gray-200 shadow-sm hover:shadow-lg active:scale-[0.98] transition cursor-pointer group relative overflow-hidden" 
-                             onclick="renderExamDashboard('${s.src}')">
-                            <div class="absolute top-0 right-0 w-16 h-16 md:w-20 md:h-20 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-teal-100"></div>
+                             onclick="renderExamDashboard('${g.year}-${g.type}')"> <div class="absolute top-0 right-0 w-20 h-20 ${g.type === 'midterm' ? 'bg-purple-50 group-hover:bg-purple-100' : 'bg-teal-50 group-hover:bg-teal-100'} rounded-bl-full -mr-4 -mt-4 transition"></div>
                             
                             <div class="flex items-center gap-4 mb-4">
-
-<div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-lg font-bold shrink-0">
-    ${s.src.match(/^\d+/) ? s.src.match(/^\d+/)[0] : 'Exam'} </div>
+                                <div class="w-12 h-12 rounded-full ${g.type === 'midterm' ? 'bg-purple-100 text-purple-600' : 'bg-teal-100 text-teal-600'} flex items-center justify-center text-lg font-bold shrink-0">
+                                    ${g.year}
+                                </div>
                                 <div class="min-w-0">
-                                    <h3 class="text-base md:text-lg font-bold text-gray-800 truncate pr-2">${s.src}</h3>
-                                    <span class="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Final Exam</span>
+                                    <h3 class="text-lg font-bold text-gray-800 truncate pr-2">${g.title}</h3>
+                                    <span class="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full uppercase">${g.type} Exam</span>
                                 </div>
                             </div>
                             
                             <div class="flex justify-between items-end">
                                 <div class="text-xs md:text-sm text-gray-500">
-                                    <div class="mb-1">題數: <span class="font-bold text-gray-800">${s.total}</span></div>
-                                    <div>解析: <span class="font-bold text-green-600">${s.solved}</span></div>
+                                    <div class="mb-1">題數: <span class="font-bold text-gray-800">${g.questions.length}</span></div>
+                                    <div>解析: <span class="font-bold text-green-600">${g.solvedCount}</span></div>
                                 </div>
-                                <button class="bg-teal-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-teal-700 shadow-teal-200 shadow-sm">
+                                <button class="${g.type === 'midterm' ? 'bg-purple-600 hover:bg-purple-700 shadow-purple-200' : 'bg-teal-600 hover:bg-teal-700 shadow-teal-200'} text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition">
                                     練習 <i class="fas fa-arrow-right ml-1"></i>
                                 </button>
                             </div>
                             <div class="w-full bg-gray-100 h-1 mt-4 rounded-full overflow-hidden">
-                                <div class="bg-teal-500 h-full rounded-full" style="width: ${(s.solved/s.total)*100}%"></div>
+                                <div class="${g.type === 'midterm' ? 'bg-purple-500' : 'bg-teal-500'} h-full rounded-full" style="width: ${(g.solvedCount/g.questions.length)*100}%"></div>
                             </div>
                         </div>
                     `).join('')}
@@ -957,15 +996,18 @@ function renderExamDashboard(sourceFilter = null) {
             </div>
         `;
     } 
-    // --- 模式 B: 答題介面 (Question List) ---
+    // --- 模式 B: 刷題介面 ---
     else {
-        const filteredDB = pastExamDB.filter(q => q.source === sourceFilter);
-        const solvedQ = filteredDB.filter(q => q.correctAnswer).length;
+        // 根據傳入的 Key (例如 "113-final") 找出對應的群組
+        const targetGroup = examGroups[groupFilter];
+        if (!targetGroup) return renderExamDashboard(); // 找不到就回首頁
+
+        const questions = targetGroup.questions;
 
         toc.innerHTML = `
             <li><a href="#" onclick="renderExamDashboard(); return false;" class="text-medical-600 font-bold block py-1 hover:underline mb-2"><i class="fas fa-arrow-left mr-1"></i>回列表</a></li>
             <li class="border-t border-gray-100 my-2"></li>
-            <li class="text-xs font-bold text-gray-400 uppercase mb-2">當前: ${sourceFilter}</li>
+            <li class="text-xs font-bold text-gray-400 uppercase mb-2">當前: ${targetGroup.title}</li>
         `;
 
         container.innerHTML = `
@@ -975,18 +1017,18 @@ function renderExamDashboard(sourceFilter = null) {
                         <button class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-teal-600 active:scale-90 transition shadow-sm" onclick="renderExamDashboard()">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <h1 class="text-lg md:text-2xl font-bold text-gray-900 truncate max-w-[200px] md:max-w-none">
-                            ${sourceFilter}
+                        <h1 class="text-lg md:text-2xl font-bold text-gray-900 truncate">
+                            ${targetGroup.title}
                         </h1>
                     </div>
                     <div class="flex flex-col items-end">
-                        <span class="text-xl font-bold text-teal-600" id="progress-text">${solvedQ}/${filteredDB.length}</span>
+                        <span class="text-xl font-bold text-teal-600">${targetGroup.solvedCount}/${questions.length}</span>
                         <span class="text-[10px] text-gray-400 uppercase font-bold">Solved</span>
                     </div>
                 </div>
 
                 <div class="grid gap-3 md:gap-4 px-2 md:px-0">
-                    ${filteredDB.map((q, index) => `
+                    ${questions.map((q, index) => `
                         <div class="bg-white p-4 md:p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md active:scale-[0.99] transition cursor-pointer relative overflow-hidden" onclick="openQuestionModal('${q.id}')">
                             <div class="flex justify-between items-start mb-2">
                                 <span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Q${index + 1}</span>
@@ -1004,24 +1046,7 @@ function renderExamDashboard(sourceFilter = null) {
                     `).join('')}
                 </div>
             </div>
-
-            <div id="examModal" class="fixed inset-0 z-[60] hidden flex items-end md:items-center justify-center sm:p-4">
-                <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="history.back()"></div>
-                
-                <div class="bg-white w-full h-[95vh] md:h-auto md:max-w-4xl md:max-h-[90vh] rounded-t-2xl md:rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-slide-up md:animate-fade-in relative z-10">
-                    <div class="p-3 md:p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
-                        <h3 class="font-bold text-gray-700 flex items-center gap-2 text-sm md:text-base">
-                            <span class="w-1.5 h-5 bg-teal-500 rounded-full"></span> 題目解析
-                        </h3>
-                        <button onclick="history.back()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="flex-1 overflow-y-auto p-4 md:p-8 custom-scroll bg-white" id="modalContent"></div>
-                    <div class="p-3 md:p-4 border-t border-gray-100 bg-gray-50 flex justify-between gap-3 shrink-0 safe-pb" id="modalFooter"></div>
-                </div>
-            </div>
+            <div id="examModal" ...></div> 
         `;
     }
 }
@@ -1404,6 +1429,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
