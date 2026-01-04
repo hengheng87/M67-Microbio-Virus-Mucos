@@ -128,23 +128,32 @@
 </head>
 <body class="bg-gray-50 text-gray-800 h-screen flex flex-col overflow-hidden">
 
-    <header class="bg-medical-900 text-white shadow-lg z-20 shrink-0">
+<header class="bg-medical-900 text-white shadow-lg z-20 shrink-0 transition-all duration-300" id="mainHeader">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition" onclick="renderDashboard()">
-                <i class="fas fa-virus-covid text-2xl text-medical-200"></i>
-                <div>
-                    <h1 class="font-bold text-lg tracking-wide">M67 微免期末衝刺</h1>
-                    <p class="text-[10px] text-medical-200 uppercase">Systematic Review Dashboard V9.8</p>
+            <div class="flex items-center gap-3">
+                <button id="globalBackBtn" onclick="goBack()" class="hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition active:scale-95 text-medical-200 hover:text-white" title="返回上一頁">
+                    <i class="fas fa-arrow-left text-lg"></i>
+                </button>
+                
+                <div class="cursor-pointer hover:opacity-80 transition flex items-center gap-3" onclick="renderDashboard()">
+                    <i class="fas fa-virus-covid text-2xl text-medical-200"></i>
+                    <div>
+                        <h1 class="font-bold text-lg tracking-wide">M67 微免期末衝刺</h1>
+                        <p class="text-[10px] text-medical-200 uppercase">Systematic Review V9.9</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="flex items-center gap-4">
-                <button onclick="renderDashboard()" class="hidden md:flex items-center gap-2 text-sm text-medical-200 hover:text-white transition">
-                    <i class="fas fa-home"></i> 回首頁
-                </button>
+            <div class="flex items-center gap-3">
+                <div class="hidden md:flex items-center bg-medical-800/80 rounded-full px-3 py-1.5 border border-medical-700 focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-400/20 transition-all group">
+                    <i class="fas fa-key text-yellow-400 text-xs mr-2 group-hover:text-yellow-300"></i>
+                    <input type="password" id="headerApiKey" placeholder="Paste Gemini API Key" 
+                        class="bg-transparent border-none text-xs text-white placeholder-medical-300 focus:ring-0 w-28 focus:w-64 transition-all outline-none"
+                        onchange="updateGlobalApiKey(this.value)">
+                </div>
 
                 <div class="flex items-center gap-2 bg-medical-800 px-3 py-1.5 rounded-full border border-medical-600 cursor-pointer hover:bg-medical-700 transition" onclick="document.getElementById('examToggle').click()">
-                    <span class="text-xs font-medium select-none"><i class="fas fa-user-graduate mr-1"></i>考點隱藏</span>
+                    <span class="text-xs font-medium select-none"><i class="fas fa-user-graduate mr-1"></i>考點</span>
                     <label class="relative inline-flex items-center cursor-pointer pointer-events-none">
                         <input type="checkbox" id="examToggle" class="sr-only peer">
                         <div class="w-9 h-5 bg-gray-400 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
@@ -153,7 +162,6 @@
             </div>
         </div>
     </header>
-
     <div class="flex flex-1 overflow-hidden">
         <nav class="w-72 bg-white border-r border-gray-200 flex flex-col hidden md:flex h-full transition-all duration-300">
             <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center cursor-pointer hover:bg-gray-100" onclick="renderDashboard()">
@@ -192,6 +200,76 @@
     </div>
 
     <script>
+<script>
+        // --- V9.9 Navigation & System Logic ---
+        
+        let viewHistory = [];        // 歷史紀錄堆疊
+        let currentViewRestorer = null; // 當前畫面的「還原函數」
+        let isNavigatingBack = false;   // 是否正在執行「返回」動作
+
+        // 1. 初始化系統 (綁定 Header Key, 設定初始狀態)
+        function initSystem() {
+            // 讀取並填入 API Key
+            const savedKey = localStorage.getItem('gemini_api_key');
+            if (savedKey) {
+                const input = document.getElementById('headerApiKey');
+                if(input) input.value = savedKey;
+                userApiKey = savedKey;
+            }
+            // 設定起點為儀表板
+            currentViewRestorer = () => renderDashboard();
+            updateBackButtonState();
+        }
+
+        // 2. 視圖追蹤器 (Hook) - 每次切換畫面時呼叫此函數
+        function updateView(restorerFunc) {
+            if (isNavigatingBack) {
+                // 如果是按上一頁回來的：不推入歷史，只更新當前狀態
+                currentViewRestorer = restorerFunc;
+                isNavigatingBack = false; 
+            } else {
+                // 如果是新進入的頁面：把「上一個頁面」存入歷史
+                if (currentViewRestorer) {
+                    viewHistory.push(currentViewRestorer);
+                }
+                currentViewRestorer = restorerFunc;
+            }
+            updateBackButtonState();
+        }
+
+        // 3. 執行「返回上一頁」
+        function goBack() {
+            if (viewHistory.length === 0) return;
+            
+            const previousView = viewHistory.pop(); // 取出上一個狀態
+            isNavigatingBack = true; // 標記為返回模式 (避免重複 Push)
+            previousView(); // 執行還原
+        }
+
+        // 4. 更新按鈕顯示狀態
+        function updateBackButtonState() {
+            const btn = document.getElementById('globalBackBtn');
+            if (!btn) return;
+            
+            if (viewHistory.length > 0) {
+                btn.classList.remove('hidden');
+            } else {
+                btn.classList.add('hidden'); // 在首頁時隱藏
+            }
+        }
+
+        // 5. Header API Key 同步
+        function updateGlobalApiKey(val) {
+            userApiKey = val.trim();
+            localStorage.setItem('gemini_api_key', userApiKey);
+            // 視覺回饋：閃爍一下邊框代表儲存成功
+            const input = document.getElementById('headerApiKey');
+            input.parentElement.classList.add('ring-2', 'ring-green-400');
+            setTimeout(() => input.parentElement.classList.remove('ring-2', 'ring-green-400'), 500);
+        }
+
+        // --- 以下接續原本的 Data Store (pathogenData) ---
+        
         // --- DATA STORE ---
         const pathogenData = {
             'dna_pap_poly': {
@@ -2578,6 +2656,7 @@
         }
 
  function renderDashboard() {
+    updateView(() => renderDashboard());
     const container = document.getElementById('contentArea');
     const toc = document.getElementById('toc');
     
@@ -2699,6 +2778,7 @@
 
 // --- V7.1 新增：類別總覽頁面渲染邏輯 ---
 function renderCategoryOverview(targetCategory) {
+    updateView(() => renderCategoryOverview(targetCategory));
     const container = document.getElementById('contentArea');
     const toc = document.getElementById('toc');
     
@@ -2777,6 +2857,7 @@ function renderCategoryOverview(targetCategory) {
 }
 
         function loadContent(key) {
+            updateView(() => loadContent(key, fromSearch));
             const data = pathogenData[key];
             if (!data) return;
             const container = document.getElementById('contentArea');
@@ -2817,6 +2898,7 @@ let isGenerating = false;
 
 // A. 渲染 AI 實驗室主畫面
 function renderAILab() {
+    updateView(() => renderAILab());
     const container = document.getElementById('contentArea');
     const toc = document.getElementById('toc');
     
@@ -3128,6 +3210,7 @@ let currentExamQuestionId = null;
 
 // 1. 渲染考古題主畫面 (列表模式) - [V9.3 ID 修正版]
 function renderExamDashboard() {
+    updateView(() => renderExamDashboard());
     const container = document.getElementById('contentArea');
     const toc = document.getElementById('toc');
     
@@ -3396,6 +3479,7 @@ async function callAIForExplanation(qid) {
 }
         
         document.addEventListener('DOMContentLoaded', () => {
+            initSystem();
             renderSidebar();
             renderDashboard();
             document.getElementById('examToggle').addEventListener('change', toggleExamMode);
@@ -3577,6 +3661,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
