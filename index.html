@@ -3401,12 +3401,7 @@ const pastExamDB_112_Filtered = [
 
 // 將精選題目加入總題庫 (請確保這裡只有加入這一個陣列)
 pastExamDB.push(...pastExamDB_112_Filtered);
-
-// 重要：將兩份題庫合併到主資料庫
-// 如果您之前的 pastExamDB 是 const，請改為 let，或者使用 push
-pastExamDB.push(...pastExamDB_112);
-
-        
+       
         // --- RENDER LOGIC ---
         function renderSidebar() {
             const nav = document.getElementById('sidebarNav');
@@ -4497,6 +4492,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
