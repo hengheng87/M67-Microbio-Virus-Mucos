@@ -3512,7 +3512,7 @@ const pastExamDB = [
             "(D) 病毒感染後，續發性細菌感染常引起肺炎"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "全世界大流行 (Pandemic) 主要由 A 型引起 [cite: 51]"
+        userNote: "全世界大流行 (Pandemic) 主要由 A 型引起 [cite: 51]"
     },
     {
         id: "999-national-52",
@@ -3527,7 +3527,7 @@ const pastExamDB = [
             "(全) 以上皆是"
         ],
         correctAnswer: "全",
-        [cite_start]userNote: "登革熱典型症狀包含發燒、出疹、骨頭痛及血小板低下 [cite: 52]"
+        userNote: "登革熱典型症狀包含發燒、出疹、骨頭痛及血小板低下 [cite: 52]"
     },
     {
         id: "999-national-53",
@@ -3541,7 +3541,7 @@ const pastExamDB = [
             "(D) P. claviformes"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "現已改名為 Talaromyces marneffei，東南亞愛滋病患常見 [cite: 53]"
+        userNote: "現已改名為 Talaromyces marneffei，東南亞愛滋病患常見 [cite: 53]"
     },
     {
         id: "999-national-54",
@@ -3555,7 +3555,7 @@ const pastExamDB = [
             "(D) Fluconazole"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "Flucytosine (5-FC) 會轉化為 5-FU 抑制核酸合成 [cite: 54]"
+        userNote: "Flucytosine (5-FC) 會轉化為 5-FU 抑制核酸合成 [cite: 54]"
     },
     {
         id: "999-national-55",
@@ -3569,7 +3569,7 @@ const pastExamDB = [
             "(D) Staphylococcus aureus"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "孢子絲菌症 (Sporotrichosis)，典型臨床表現為沿淋巴管排列之結節 [cite: 55]"
+        userNote: "孢子絲菌症 (Sporotrichosis)，典型臨床表現為沿淋巴管排列之結節 [cite: 55]"
     },
     {
         id: "999-national-56",
@@ -3583,7 +3583,7 @@ const pastExamDB = [
             "(D) 常發生於神經胺酸酶基因"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "基因重分配 (Reassortment) 是造成抗原大變異 (Shift) 的原因 [cite: 56]"
+        userNote: "基因重分配 (Reassortment) 是造成抗原大變異 (Shift) 的原因 [cite: 56]"
     },
     {
         id: "999-national-57",
@@ -3597,7 +3597,7 @@ const pastExamDB = [
             "(D) 周產期"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "懷孕首三月 (First trimester) 感染風險最高 [cite: 57]"
+        userNote: "懷孕首三月 (First trimester) 感染風險最高 [cite: 57]"
     },
     {
         id: "999-national-58",
@@ -3611,7 +3611,7 @@ const pastExamDB = [
             "(D) Paracoccidioides brasiliensis"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "Paracoccidioides 屬於地方性兩型性真菌，為主要病原 [cite: 58]"
+        userNote: "Paracoccidioides 屬於地方性兩型性真菌，為主要病原 [cite: 58]"
     },
     {
         id: "999-national-59",
@@ -3625,7 +3625,7 @@ const pastExamDB = [
             "(D) 男女性別"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "性別通常不影響伺機性感染的發生 [cite: 59]"
+        userNote: "性別通常不影響伺機性感染的發生 [cite: 59]"
     },
     {
         id: "999-national-60",
@@ -3639,7 +3639,7 @@ const pastExamDB = [
             "(D) β-聚葡萄糖（β-glucan）"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "Terbinafine 抑制 Squalene epoxidase，阻斷麥角固醇合成路徑 [cite: 60]"
+        userNote: "Terbinafine 抑制 Squalene epoxidase，阻斷麥角固醇合成路徑 [cite: 60]"
     },
     {
         id: "999-national-61",
@@ -3653,7 +3653,7 @@ const pastExamDB = [
             "(D) Varicella-zoster virus"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "HHV-6 造成嬰兒玫瑰疹，典型症狀為燒退才出疹 [cite: 61]"
+        userNote: "HHV-6 造成嬰兒玫瑰疹，典型症狀為燒退才出疹 [cite: 61]"
     },
     {
         id: "999-national-62",
@@ -3667,7 +3667,7 @@ const pastExamDB = [
             "(D) 聖路易斯腦炎病毒與鳥類"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "註：講義答案給 C，但 A 選項中黃熱病宿主主要為靈長類亦有爭議 [cite: 62, 63]"
+        userNote: "註：講義答案給 C，但 A 選項中黃熱病宿主主要為靈長類亦有爭議 [cite: 62, 63]"
     },
     {
         id: "999-national-63",
@@ -3681,7 +3681,7 @@ const pastExamDB = [
             "(D) 先在肌肉增殖，並擴散到中樞神經"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "註：依講義為 D。一般常規知識為 B 路徑 [cite: 64]"
+        userNote: "註：依講義為 D。一般常規知識為 B 路徑 [cite: 64]"
     },
     {
         id: "999-national-64",
@@ -3695,7 +3695,7 @@ const pastExamDB = [
             "(D) 主動感染 B 型肝炎病毒"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "註：常規應為疫苗 A，但講義標示 B (可能指暴露後治療) [cite: 65]"
+        userNote: "註：常規應為疫苗 A，但講義標示 B (可能指暴露後治療) [cite: 65]"
     },
     {
         id: "999-national-65",
@@ -3709,7 +3709,7 @@ const pastExamDB = [
             "(D) Blastomyces dermatitidis"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "Candida 多為內源性或接觸感染 [cite: 66]"
+        userNote: "Candida 多為內源性或接觸感染 [cite: 66]"
     },
     {
         id: "999-national-66",
@@ -3723,7 +3723,7 @@ const pastExamDB = [
             "(D) Malassezia furfur"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "註：常規球黴菌為 A，講義標示 C [cite: 67]"
+        userNote: "註：常規球黴菌為 A，講義標示 C [cite: 67]"
     },
     {
         id: "999-national-67",
@@ -3737,7 +3737,7 @@ const pastExamDB = [
             "(D) 亨得拉病毒"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "重複重點：SSPE 是麻疹病毒感染後的罕見遠期併發症 [cite: 68]"
+        userNote: "重複重點：SSPE 是麻疹病毒感染後的罕見遠期併發症 [cite: 68]"
     },
     {
         id: "999-national-68",
@@ -3751,7 +3751,7 @@ const pastExamDB = [
             "(D) D 型肝炎需 A 型之幫助來傳染和複製"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "HDV 是缺陷病毒，需要 HBV 提供外套膜 (HBsAg) [cite: 69]"
+        userNote: "HDV 是缺陷病毒，需要 HBV 提供外套膜 (HBsAg) [cite: 69]"
     },
     {
         id: "999-national-69",
@@ -3765,7 +3765,7 @@ const pastExamDB = [
             "(D) Subcutaneous zygomycosis- Sporothrix schenckii"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "真菌性足菌腫 (Eumycotic mycetoma) 可由 A. nidulans 引起 [cite: 70, 71]"
+        userNote: "真菌性足菌腫 (Eumycotic mycetoma) 可由 A. nidulans 引起 [cite: 70, 71]"
     },
     {
         id: "999-national-70",
@@ -3779,7 +3779,7 @@ const pastExamDB = [
             "(D) 肛門拭子"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "登革熱主要引起病毒血症，血液檢體分離率最高 [cite: 72]"
+        userNote: "登革熱主要引起病毒血症，血液檢體分離率最高 [cite: 72]"
     },
     {
         id: "999-national-71",
@@ -3793,7 +3793,7 @@ const pastExamDB = [
             "(D) 副球黴菌症"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "Coccidioides immitis 的典型特徵為桶狀關節孢子 [cite: 73]"
+        userNote: "Coccidioides immitis 的典型特徵為桶狀關節孢子 [cite: 73]"
     },
     {
         id: "999-national-72",
@@ -3807,7 +3807,7 @@ const pastExamDB = [
             "(D) 聚乙烯（Polyenes）抑制蛋白質合成"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "Nikkomycin 抑制幾丁質 (Chitin) 合成；Polyene 破壞細胞膜 [cite: 74]"
+        userNote: "Nikkomycin 抑制幾丁質 (Chitin) 合成；Polyene 破壞細胞膜 [cite: 74]"
     },
     {
         id: "999-national-73",
@@ -3821,7 +3821,7 @@ const pastExamDB = [
             "(D) 產生具色素之菌絲"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "Hyaline 指透明、無色，且具備橫隔 (Septate) [cite: 75]"
+        userNote: "Hyaline 指透明、無色，且具備橫隔 (Septate) [cite: 75]"
     },
     {
         id: "999-national-74",
@@ -3835,7 +3835,7 @@ const pastExamDB = [
             "(D) 蛙糞黴"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "Sporothrix 為典型的兩型性皮下真菌 [cite: 76]"
+        userNote: "Sporothrix 為典型的兩型性皮下真菌 [cite: 76]"
     },
     {
         id: "999-national-75",
@@ -3849,7 +3849,7 @@ const pastExamDB = [
             "(D) 克里米亞-剛果出血熱病毒"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "Hantavirus 由齧齒動物（如老鼠）尿液糞便傳播，非節肢動物 [cite: 77]"
+        userNote: "Hantavirus 由齧齒動物（如老鼠）尿液糞便傳播，非節肢動物 [cite: 77]"
     },
     {
         id: "999-national-76",
@@ -3863,7 +3863,7 @@ const pastExamDB = [
             "(D) 具瓶狀 (flask-shaped) 孢子梗 (phialides)"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "麴菌的分生孢子頭 (Conidial head) 具有瓶狀小梗 [cite: 78]"
+        userNote: "麴菌的分生孢子頭 (Conidial head) 具有瓶狀小梗 [cite: 78]"
     },
     {
         id: "999-national-77",
@@ -3877,7 +3877,7 @@ const pastExamDB = [
             "(D) 兩性黴素 B"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "Echinocandins (如 Caspofungin) 抑制 1,3-β-glucan 合成 [cite: 79]"
+        userNote: "Echinocandins (如 Caspofungin) 抑制 1,3-β-glucan 合成 [cite: 79]"
     },
     {
         id: "999-national-78",
@@ -3891,7 +3891,7 @@ const pastExamDB = [
             "(D) 克里米亞-剛果出血熱病毒"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "沙狀病毒 (Arenaviruses) 具兩段環狀 RNA，且帶有雙義性 [cite: 80]"
+        userNote: "沙狀病毒 (Arenaviruses) 具兩段環狀 RNA，且帶有雙義性 [cite: 80]"
     },
     {
         id: "999-national-79",
@@ -3905,7 +3905,7 @@ const pastExamDB = [
             "(D) 主要感染途徑為呼吸道"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "兩型性真菌在 37°C 為酵母狀；主要吸入感染 [cite: 81]"
+        userNote: "兩型性真菌在 37°C 為酵母狀；主要吸入感染 [cite: 81]"
     },
     {
         id: "999-national-80",
@@ -3919,7 +3919,7 @@ const pastExamDB = [
             "(D) 奎奴普丁"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "Cycloheximide 可抑制伺機性真菌生長 [cite: 82]"
+        userNote: "Cycloheximide 可抑制伺機性真菌生長 [cite: 82]"
     },
     {
         id: "999-national-81",
@@ -3933,7 +3933,7 @@ const pastExamDB = [
             "(D) 呼吸道細胞融合病毒"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "HBV 為 Hepadnavirus，利用 RT 進行 DNA 複製 [cite: 83]"
+        userNote: "HBV 為 Hepadnavirus，利用 RT 進行 DNA 複製 [cite: 83]"
     },
     {
         id: "999-national-82",
@@ -3947,7 +3947,7 @@ const pastExamDB = [
             "(D) N-乙醯葡萄胺糖"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "Malassezia 為嗜脂性真菌 (Lipophilic) [cite: 84]"
+        userNote: "Malassezia 為嗜脂性真菌 (Lipophilic) [cite: 84]"
     },
     {
         id: "999-national-83",
@@ -3961,7 +3961,7 @@ const pastExamDB = [
             "(D) 近平滑念珠菌"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "C. glabrata 僅以酵母型存在，不產生假菌絲 [cite: 85]"
+        userNote: "C. glabrata 僅以酵母型存在，不產生假菌絲 [cite: 85]"
     },
     {
         id: "999-national-84",
@@ -3975,7 +3975,7 @@ const pastExamDB = [
             "(D) 泡沫病毒亞科"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "Orbivirus 屬於 Reoviridae [cite: 86]"
+        userNote: "Orbivirus 屬於 Reoviridae [cite: 86]"
     },
     {
         id: "999-national-85",
@@ -3989,7 +3989,7 @@ const pastExamDB = [
             "(D) 紫外線消毒"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "Prion 不含核酸，對紫外線照射不敏感 [cite: 87]"
+        userNote: "Prion 不含核酸，對紫外線照射不敏感 [cite: 87]"
     },
     {
         id: "999-national-86",
@@ -4003,7 +4003,7 @@ const pastExamDB = [
             "(D) HPV-16 和 HPV-18 與癌症有關"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "HPV 的致癌蛋白是 E6 (接 p53) 與 E7 (接 pRb) [cite: 88]"
+        userNote: "HPV 的致癌蛋白是 E6 (接 p53) 與 E7 (接 pRb) [cite: 88]"
     },
     {
         id: "999-national-87",
@@ -4017,7 +4017,7 @@ const pastExamDB = [
             "(D) B 型肝炎病毒在細胞核內複製"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "HAV 與 HEV 主要傳染途徑為糞口 (Fecal-oral) [cite: 89]"
+        userNote: "HAV 與 HEV 主要傳染途徑為糞口 (Fecal-oral) [cite: 89]"
     },
     {
         id: "999-national-88",
@@ -4031,7 +4031,7 @@ const pastExamDB = [
             "(D) p55"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "gp120 負責與 CD4 受體結合 [cite: 90]"
+        userNote: "gp120 負責與 CD4 受體結合 [cite: 90]"
     },
     {
         id: "999-national-89",
@@ -4045,7 +4045,7 @@ const pastExamDB = [
             "(D) 毛癬菌屬（Trichophyton）產生大量大分生孢子"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "Epidermophyton 僅產生棒狀大分生孢子，不具小分生孢子 [cite: 91]"
+        userNote: "Epidermophyton 僅產生棒狀大分生孢子，不具小分生孢子 [cite: 91]"
     },
     {
         id: "999-national-90",
@@ -4059,7 +4059,7 @@ const pastExamDB = [
             "(D) 抑制 1,3-β-葡聚醣之合成"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "與第 11 題重複重點：Polyenes (如 AmB) 直接破壞細胞膜 [cite: 92]"
+        userNote: "與第 11 題重複重點：Polyenes (如 AmB) 直接破壞細胞膜 [cite: 92]"
     },
     {
         id: "999-national-91",
@@ -4073,7 +4073,7 @@ const pastExamDB = [
             "(D) 假菌絲和鎖狀連接菌絲"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "真菌基本形態為有隔膜與無隔膜 (多核體) [cite: 93]"
+        userNote: "真菌基本形態為有隔膜與無隔膜 (多核體) [cite: 93]"
     },
     {
         id: "999-national-92",
@@ -4087,7 +4087,7 @@ const pastExamDB = [
             "(D) 狂犬病病毒"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "HIV 可透過套膜蛋白與 CD4 細胞交互作用形成多核巨大細胞 [cite: 94]"
+        userNote: "HIV 可透過套膜蛋白與 CD4 細胞交互作用形成多核巨大細胞 [cite: 94]"
     },
     {
         id: "999-national-93",
@@ -4101,7 +4101,7 @@ const pastExamDB = [
             "(D) 德國麻疹病毒 (Rubella virus)"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "CRS 典型三大症狀：心臟畸形、耳聾、白內障 [cite: 95]"
+        userNote: "CRS 典型三大症狀：心臟畸形、耳聾、白內障 [cite: 95]"
     },
     {
         id: "999-national-94",
@@ -4115,7 +4115,7 @@ const pastExamDB = [
             "(D) ①③"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "HSV 與 Zika 皆可透過性行為傳播 [cite: 96]"
+        userNote: "HSV 與 Zika 皆可透過性行為傳播 [cite: 96]"
     },
     {
         id: "999-national-95",
@@ -4129,7 +4129,7 @@ const pastExamDB = [
             "(D) Neuraminidase inhibitor"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "Neuraminidase inhibitor (如奧司他韋) 用於治療流感 [cite: 97]"
+        userNote: "Neuraminidase inhibitor (如奧司他韋) 用於治療流感 [cite: 97]"
     },
     {
         id: "999-national-96",
@@ -4143,7 +4143,7 @@ const pastExamDB = [
             "(D) 病毒蛋白產量是一致的"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "與第 39 題呼應：Paramyxo 具 F protein 造成細胞融合 [cite: 98]"
+        userNote: "與第 39 題呼應：Paramyxo 具 F protein 造成細胞融合 [cite: 98]"
     },
     {
         id: "999-national-97",
@@ -4157,7 +4157,7 @@ const pastExamDB = [
             "(D) 冠狀病毒 (Coronavirus)"
         ],
         correctAnswer: "D",
-        [cite_start]userNote: "Coronavirus 屬於 Coronaviridae [cite: 99]"
+        userNote: "Coronavirus 屬於 Coronaviridae [cite: 99]"
     },
     {
         id: "999-national-98",
@@ -4171,7 +4171,7 @@ const pastExamDB = [
             "(D) 伊波拉病毒顆粒是子彈型"
         ],
         correctAnswer: "A",
-        [cite_start]userNote: "伊波拉病毒為 (-)ssRNA，形狀為長絲狀 [cite: 100]"
+        userNote: "伊波拉病毒為 (-)ssRNA，形狀為長絲狀 [cite: 100]"
     },
     {
         id: "999-national-99",
@@ -4185,7 +4185,7 @@ const pastExamDB = [
             "(D) 細胞激素"
         ],
         correctAnswer: "C",
-        [cite_start]userNote: "註：依講義給 C。一般第四型應與 T 細胞、巨噬細胞較有關 [cite: 101]"
+        userNote: "註：依講義給 C。一般第四型應與 T 細胞、巨噬細胞較有關 [cite: 101]"
     },
     {
         id: "999-national-100",
@@ -4199,7 +4199,7 @@ const pastExamDB = [
             "(D) 樹突細胞"
         ],
         correctAnswer: "B",
-        [cite_start]userNote: "HIV 感染帶有 CD4 與 CCR5/CXCR4 的細胞 [cite: 102]"
+        userNote: "HIV 感染帶有 CD4 與 CCR5/CXCR4 的細胞 [cite: 102]"
     },
     {
         id: "999-national-101",
@@ -5056,5 +5056,3 @@ const pastExamDB = [
         userNote: "Zika 屬於 Flaviviridae，為正股 (+)ssRNA [cite: 165]"
     }
 ];
-
-
