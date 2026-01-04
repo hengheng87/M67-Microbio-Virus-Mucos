@@ -224,35 +224,55 @@
     </div>
 
     <script>
-// --- V9.9 System Core & Navigation (修復版) ---
+// --- V10.6 System Core & Navigation (Android Back Button Fixed) ---
     
-    // 1. 全局變數定義 (為了安全起見，將 Key 變數提升至頂端)
-    // 如果您原本的程式碼下方還有 let userApiKey = ... 的宣告，請稍後將其刪除，以免重複宣告報錯
-    // 若不確定，可暫時保留此行註解，沿用下方的宣告，但 initSystem 需確保在 DOMContentLoaded 後執行
     let viewHistory = [];        
     let currentViewRestorer = null; 
     let isNavigatingBack = false;   
 
-    // 2. 初始化系統
     function initSystem() {
-        // 讀取並填入 API Key
+        // 1. 讀取 API Key
         const savedKey = localStorage.getItem('gemini_api_key');
         if (savedKey) {
             const input = document.getElementById('headerApiKey');
             if(input) input.value = savedKey;
-            
-            // 嘗試同步給下方的 userApiKey (若變數已存在)
-            if (typeof userApiKey !== 'undefined') {
-                userApiKey = savedKey;
-            }
+            if (typeof userApiKey !== 'undefined') userApiKey = savedKey;
         }
         
-        // 設定起點
+        // 2. 設定起點
         currentViewRestorer = () => renderDashboard();
+        
+        // 3. [關鍵修正] 初始化歷史紀錄狀態，防止直接跳出 App
+        if (!history.state) {
+            history.replaceState({ type: 'root' }, '');
+        }
+        
+        // 4. [關鍵修正] 監聽硬體返回鍵 (Popstate Event)
+        window.addEventListener('popstate', (event) => {
+            // A. 優先處理彈窗 (Modal)
+            const modal = document.getElementById('examModal');
+            if (modal && !modal.classList.contains('hidden')) {
+                // 如果彈窗開著，返回鍵的行為應該是「關閉彈窗」
+                modal.classList.add('hidden');
+                // 這裡不需要 pop viewHistory，因為彈窗通常是疊加在當前 View 之上的
+                return;
+            }
+
+            // B. 處理頁面導航 (View Navigation)
+            if (viewHistory.length > 0) {
+                const previousView = viewHistory.pop();
+                isNavigatingBack = true; // 標記為返回模式，避免 updateView 重複 pushState
+                previousView();
+            } else {
+                // 如果沒有歷史紀錄了 (回到首頁)，此時再按返回鍵才會由瀏覽器處理 (離開 App)
+            }
+            
+            updateBackButtonState();
+        });
+
         updateBackButtonState();
     }
 
-    // 3. 視圖追蹤
     function updateView(restorerFunc) {
         if (isNavigatingBack) {
             currentViewRestorer = restorerFunc;
@@ -260,21 +280,22 @@
         } else {
             if (currentViewRestorer) {
                 viewHistory.push(currentViewRestorer);
+                // [關鍵修正] 切換頁面時，推入一筆歷史紀錄
+                history.pushState({ type: 'view' }, '');
             }
             currentViewRestorer = restorerFunc;
         }
         updateBackButtonState();
     }
 
-    // 4. 返回功能
     function goBack() {
-        if (viewHistory.length === 0) return;
-        const previousView = viewHistory.pop();
-        isNavigatingBack = true; 
-        previousView(); 
+        // [關鍵修正] 軟體返回按鈕改為觸發瀏覽器返回，以觸發 popstate
+        // 這樣可以與硬體返回鍵共用邏輯
+        if (viewHistory.length > 0) {
+            history.back();
+        }
     }
 
-    // 5. 更新按鈕狀態
     function updateBackButtonState() {
         const btn = document.getElementById('globalBackBtn');
         if (!btn) return;
@@ -285,22 +306,22 @@
         }
     }
 
-    // 6. Header API Key 同步
     function updateGlobalApiKey(val) {
         const cleanVal = val.trim();
         localStorage.setItem('gemini_api_key', cleanVal);
+        if (typeof userApiKey !== 'undefined') userApiKey = cleanVal;
         
-        // 更新全局變數
-        if (typeof userApiKey !== 'undefined') {
-            userApiKey = cleanVal;
-        }
-        
-        // 視覺回饋
-        const input = document.getElementById('headerApiKey');
-        input.parentElement.classList.add('ring-2', 'ring-green-400');
-        setTimeout(() => input.parentElement.classList.remove('ring-2', 'ring-green-400'), 500);
-    }
+        // Mobile & Desktop Input Sync
+        const headerInput = document.getElementById('headerApiKey');
+        const mobileInput = document.getElementById('mobileApiKeyInput');
+        if(headerInput) headerInput.value = cleanVal;
+        if(mobileInput) mobileInput.value = cleanVal;
 
+        if(headerInput) {
+            headerInput.parentElement.classList.add('ring-2', 'ring-green-400');
+            setTimeout(() => headerInput.parentElement.classList.remove('ring-2', 'ring-green-400'), 500);
+        }
+    }
         // --- DATA STORE ---
         const pathogenData = {
             'dna_pap_poly': {
@@ -3987,10 +4008,7 @@ function logoutApiKey() {
 
 let currentExamQuestionId = null;
 
-// --- V10.0 Exam Library System (試卷圖書館) ---
-
-// 狀態變數：當前選中的試卷來源 (null 代表在選擇頁面)
-// --- V10.5 Exam Library (Mobile Optimized) ---
+// --- V10.6 Exam Library (Android Back Support) ---
 let currentExamSource = null;
 
 function renderExamDashboard(sourceFilter = null) {
@@ -4106,20 +4124,19 @@ function renderExamDashboard(sourceFilter = null) {
             </div>
 
             <div id="examModal" class="fixed inset-0 z-[60] hidden flex items-end md:items-center justify-center sm:p-4">
-                <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="document.getElementById('examModal').classList.add('hidden')"></div>
+                <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="history.back()"></div>
                 
                 <div class="bg-white w-full h-[95vh] md:h-auto md:max-w-4xl md:max-h-[90vh] rounded-t-2xl md:rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-slide-up md:animate-fade-in relative z-10">
                     <div class="p-3 md:p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
                         <h3 class="font-bold text-gray-700 flex items-center gap-2 text-sm md:text-base">
                             <span class="w-1.5 h-5 bg-teal-500 rounded-full"></span> 題目解析
                         </h3>
-                        <button onclick="document.getElementById('examModal').classList.add('hidden')" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
+                        <button onclick="history.back()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
                     
                     <div class="flex-1 overflow-y-auto p-4 md:p-8 custom-scroll bg-white" id="modalContent"></div>
-
                     <div class="p-3 md:p-4 border-t border-gray-100 bg-gray-50 flex justify-between gap-3 shrink-0 safe-pb" id="modalFooter"></div>
                 </div>
             </div>
@@ -4127,16 +4144,16 @@ function renderExamDashboard(sourceFilter = null) {
     }
 }
         
-// 2. 開啟單題視窗
-// [更新版] 開啟單題視窗
-// [修正版] 開啟單題視窗 (含詳解回填)
-// --- V10.5 Question Modal (Touch Optimized) ---
+// --- V10.6 Question Modal (History Integrated) ---
 function openQuestionModal(qid) {
     currentExamQuestionId = qid;
     const q = pastExamDB.find(i => i.id === qid);
     const modal = document.getElementById('examModal');
     const content = document.getElementById('modalContent');
     const footer = document.getElementById('modalFooter');
+    
+    // [關鍵修正] 開啟彈窗時，推入一筆歷史紀錄
+    history.pushState({ type: 'modal' }, '');
     
     modal.classList.remove('hidden');
     
@@ -4157,7 +4174,6 @@ function openQuestionModal(qid) {
                     </div>
                     
                     <span class="text-sm md:text-base text-gray-700 font-medium leading-relaxed">${opt}</span>
-                    
                     <div class="ml-auto hidden status-icon self-center pl-2"></div>
                 </div>
             `).join('')}
@@ -4179,9 +4195,9 @@ function openQuestionModal(qid) {
         </div>
     `;
 
-    // 渲染按鈕區 (Mobile Sticky Footer)
+    // [關鍵修正] Footer 關閉按鈕改為 history.back()
     footer.innerHTML = `
-        <button onclick="document.getElementById('examModal').classList.add('hidden')" 
+        <button onclick="history.back()" 
                 class="flex-1 px-4 py-3 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 active:bg-gray-100 transition text-sm">
             關閉
         </button>
@@ -4191,18 +4207,15 @@ function openQuestionModal(qid) {
         </button>
     `;
 
-    // 恢復詳解狀態
     if (q.aiExplanation) {
         document.getElementById('aiAnalysisArea').classList.remove('hidden');
         document.getElementById('aiContent').innerHTML = marked.parse(q.aiExplanation);
         const solveBtn = document.getElementById('solveBtn');
         solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成`;
-        solveBtn.classList.add('bg-gray-400', 'from-gray-400', 'to-gray-500', 'cursor-not-allowed', 'opacity-80');
-        solveBtn.classList.remove('from-teal-600', 'to-emerald-600', 'shadow-teal-200');
+        solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed', 'opacity-80');
         solveBtn.disabled = true;
     }
 
-    // 恢復選項對錯
     if (q.correctAnswer) {
         let correctIdx = -1;
         q.options.forEach((opt, i) => {
@@ -4509,6 +4522,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
