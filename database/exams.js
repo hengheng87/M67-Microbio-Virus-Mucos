@@ -749,11 +749,6 @@ const pastExamDB = [
         correctAnswer: "",
         userNote: ""
     },
-];
-// --- V10.2 Filtered Data: 112 (M65) 病毒與真菌精選題 ---
-// 已移除 Q1-Q25 (細菌學)，僅保留 Q26-Q50 並重新編號為 Q1-Q25。
-
-const pastExamDB_112_Filtered = [
     {
         id: "112-final-01", // 原 Q26
         source: "112-微免期末 (M65)",
@@ -1503,5 +1498,743 @@ const pastExamDB_112_Filtered = [
         ],
         correctAnswer: "",
         userNote: ""
+    },
+    {
+        id: "111-final-01",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "general_virology",
+        type: "virology",
+        question: "有關病毒的敘述，下列何者錯誤？",
+        options: [
+            "(A) 外套膜 (envelope) 可以取材自細胞膜、胞器膜或核膜",
+            "(B) 病毒必須在活細胞中繁殖",
+            "(C) 病毒表面突出的蛋白質可能會負責吸附",
+            "(D) RNA(+)病毒必須攜帶 RdRp (RNA-dependent RNA polymerase)"
+        ],
+        correctAnswer: "D",
+        userNote: "RNA(+) 病毒基因體本身可作為 mRNA，故不需攜帶 RdRp。"
+    },
+    {
+        id: "111-final-02",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "general_virology",
+        type: "mechanism",
+        question: "下列為病毒生活史的基本步驟，請依照感染步驟依序加以排列：(1)釋放 (release) (2)穿透 (penetration) (3)基因體的複製及蛋白質的產生 (4)組裝 (assembly) (5)吸附 (attachment) (6)去蛋白衣 (uncoating)。",
+        options: [
+            "(A) 5,6,2,4,1,3",
+            "(B) 6,2,3,4,1,5",
+            "(C) 2,6,5,3,4,1",
+            "(D) 5,2,6,3,4,1"
+        ],
+        correctAnswer: "D",
+        userNote: ""
+    },
+    {
+        id: "111-final-03",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "immunology",
+        type: "clinical",
+        question: "下列數據是某患者相隔兩星期分別測得之某一致病原的抗體效價，請問那一組的結果 (急性期/恢復期) 可以判斷該病人為近期感染？",
+        options: [
+            "(A) 20倍/20倍",
+            "(B) 40倍/80倍",
+            "(C) 80倍/640倍",
+            "(D) 80倍/20倍"
+        ],
+        correctAnswer: "C",
+        userNote: "抗體效價上升 4 倍 (4-fold rise) 以上視為近期感染。"
+    },
+    {
+        id: "111-final-04",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "antiviral",
+        type: "pharmacology",
+        question: "下列有關各種抗病毒藥物與其作用機制的配對，何者錯誤？",
+        options: [
+            "(A) Amantadine / 脫殼",
+            "(B) Interferon / DNA複製",
+            "(C) Oseltamivir / 釋放",
+            "(D) neutralizing / 附著"
+        ],
+        correctAnswer: "B",
+        userNote: "Interferon (干擾素) 主要抑制病毒蛋白合成 (Translation) 或降解 mRNA。"
+    },
+    {
+        id: "111-final-05",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "prion",
+        type: "clinical",
+        question: "關於 Prion 敘述何者正確？",
+        options: [
+            "(A) 會造成患者腦部出現海綿狀空泡化",
+            "(B) 患者會有強烈的免疫反應且有發燒現象",
+            "(C) 可用一般之滅菌方式消滅",
+            "(D) Prion 是一種有套膜的 dsRNA 病毒"
+        ],
+        correctAnswer: "A",
+        userNote: "Prion 不誘發發炎反應 (No inflammation)，也不含核酸。"
+    },
+    {
+        id: "111-final-06",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "prion",
+        type: "epidemiology",
+        question: "根據食品衛生管理法規定，雖非疫區但近十年內有發生牛海綿狀腦病之國家，其牛隻何種部位不屬於台灣明訂禁止進口的特定風險物質？",
+        options: [
+            "(A) 牛舌",
+            "(B) 絞肉",
+            "(C) 脊髓",
+            "(D) 眼睛"
+        ],
+        correctAnswer: "A",
+        userNote: "特定風險物質 (SRM) 包括腦、眼、脊髓、扁桃腺、迴腸末端。"
+    },
+    {
+        id: "111-final-07",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "hpv",
+        type: "clinical",
+        question: "下列有關人類乳突病毒 (HPV) 的敘述何者錯誤？",
+        options: [
+            "(A) 具有高致癌力的是第 16 及 18 型",
+            "(B) 菜花是由第 6 及 11 型所引起的",
+            "(C) 雞眼與此病毒無關",
+            "(D) 臨床上是利用抗原性不同進行分型"
+        ],
+        correctAnswer: "D",
+        userNote: "HPV 分型是依據 DNA 序列差異。"
+    },
+    {
+        id: "111-final-08",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_rhabdo",
+        type: "clinical",
+        question: "下列有關狂犬病毒 (Rabies) 何者最不適當？",
+        options: [
+            "(A) 此病毒可以侵犯中樞神經系統",
+            "(B) 有部分受感染的人會產生恐水症",
+            "(C) 疫苗對已經受感染病人並無任何治療效果",
+            "(D) 此病毒可能存在被感染動物的唾液中"
+        ],
+        correctAnswer: "C",
+        userNote: "狂犬病暴露後預防 (PEP) 包含疫苗與免疫球蛋白，及時施打有效。"
+    },
+    {
+        id: "111-final-09",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_picorna",
+        type: "virology",
+        question: "下列有關鼻病毒 (Rhinovirus) 的敘述何者錯誤？",
+        options: [
+            "(A) 感染上呼吸道，可造成普通感冒",
+            "(B) 病毒可在 33°C 的細胞培養中複製",
+            "(C) 耐酸性環境，可在腸胃道複製",
+            "(D) 感染不限於嬰幼兒，也可以感染成人"
+        ],
+        correctAnswer: "C",
+        userNote: "Rhinovirus 不耐酸 (Acid labile)。"
+    },
+    {
+        id: "111-final-10",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_picorna",
+        type: "clinical",
+        question: "關於腸病毒的敘述下列何者正確？",
+        options: [
+            "(A) 傳染性紅斑是因為腸病毒感染所引起",
+            "(B) 手足口症有可能因為腸病毒 71 型感染所產生",
+            "(C) 大部分的疱疹性咽峡炎症狀都很輕微，且潰瘍常出現在前硬顎",
+            "(D) 所有腸病毒的感染都需要積極治療，包括使用抗病毒藥物"
+        ],
+        correctAnswer: "B",
+        userNote: "A: B19病毒。 C: 軟顎。 D: 無特效藥，採支持療法。"
+    },
+    {
+        id: "111-final-11",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "general_virology",
+        type: "virology",
+        question: "下列病毒之敘述何者錯誤？",
+        options: [
+            "(A) 腺病毒感染後可能造成結膜炎、咽炎等症狀",
+            "(B) JC 病毒透過呼吸道傳染，會造成進行性多灶性白質腦病 (PML)",
+            "(C) 人類乳突病毒透過接觸傳染，可能會造成疣或癌",
+            "(D) B19 病毒會感染紅血球造成貧血"
+        ],
+        correctAnswer: "D",
+        userNote: "B19 感染「紅血球前驅細胞」，而非成熟紅血球。"
+    },
+    {
+        id: "111-final-12",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "dna_herpes",
+        type: "clinical",
+        question: "口唇疱疹 (Cold sore) 與下列何種病毒有關？",
+        options: [
+            "(A) 克沙其病毒",
+            "(B) 人類乳突病毒",
+            "(C) 水痘-帶狀疱疹病毒",
+            "(D) 單純疱疹病毒第一型 (HSV-1)"
+        ],
+        correctAnswer: "D",
+        userNote: ""
+    },
+    {
+        id: "111-final-13",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "dna_adeno",
+        type: "clinical",
+        question: "下列何者為腺病毒第 41 型所引發的主要臨床症狀？",
+        options: [
+            "(A) 角膜結膜炎",
+            "(B) 上呼吸道感染",
+            "(C) 紅疹",
+            "(D) 腸胃道感染"
+        ],
+        correctAnswer: "D",
+        userNote: ""
+    },
+    {
+        id: "111-final-14",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "vzv",
+        type: "clinical",
+        question: "有關帶狀疱疹 (Zoster) 何者錯誤？",
+        options: [
+            "(A) 人類疱疹病毒第三型初次感染所引起",
+            "(B) 出疹處常劇烈疼痛",
+            "(C) 病灶常侷限於胸或腹部的一側",
+            "(D) 可能出現帶狀疱疹後神經痛"
+        ],
+        correctAnswer: "A",
+        userNote: "初次感染是水痘，帶狀疱疹是復發。"
+    },
+    {
+        id: "111-final-15",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_reo",
+        type: "virology",
+        question: "下列何種病毒具有雙層蛋白衣，經胰蛋白酶 (Trypsin) 消化後形成中間型次病毒顆粒，其感染能力會增強？",
+        options: [
+            "(A) 諾羅病毒",
+            "(B) 輪狀病毒 (Rotavirus)",
+            "(C) 腸病毒",
+            "(D) 腺病毒"
+        ],
+        correctAnswer: "B",
+        userNote: ""
+    },
+    {
+        id: "111-final-16",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "ebv",
+        type: "clinical",
+        question: "下列何種症狀最不可能發生於 EBV 感染？",
+        options: [
+            "(A) 白血球數目增多",
+            "(B) 發燒",
+            "(C) 血紅素下降",
+            "(D) 肝脾腫大"
+        ],
+        correctAnswer: "C",
+        userNote: "除非併發溶血性貧血，否則 EBV 通常不造成血紅素下降。"
+    },
+    {
+        id: "111-final-17",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "general_virology",
+        type: "virology",
+        question: "下列何種病毒最不可能有潛伏性感染 (latent infection)？",
+        options: [
+            "(A) 單純疱疹病毒",
+            "(B) 水痘帶狀疱疹病毒",
+            "(C) BK 病毒",
+            "(D) 小病毒 B19"
+        ],
+        correctAnswer: "D",
+        userNote: ""
+    },
+    {
+        id: "111-final-18",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "dna_herpes",
+        type: "clinical",
+        question: "下列何種病毒可引發單核球增多症，也是輸血後症候群的常見致病原？",
+        options: [
+            "(A) 小病毒 B19",
+            "(B) EBV",
+            "(C) 水痘帶狀疱疹病毒",
+            "(D) 巨細胞病毒 (CMV)"
+        ],
+        correctAnswer: "D",
+        userNote: ""
+    },
+    {
+        id: "111-final-19",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "hpv",
+        type: "vaccine",
+        question: "目前臨床上使用的子宮頸癌疫苗可以預防下列哪一種疾病？",
+        options: [
+            "(A) 尖銳濕疣 (Genital warts)",
+            "(B) 單純疣",
+            "(C) 卡波西肉瘤",
+            "(D) 生殖道疱疹"
+        ],
+        correctAnswer: "A",
+        userNote: "針對 HPV 6, 11 型可預防菜花。"
+    },
+    {
+        id: "111-final-20",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "vaccine",
+        type: "vaccine",
+        question: "目前人類疱疹病毒中，何者具有疫苗可預防感染？",
+        options: [
+            "(A) 水痘帶狀疱疹病毒 (VZV)",
+            "(B) EBV",
+            "(C) 單純疱疹病毒",
+            "(D) 巨細胞病毒"
+        ],
+        correctAnswer: "A",
+        userNote: ""
+    },
+    {
+        id: "111-final-21",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_picorna",
+        type: "vaccine",
+        question: "下列何者是口服小兒麻痺疫苗 (OPV) 的特性？",
+        options: [
+            "(A) 可引發 IgA 反應",
+            "(B) 口服一次終生免疫",
+            "(C) 不會突變為野生型病毒",
+            "(D) 為台灣現在主要的小兒麻痺疫苗"
+        ],
+        correctAnswer: "A",
+        userNote: "台灣目前主要使用 IPV (注射型)。"
+    },
+    {
+        id: "111-final-22",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "general_virology",
+        type: "virology",
+        question: "下列哪些病毒對乾洗手 (酒精) 的處理有抗性？ (1)克沙其病毒 (2)輪狀病毒 (3)水痘-帶狀疱疹病毒 (4)腺病毒",
+        options: [
+            "(A) 123",
+            "(B) 234",
+            "(C) 124",
+            "(D) 1234"
+        ],
+        correctAnswer: "C",
+        userNote: "無套膜病毒 (1, 2, 4) 對酒精有抗性；VZV (3) 有套膜。"
+    },
+    {
+        id: "111-final-23",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "antiviral",
+        type: "pharmacology",
+        question: "Acyclovir 是臨床上治療何種病毒之藥物？",
+        options: [
+            "(A) 單純疱疹病毒 (HSV)",
+            "(B) EBV",
+            "(C) 人體免疫缺乏病毒",
+            "(D) 巨細胞病毒"
+        ],
+        correctAnswer: "A",
+        userNote: ""
+    },
+    {
+        id: "111-final-24",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "antiviral",
+        type: "clinical",
+        question: "小孩因病毒感染而使用某種藥物作為退燒時，易伴隨有雷氏症候群 (Reye syndrome)。下列何種藥物產生此副作用的可能性最高？",
+        options: [
+            "(A) Acyclovir",
+            "(B) Aspirin",
+            "(C) Penicillin",
+            "(D) Rifampin"
+        ],
+        correctAnswer: "B",
+        userNote: ""
+    },
+    
+    // --- 原期末考範圍 (HIV, 肝炎, 蟲媒, 黴菌) ---
+    {
+        id: "111-final-25",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_retro",
+        type: "clinical",
+        question: "下列有關 HIV 的敘述，何者是正確的？",
+        options: [
+            "(A) 為 ssRNA(+) 病毒，對酒精不敏感",
+            "(B) 病毒的 gp41 負責吸附，gp120 負責穿透",
+            "(C) HIV DNA 會插到宿主染色體中，進而導致腫瘤的發生",
+            "(D) 目前利用 HAART 的療法 (雞尾酒療法) 可以延緩抗藥性病毒株的出現"
+        ],
+        correctAnswer: "D",
+        userNote: "HIV 有套膜，對酒精敏感。gp120 吸附，gp41 穿透。"
+    },
+    {
+        id: "111-final-26",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_retro",
+        type: "virology",
+        question: "下列何種細胞不是 HIV 主要感染的細胞種類？",
+        options: [
+            "(A) CD4 T 細胞",
+            "(B) 嗜中性白血球 (Neutrophil)",
+            "(C) 巨噬細胞 (Macrophage)",
+            "(D) 樹突細胞 (Dendritic cells)"
+        ],
+        correctAnswer: "B",
+        userNote: "HIV 感染帶有 CD4 的細胞。"
+    },
+    {
+        id: "111-final-27",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_retro",
+        type: "diagnosis",
+        question: "下列有關 HIV-1 診斷的敘述，何者是錯誤的？",
+        options: [
+            "(A) HIV 的核酸或 p24 抗原檢測是感染初期診斷的重要檢驗",
+            "(B) HIV 的 RNA 病毒量可以用來判斷治療成果",
+            "(C) CD4+ T 細胞數目小於 500 個/µl，比較容易有伺機性感染",
+            "(D) HIV 的 RT-PCR 檢驗可以用來確診新生兒 HIV 感染"
+        ],
+        correctAnswer: "C",
+        userNote: "AIDS 定義通常為 CD4 < 200/µl。"
+    },
+    {
+        id: "111-final-28",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_retro",
+        type: "pharmacology",
+        question: "在 HIV-1 中，下列那個基因的點突變會對治療藥物 lamivudine 產生抗藥性？",
+        options: [
+            "(A) gag",
+            "(B) env",
+            "(C) pol",
+            "(D) vif"
+        ],
+        correctAnswer: "C",
+        userNote: "Pol 基因編碼反轉錄酶 (RT)。"
+    },
+    {
+        id: "111-final-29",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_retro",
+        type: "diagnosis",
+        question: "利用現行 HIV-1 檢驗試劑，可測得特異性標記在血液中出現的時間順序依次為何？(1)HIV-1 IgG (2)HIV-1 IgM (3)HIV-1 RNA (4)p24 Ag",
+        options: [
+            "(A) 4,3,1,2",
+            "(B) 3,4,2,1",
+            "(C) 3,2,4,1",
+            "(D) 4,1,2,3"
+        ],
+        correctAnswer: "B",
+        userNote: "病毒核酸(RNA) -> 抗原(p24) -> IgM -> IgG。"
+    },
+    {
+        id: "111-final-30",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "dna_pox",
+        type: "clinical",
+        question: "下列何種人類疾病不是由痘病毒 (Poxvirus) 引起？",
+        options: [
+            "(A) 天花 (Smallpox)",
+            "(B) 傳染性軟疣 (Molluscum contagiosum)",
+            "(C) 手指頭上的 Orf 病灶",
+            "(D) 疱疹性膿性指頭 (Herpetic Whitlow)"
+        ],
+        correctAnswer: "D",
+        userNote: "Herpetic Whitlow 由 HSV 引起。"
+    },
+    {
+        id: "111-final-31",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "antiviral",
+        type: "pharmacology",
+        question: "有關抗流感藥物 zanamivir (Relenza) 及 oseltamivir (Tamiflu) 的敘述，下列何者錯誤？",
+        options: [
+            "(A) 二者都是針對 neuraminidase 的酵素抑制物",
+            "(B) 作用在流感病毒的 release 階段",
+            "(C) 只對 influenza A 有效",
+            "(D) 感染後 48 小時內服用可以預防或縮短症狀時間"
+        ],
+        correctAnswer: "C",
+        userNote: "對 A 型與 B 型流感皆有效。"
+    },
+    {
+        id: "111-final-32",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_ortho",
+        type: "virology",
+        question: "下列有關流感病毒 (influenza virus) 的敘述，何者錯誤？",
+        options: [
+            "(A) 利用 NP 與 M1 蛋白的差異，來區別流感病毒 A、B、C 三型",
+            "(B) 利用 HA 與 NA 蛋白的差異，來區別 A 型流感病毒的亞型",
+            "(C) A、B、C 三型中，抗原變異最大的是 A 型",
+            "(D) C 型曾造成大流行"
+        ],
+        correctAnswer: "D",
+        userNote: "C 型流感較穩定，極少造成大流行。"
+    },
+    {
+        id: "111-final-33",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "hepatitis",
+        type: "clinical",
+        question: "某醫院工作人員被驗出有 HBsAg，繼而又被驗出 HBeAg。此醫院工作人員最可能是下列何種情況？",
+        options: [
+            "(A) 有肝炎且有傳染力",
+            "(B) 有肝炎但不具傳染力",
+            "(C) 感染了 B 型及 C 型肝炎病毒",
+            "(D) 此檢驗結果顯然是偽陽性"
+        ],
+        correctAnswer: "A",
+        userNote: "HBeAg 陽性代表高傳染力。"
+    },
+    {
+        id: "111-final-34",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_arbo",
+        type: "virology",
+        question: "下列有關日本腦炎病毒與登革熱病毒特性之敘述，何者正確？",
+        options: [
+            "(A) 均可注射疫苗，預防感染",
+            "(B) 被感染之宿主可再直接散播病毒",
+            "(C) 均由埃及斑蚊傳播",
+            "(D) 感染後均產生感冒般症狀"
+        ],
+        correctAnswer: "D",
+        userNote: ""
+    },
+    {
+        id: "111-final-35",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "hepatitis",
+        type: "virology",
+        question: "B 型肝炎病毒中何種蛋白可自行聚集形成大小形狀不一的顆粒 (Decoy particles)？",
+        options: [
+            "(A) HBcAg",
+            "(B) HBeAg",
+            "(C) HBsAg",
+            "(D) X protein"
+        ],
+        correctAnswer: "C",
+        userNote: ""
+    },
+    {
+        id: "111-final-36",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_paramyxo",
+        type: "virology",
+        question: "下列何者是流行性感冒病毒 (Influenza) 和副流行性感冒病毒 (Parainfluenza) 的不同點？",
+        options: [
+            "(A) 前者為正股 RNA 病毒，後者為負股 RNA 病毒",
+            "(B) 前者為負股 RNA 病毒，後者為正股 RNA 病毒",
+            "(C) 前者在細胞核複製，後者是在細胞質複製",
+            "(D) 前者的基因體是不分段型，後者是分段型"
+        ],
+        correctAnswer: "C",
+        userNote: ""
+    },
+    {
+        id: "111-final-37",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "general_virology",
+        type: "safety",
+        question: "有關生物安全等級-3 (BSL-3) 實驗室設計上的防護，下列敘述何者錯誤？",
+        options: [
+            "(A) 實驗室與走廊通道有物理性分隔",
+            "(B) 具備可自動關的雙門，且雙門不會同時打開",
+            "(C) 排放的廢氣不再循環",
+            "(D) 正壓氣流進入實驗室"
+        ],
+        correctAnswer: "D",
+        userNote: "BSL-3 需維持負壓。"
+    },
+    {
+        id: "111-final-38",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "myco_intro",
+        type: "basic",
+        question: "構成真菌細胞壁之主要成分為何？",
+        options: [
+            "(A) 幾丁質以及 α-1-4-葡萄聚醣",
+            "(B) 幾丁質以及 β-1-3-葡萄聚醣",
+            "(C) 肽醣以及 β-1-4-葡萄聚醣",
+            "(D) 幾丁質以及 α-1-6-葡萄聚醣"
+        ],
+        correctAnswer: "B",
+        userNote: ""
+    },
+    {
+        id: "111-final-39",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "myco_opportunistic",
+        type: "clinical",
+        question: "常見於嬰孩口腔之鵝口瘡，是何種微生物感染？",
+        options: [
+            "(A) 新型隱球菌",
+            "(B) 白色念珠菌 (C. albicans)",
+            "(C) 金黃色葡萄球菌",
+            "(D) 淋病雙球菌"
+        ],
+        correctAnswer: "B",
+        userNote: ""
+    },
+    {
+        id: "111-final-40",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "general_virology",
+        type: "virology",
+        question: "血球附著現象 (Hemadsorption) 不可用來初步認定下列那一種病毒培養？",
+        options: [
+            "(A) 呼吸道融合病毒 (RSV)",
+            "(B) 腮腺炎病毒",
+            "(C) 副流行性感冒病毒",
+            "(D) 麻疹病毒"
+        ],
+        correctAnswer: "A",
+        userNote: "RSV 不具 HA 蛋白。"
+    },
+    {
+        id: "111-final-41",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "immunology",
+        type: "vaccine",
+        question: "感染下列那些病毒後，病人可獲得終身免疫力？(1)麻疹病毒 (2)單純疱疹病毒 (3)腺病毒 (4)腮腺炎病毒",
+        options: [
+            "(A) 12",
+            "(B) 34",
+            "(C) 13",
+            "(D) 14"
+        ],
+        correctAnswer: "D",
+        userNote: "Measles (1) 和 Mumps (4) 感染後通常終身免疫。"
+    },
+    {
+        id: "111-final-42",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_paramyxo",
+        type: "clinical",
+        question: "下列何種病毒，會引起睪丸、卵巢、胰臟等腺體發炎之病症？",
+        options: [
+            "(A) 麻疹病毒",
+            "(B) 呼吸道融合病毒",
+            "(C) 腮腺炎病毒 (Mumps)",
+            "(D) 副流行性感冒病毒"
+        ],
+        correctAnswer: "C",
+        userNote: ""
+    },
+    {
+        id: "111-final-43",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "hepatitis",
+        type: "clinical",
+        question: "病患若先感染 B 型肝炎病毒後，再感染下列何種肝炎病毒，極易引發猛爆性肝炎 (Fulminant hepatitis)？",
+        options: [
+            "(A) A 型",
+            "(B) C 型",
+            "(C) D 型 (HDV)",
+            "(D) E 型"
+        ],
+        correctAnswer: "C",
+        userNote: ""
+    },
+    {
+        id: "111-final-44",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "hepatitis",
+        type: "virology",
+        question: "下列那一種肝炎病毒與腸病毒 (Enterovirus) 在分類上最接近？",
+        options: [
+            "(A) HAV",
+            "(B) HDV",
+            "(C) HCV",
+            "(D) HEV"
+        ],
+        correctAnswer: "A",
+        userNote: "HAV 屬於 Picornaviridae (微小 RNA 病毒科)。"
+    },
+    {
+        id: "111-final-45",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "myco_superficial",
+        type: "clinical",
+        question: "有關花斑癣 (pityriasis versicolor) 之敘述，下列何者錯誤？",
+        options: [
+            "(A) 最常見於年輕人",
+            "(B) 致病原為馬拉色菌綜合菌 (Malassezia furfur)",
+            "(C) 致病原未歸類為自然界腐生菌",
+            "(D) 無法由檢體直接做鏡檢診斷"
+        ],
+        correctAnswer: "D",
+        userNote: "鏡檢可見 Spaghetti and Meatballs 特徵。"
+    },
+    {
+        id: "111-final-46",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_filo",
+        type: "virology",
+        question: "下列關於馬堡病毒 (Marburg) 和伊波拉病毒 (Ebola) 之敘述，何者正確？",
+        options: [
+            "(A) 伊波拉病毒為飲食傳播",
+            "(B) 馬堡病毒有 2 種亞型",
+            "(C) 兩者皆屬於絲狀病毒科 (Filoviridae)",
+            "(D) 兩者皆為生物安全等級第三級"
+        ],
+        correctAnswer: "C",
+        userNote: "兩者皆屬 Filoviridae，且為 BSL-4 病原。"
+    },
+    {
+        id: "111-final-47",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_ortho",
+        type: "clinical",
+        question: "感染下列何種病毒，若自行服用阿司匹靈 (Aspirin) 等水楊酸類退燒藥物後，最易增加兒童罹患雷氏症候群 (Reye syndrome) 的風險？",
+        options: [
+            "(A) 德國麻疹病毒",
+            "(B) 麻疹病毒",
+            "(C) 流感病毒 (Influenza virus)",
+            "(D) 狂犬病病毒"
+        ],
+        correctAnswer: "C",
+        userNote: ""
+    },
+    {
+        id: "111-final-48",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "rna_arbo",
+        type: "virology",
+        question: "關於黃病毒屬 (Flavivirus) 之敘述，下列何者錯誤？",
+        options: [
+            "(A) 常見的病媒 (vector) 為蚊子或壁蝨",
+            "(B) NS1 蛋白在病毒感染的後期才會表現",
+            "(C) 茲卡病毒 (Zika virus) 屬於 flavivirus",
+            "(D) 為具有套膜的 RNA 病毒"
+        ],
+        correctAnswer: "B",
+        userNote: "NS1 為早期非結構蛋白。"
+    },
+    {
+        id: "111-final-49",
+        source: "111-微免期末 (M64)",
+        relatedPathogen: "myco_intro",
+        type: "basic",
+        question: "真菌之無性孢子 (asexual spores) 可分成那兩大類？",
+        options: [
+            "(A) 分生孢子 (conidia) 及囊孢子 (sporangiospores)",
+            "(B) 瓶孢子 (phialides) 及分節孢子 (arthrospores)",
+            "(C) 厚膜孢子 (chlamydospores) 及分節孢子 (arthrospores)",
+            "(D) 分節孢子 (arthrospores) 及芽生孢子 (blastospores)"
+        ],
+        correctAnswer: "A",
+        userNote: ""
     }
 ];
+
