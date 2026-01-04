@@ -783,7 +783,7 @@ function logoutApiKey() {
 // --- V10.6 Exam Library (Android Back Support) ---
 let currentExamSource = null;
 
-// [V11.0 修正版] 考古題儀表板：包含完整的彈窗 HTML 結構
+// [V11.0 最終修正版] 考古題儀表板
     function renderExamDashboard(groupFilter = null) {
         updateView(() => renderExamDashboard(groupFilter));
         const container = document.getElementById('contentArea');
@@ -823,9 +823,8 @@ let currentExamSource = null;
                         <p class="text-sm text-gray-500">ID 自動歸檔系統運作中</p>
                     </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                        ${sortedGroups.map(g => {  /* 🔴 注意這裡多了一個左大括號 */
-                            
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        ${sortedGroups.map(g => {
                             // 1. 定義樣式邏輯 (在此處進行判斷)
                             let themeColor = '';
                             let iconColor = '';
@@ -886,9 +885,12 @@ let currentExamSource = null;
                                 </div>
                             </div>
                             `; 
-                        }).join('')} </div>
+                        }).join('')}
+                    </div>
+                </div>
+            `;
         } else {
-            // --- 模式 B: 刷題介面 (這部分您之前的程式碼可能缺了 examModal 的內容) ---
+            // --- 模式 B: 刷題介面 ---
             const targetGroup = examGroups[groupFilter];
             if (!targetGroup) return renderExamDashboard();
 
@@ -1422,6 +1424,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
