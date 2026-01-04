@@ -128,56 +128,64 @@
 </head>
 <body class="bg-gray-50 text-gray-800 h-screen flex flex-col overflow-hidden">
 
-<header class="bg-medical-900 text-white shadow-lg z-20 shrink-0 transition-all duration-300" id="mainHeader">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <button id="globalBackBtn" onclick="goBack()" class="hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition active:scale-95 text-medical-200 hover:text-white" title="返回上一頁">
-                    <i class="fas fa-arrow-left text-lg"></i>
-                </button>
-                
-                <div class="cursor-pointer hover:opacity-80 transition flex items-center gap-3" onclick="renderDashboard()">
-                    <i class="fas fa-virus-covid text-2xl text-medical-200"></i>
-                    <div>
-                        <h1 class="font-bold text-lg tracking-wide">M67 微免期末衝刺</h1>
-                        <p class="text-[10px] text-medical-200 uppercase">Systematic Review V9.9</p>
-                    </div>
-                </div>
-            </div>
+<header class="bg-medical-900 text-white shadow-lg z-50 shrink-0 transition-all duration-300 relative" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <button id="globalBackBtn" onclick="goBack()" class="hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/10 transition active:scale-95 text-medical-200 hover:text-white" title="返回上一頁">
+                <i class="fas fa-arrow-left text-lg"></i>
+            </button>
             
-           <div class="flex items-center gap-3">
-                <div class="hidden md:flex items-center bg-medical-800/80 rounded-full px-3 py-1.5 border border-medical-700 focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-400/20 transition-all group">
-                    <i class="fas fa-key text-yellow-400 text-xs mr-2 group-hover:text-yellow-300"></i>
-                    <input type="password" id="headerApiKey" placeholder="Paste Gemini API Key" 
-                        class="bg-transparent border-none text-xs text-white placeholder-medical-300 focus:ring-0 w-28 focus:w-64 transition-all outline-none"
-                        onchange="updateGlobalApiKey(this.value)">
-                </div>
-
-                <a href="https://aistudio.google.com/app/apikey" target="_blank" 
-                   class="hidden md:flex items-center gap-1 text-[10px] text-teal-300 hover:text-white transition-colors border border-teal-500/30 rounded-full px-2 py-1 hover:bg-teal-500/20" 
-                   title="前往 Google AI Studio 獲取免費金鑰">
-                    <span>Get Key</span>
-                    <i class="fas fa-external-link-alt text-[9px]"></i>
-                </a>
-
-                <div class="flex items-center gap-2 bg-medical-800 px-3 py-1.5 rounded-full border border-medical-600 cursor-pointer hover:bg-medical-700 transition" onclick="document.getElementById('examToggle').click()">
-                    <span class="text-xs font-medium select-none"><i class="fas fa-user-graduate mr-1"></i>考點</span>
-                    <label class="relative inline-flex items-center cursor-pointer pointer-events-none">
-                        <input type="checkbox" id="examToggle" class="sr-only peer">
-                        <div class="w-9 h-5 bg-gray-400 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
-                    </label>
-                </div>
-            </div>
-
-                <div class="flex items-center gap-2 bg-medical-800 px-3 py-1.5 rounded-full border border-medical-600 cursor-pointer hover:bg-medical-700 transition" onclick="document.getElementById('examToggle').click()">
-                    <span class="text-xs font-medium select-none"><i class="fas fa-user-graduate mr-1"></i>考點</span>
-                    <label class="relative inline-flex items-center cursor-pointer pointer-events-none">
-                        <input type="checkbox" id="examToggle" class="sr-only peer">
-                        <div class="w-9 h-5 bg-gray-400 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
-                    </label>
+            <div class="cursor-pointer hover:opacity-80 transition flex items-center gap-2" onclick="renderDashboard()">
+                <i class="fas fa-virus-covid text-2xl text-medical-200"></i>
+                <div class="leading-tight">
+                    <h1 class="font-bold text-lg tracking-wide">微免戰情室</h1>
+                    <p class="text-[9px] text-medical-200 uppercase tracking-wider">Review V10.5</p>
                 </div>
             </div>
         </div>
-    </header>
+        
+        <div class="flex items-center gap-2">
+            <div class="hidden md:flex items-center bg-medical-800/80 rounded-full px-3 py-1.5 border border-medical-700 focus-within:border-teal-400 transition-all group">
+                <i class="fas fa-key text-yellow-400 text-xs mr-2"></i>
+                <input type="password" id="headerApiKey" placeholder="Paste Gemini API Key" 
+                    class="bg-transparent border-none text-xs text-white placeholder-medical-300 focus:ring-0 w-28 focus:w-64 transition-all outline-none"
+                    onchange="updateGlobalApiKey(this.value)">
+            </div>
+
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" 
+               class="hidden md:flex items-center gap-1 text-[10px] text-teal-300 hover:text-white border border-teal-500/30 rounded-full px-2 py-1 hover:bg-teal-500/20">
+                <span>Key</span><i class="fas fa-external-link-alt"></i>
+            </a>
+
+            <button onclick="document.getElementById('mobileKeyPanel').classList.toggle('hidden')" 
+                    class="md:hidden w-8 h-8 rounded-full bg-medical-800 text-yellow-400 flex items-center justify-center border border-medical-700 active:scale-95">
+                <i class="fas fa-key text-xs"></i>
+            </button>
+
+            <div class="flex items-center gap-2 bg-medical-800 px-2 pl-3 py-1.5 rounded-full border border-medical-600 cursor-pointer active:scale-95 transition select-none" onclick="document.getElementById('examToggle').click()">
+                <span class="text-xs font-medium"><i class="fas fa-user-graduate"></i></span>
+                <label class="relative inline-flex items-center cursor-pointer pointer-events-none">
+                    <input type="checkbox" id="examToggle" class="sr-only peer">
+                    <div class="w-8 h-4 bg-gray-500 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-green-500"></div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobileKeyPanel" class="hidden md:hidden absolute top-16 left-0 w-full bg-medical-800 border-b border-medical-700 p-3 shadow-xl animate-fade-in">
+        <div class="flex gap-2">
+            <div class="flex-1 flex items-center bg-medical-900/50 rounded-lg px-3 py-2 border border-medical-600">
+                <i class="fas fa-key text-yellow-400 text-sm mr-2"></i>
+                <input type="password" id="mobileApiKeyInput" placeholder="在此貼上 API Key" 
+                    class="bg-transparent border-none text-sm text-white w-full focus:ring-0 outline-none"
+                    onchange="updateGlobalApiKey(this.value)">
+            </div>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="bg-teal-600 text-white px-3 rounded-lg flex items-center justify-center font-bold text-xs">
+                獲取
+            </a>
+        </div>
+    </div>
+</header>
     <div class="flex flex-1 overflow-hidden">
         <nav class="w-72 bg-white border-r border-gray-200 flex flex-col hidden md:flex h-full transition-all duration-300">
             <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center cursor-pointer hover:bg-gray-100" onclick="renderDashboard()">
@@ -3982,73 +3990,65 @@ let currentExamQuestionId = null;
 // --- V10.0 Exam Library System (試卷圖書館) ---
 
 // 狀態變數：當前選中的試卷來源 (null 代表在選擇頁面)
+// --- V10.5 Exam Library (Mobile Optimized) ---
 let currentExamSource = null;
 
 function renderExamDashboard(sourceFilter = null) {
-    // 1. 記錄視圖 (這樣按上一頁才能回來)
     updateView(() => renderExamDashboard(sourceFilter));
-    
     currentExamSource = sourceFilter;
     const container = document.getElementById('contentArea');
     const toc = document.getElementById('toc');
     
-    // 重置選單樣式
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-medical-50', 'text-medical-800', 'ring-1', 'ring-medical-200'));
 
-    // --- 模式 A: 試卷選擇大廳 (Library Mode) ---
+    // --- 模式 A: 試卷選擇大廳 ---
     if (!sourceFilter) {
-        // 整理目前有哪些試卷來源
-        // 使用 Set 來去除重複，找出所有唯一的 source
         const sources = [...new Set(pastExamDB.map(q => q.source))];
-        
-        // 計算各試卷的數據
         const stats = sources.map(src => {
             const questions = pastExamDB.filter(q => q.source === src);
-            const solved = questions.filter(q => q.correctAnswer).length;
-            return { src, total: questions.length, solved };
+            return { src, total: questions.length, solved: questions.filter(q => q.correctAnswer).length };
         });
 
         toc.innerHTML = `
             <li><a href="#" onclick="renderDashboard(); return false;" class="text-medical-600 font-bold block py-1 hover:underline mb-2"><i class="fas fa-arrow-left mr-1"></i>回儀表板</a></li>
             <li class="border-t border-gray-100 my-2"></li>
             <li class="text-xs font-bold text-gray-400 uppercase mb-2">試卷列表</li>
-            ${stats.map(s => `<li><span class="text-xs text-gray-600 block py-1">${s.src}</span></li>`).join('')}
+            ${stats.map(s => `<li><span class="text-xs text-gray-600 block py-1 truncate">${s.src}</span></li>`).join('')}
         `;
 
         container.innerHTML = `
-            <div class="animate-fade-in pb-20 max-w-5xl mx-auto">
-                <div class="mb-10 text-center">
-                    <h1 class="text-3xl font-bold text-gray-900 mb-3"><i class="fas fa-archive text-teal-600"></i> 考古題圖書館</h1>
-                    <p class="text-gray-500">請選擇一份試卷開始練習，AI 助教隨時待命。</p>
+            <div class="animate-fade-in pb-24 max-w-5xl mx-auto px-1 md:px-0">
+                <div class="mb-6 md:mb-10 text-center px-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2"><i class="fas fa-archive text-teal-600"></i> 考古題圖書館</h1>
+                    <p class="text-sm text-gray-500">AI 助教隨時待命，請選擇試卷。</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     ${stats.map(s => `
-                        <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition cursor-pointer group relative overflow-hidden" 
+                        <div class="bg-white rounded-xl p-5 md:p-6 border border-gray-200 shadow-sm hover:shadow-lg active:scale-[0.98] transition cursor-pointer group relative overflow-hidden" 
                              onclick="renderExamDashboard('${s.src}')">
-                            <div class="absolute top-0 right-0 w-20 h-20 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-teal-100"></div>
+                            <div class="absolute top-0 right-0 w-16 h-16 md:w-20 md:h-20 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-teal-100"></div>
                             
                             <div class="flex items-center gap-4 mb-4">
-                                <div class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xl font-bold">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-lg font-bold shrink-0">
                                     ${s.src.includes('113') ? '113' : '112'}
                                 </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-gray-800 group-hover:text-teal-700 transition">${s.src}</h3>
-                                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Final Exam</span>
+                                <div class="min-w-0">
+                                    <h3 class="text-base md:text-lg font-bold text-gray-800 truncate pr-2">${s.src}</h3>
+                                    <span class="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Final Exam</span>
                                 </div>
                             </div>
                             
                             <div class="flex justify-between items-end">
-                                <div class="text-sm text-gray-500">
-                                    <div class="mb-1"><i class="fas fa-list-ol w-5"></i> 總題數: <span class="font-bold text-gray-800">${s.total}</span></div>
-                                    <div><i class="fas fa-check-circle w-5"></i> 已解析: <span class="font-bold text-green-600">${s.solved}</span></div>
+                                <div class="text-xs md:text-sm text-gray-500">
+                                    <div class="mb-1">題數: <span class="font-bold text-gray-800">${s.total}</span></div>
+                                    <div>解析: <span class="font-bold text-green-600">${s.solved}</span></div>
                                 </div>
-                                <button class="bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-teal-700 transition shadow-teal-200 shadow-sm">
-                                    進入練習 <i class="fas fa-arrow-right ml-1"></i>
+                                <button class="bg-teal-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-teal-700 shadow-teal-200 shadow-sm">
+                                    練習 <i class="fas fa-arrow-right ml-1"></i>
                                 </button>
                             </div>
-                            
-                            <div class="w-full bg-gray-100 h-1.5 mt-4 rounded-full overflow-hidden">
+                            <div class="w-full bg-gray-100 h-1 mt-4 rounded-full overflow-hidden">
                                 <div class="bg-teal-500 h-full rounded-full" style="width: ${(s.solved/s.total)*100}%"></div>
                             </div>
                         </div>
@@ -4059,71 +4059,68 @@ function renderExamDashboard(sourceFilter = null) {
     } 
     // --- 模式 B: 答題介面 (Question List) ---
     else {
-        // 篩選出該年份的題目
         const filteredDB = pastExamDB.filter(q => q.source === sourceFilter);
-        const totalQ = filteredDB.length;
         const solvedQ = filteredDB.filter(q => q.correctAnswer).length;
 
         toc.innerHTML = `
-            <li><a href="#" onclick="renderExamDashboard(); return false;" class="text-medical-600 font-bold block py-1 hover:underline mb-2"><i class="fas fa-arrow-left mr-1"></i>回試卷列表</a></li>
+            <li><a href="#" onclick="renderExamDashboard(); return false;" class="text-medical-600 font-bold block py-1 hover:underline mb-2"><i class="fas fa-arrow-left mr-1"></i>回列表</a></li>
             <li class="border-t border-gray-100 my-2"></li>
-            <li class="text-xs font-bold text-gray-400 uppercase mb-2">當前試卷</li>
-            <li><span class="text-xs text-teal-700 font-bold block py-1">${sourceFilter}</span></li>
+            <li class="text-xs font-bold text-gray-400 uppercase mb-2">當前: ${sourceFilter}</li>
         `;
 
         container.innerHTML = `
-            <div class="animate-fade-in pb-20 max-w-5xl mx-auto">
-                <div class="mb-8 border-b border-gray-200 pb-4 flex justify-between items-end">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="text-xs font-bold bg-gray-100 text-gray-500 px-2 py-1 rounded cursor-pointer hover:bg-gray-200 transition" onclick="renderExamDashboard()">
-                                <i class="fas fa-chevron-left"></i> 返回列表
-                            </span>
-                            <span class="text-xs font-bold bg-teal-50 text-teal-600 px-2 py-1 rounded border border-teal-100">
-                                ${sourceFilter}
-                            </span>
-                        </div>
-                        <h1 class="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                            <i class="fas fa-file-medical-alt text-teal-600"></i> 試卷詳情
+            <div class="animate-fade-in pb-20 max-w-5xl mx-auto px-1 md:px-0">
+                <div class="sticky top-0 bg-gray-50/95 backdrop-blur z-10 py-3 mb-4 border-b border-gray-200 flex justify-between items-center px-2 md:px-0">
+                    <div class="flex items-center gap-2">
+                        <button class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-teal-600 active:scale-90 transition shadow-sm" onclick="renderExamDashboard()">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <h1 class="text-lg md:text-2xl font-bold text-gray-900 truncate max-w-[200px] md:max-w-none">
+                            ${sourceFilter}
                         </h1>
                     </div>
-                    <div class="text-right">
-                        <span class="text-2xl font-bold text-teal-600" id="progress-text">${solvedQ}/${totalQ}</span>
-                        <span class="text-xs text-gray-400 uppercase font-bold">Solved</span>
+                    <div class="flex flex-col items-end">
+                        <span class="text-xl font-bold text-teal-600" id="progress-text">${solvedQ}/${filteredDB.length}</span>
+                        <span class="text-[10px] text-gray-400 uppercase font-bold">Solved</span>
                     </div>
                 </div>
 
-                <div class="grid gap-4">
+                <div class="grid gap-3 md:gap-4 px-2 md:px-0">
                     ${filteredDB.map((q, index) => `
-                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition group cursor-pointer relative overflow-hidden" onclick="openQuestionModal('${q.id}')">
+                        <div class="bg-white p-4 md:p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md active:scale-[0.99] transition cursor-pointer relative overflow-hidden" onclick="openQuestionModal('${q.id}')">
                             <div class="flex justify-between items-start mb-2">
-                                <span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Q${index + 1}</span>
-                                <span id="status-badge-${q.id}" class="text-[10px] font-bold ${q.correctAnswer ? 'text-green-600 bg-green-50' : 'text-gray-400 bg-gray-50'} px-2 py-0.5 rounded border border-gray-100 transition-colors duration-300">
+                                <span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Q${index + 1}</span>
+                                <span id="status-badge-${q.id}" class="text-[10px] font-bold ${q.correctAnswer ? 'text-green-600 bg-green-50' : 'text-gray-400 bg-gray-50'} px-2 py-0.5 rounded border border-gray-100">
                                     ${q.correctAnswer ? '已解析' : '未解析'}
                                 </span>
                             </div>
-                            <h3 class="text-base font-medium text-gray-800 mb-3 group-hover:text-teal-700 transition line-clamp-2">
+                            <h3 class="text-sm md:text-base font-medium text-gray-800 mb-2 line-clamp-2 leading-relaxed">
                                 ${q.question}
                             </h3>
-                            <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <div class="flex items-center gap-2 text-[10px] md:text-xs text-gray-400">
                                 <i class="fas fa-tag"></i> ${q.relatedPathogen || 'General'}
                             </div>
                         </div>
                     `).join('')}
                 </div>
             </div>
-            <div id="examModal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-                <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-fade-in">
-                    <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                        <h3 class="font-bold text-gray-700 flex items-center gap-2">
-                            <span class="w-2 h-6 bg-teal-500 rounded-full"></span> 題目解析
+
+            <div id="examModal" class="fixed inset-0 z-[60] hidden flex items-end md:items-center justify-center sm:p-4">
+                <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="document.getElementById('examModal').classList.add('hidden')"></div>
+                
+                <div class="bg-white w-full h-[95vh] md:h-auto md:max-w-4xl md:max-h-[90vh] rounded-t-2xl md:rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-slide-up md:animate-fade-in relative z-10">
+                    <div class="p-3 md:p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
+                        <h3 class="font-bold text-gray-700 flex items-center gap-2 text-sm md:text-base">
+                            <span class="w-1.5 h-5 bg-teal-500 rounded-full"></span> 題目解析
                         </h3>
-                        <button onclick="document.getElementById('examModal').classList.add('hidden')" class="text-gray-400 hover:text-red-500 transition w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-50">
-                            <i class="fas fa-times text-lg"></i>
+                        <button onclick="document.getElementById('examModal').classList.add('hidden')" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 transition">
+                            <i class="fas fa-times"></i>
                         </button>
                     </div>
-                    <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scroll" id="modalContent"></div>
-                    <div class="p-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3" id="modalFooter"></div>
+                    
+                    <div class="flex-1 overflow-y-auto p-4 md:p-8 custom-scroll bg-white" id="modalContent"></div>
+
+                    <div class="p-3 md:p-4 border-t border-gray-100 bg-gray-50 flex justify-between gap-3 shrink-0 safe-pb" id="modalFooter"></div>
                 </div>
             </div>
         `;
@@ -4133,6 +4130,7 @@ function renderExamDashboard(sourceFilter = null) {
 // 2. 開啟單題視窗
 // [更新版] 開啟單題視窗
 // [修正版] 開啟單題視窗 (含詳解回填)
+// --- V10.5 Question Modal (Touch Optimized) ---
 function openQuestionModal(qid) {
     currentExamQuestionId = qid;
     const q = pastExamDB.find(i => i.id === qid);
@@ -4145,64 +4143,67 @@ function openQuestionModal(qid) {
     // 渲染題目區
     content.innerHTML = `
         <div class="mb-6">
-            <span class="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded mb-2 inline-block">題目</span>
-            <p class="text-xl font-bold text-gray-800 leading-relaxed">${q.question}</p>
+            <span class="text-[10px] font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded mb-2 inline-block tracking-wider">QUESTION</span>
+            <p class="text-lg md:text-xl font-bold text-gray-800 leading-relaxed text-justify">${q.question}</p>
         </div>
         
         <div class="grid grid-cols-1 gap-3 mb-8" id="examOptionsArea">
             ${q.options.map((opt, idx) => `
                 <div id="exam-opt-${idx}" onclick="checkExamAnswer('${qid}', ${idx})" 
-                     class="p-4 rounded-lg border border-gray-200 hover:bg-teal-50 hover:border-teal-300 transition cursor-pointer flex items-center gap-3 group relative overflow-hidden select-none">
-                    <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center font-bold text-sm group-hover:bg-teal-600 group-hover:text-white transition" id="exam-opt-icon-${idx}">${String.fromCharCode(65+idx)}</div>
-                    <span class="text-gray-700 font-medium">${opt}</span>
-                    <div class="ml-auto hidden status-icon"></div>
+                     class="p-4 rounded-xl border border-gray-200 bg-white hover:bg-teal-50 hover:border-teal-300 active:bg-teal-100 active:scale-[0.98] transition-all duration-200 cursor-pointer flex items-start gap-3 group relative select-none">
+                    
+                    <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center font-bold text-xs md:text-sm group-hover:bg-teal-600 group-hover:text-white transition shrink-0 mt-0.5" id="exam-opt-icon-${idx}">
+                        ${String.fromCharCode(65+idx)}
+                    </div>
+                    
+                    <span class="text-sm md:text-base text-gray-700 font-medium leading-relaxed">${opt}</span>
+                    
+                    <div class="ml-auto hidden status-icon self-center pl-2"></div>
                 </div>
             `).join('')}
         </div>
 
-        <div id="aiAnalysisArea" class="hidden animate-fade-in">
-            <div class="flex items-center gap-2 mb-4 p-3 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border border-purple-100">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white text-xs shadow-lg">
+        <div id="aiAnalysisArea" class="hidden animate-fade-in border-t border-gray-100 pt-6">
+            <div class="flex items-center gap-2 mb-3">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-white text-[10px] shadow-sm">
                     <i class="fas fa-robot"></i>
                 </div>
-                <div>
-                    <h3 class="font-bold text-gray-800 text-sm">Gemini 老師詳解</h3>
-                    <p class="text-[10px] text-gray-500">AI 將自動判讀正確答案並為您評分</p>
-                </div>
+                <h3 class="font-bold text-gray-800 text-sm">Gemini 解析</h3>
             </div>
-            <div id="aiContent" class="bg-white p-6 rounded-xl border border-gray-200 text-gray-700 leading-relaxed prose prose-sm max-w-none shadow-sm">
-                <div class="flex flex-col items-center justify-center py-8 text-gray-400">
-                    <i class="fas fa-circle-notch fa-spin text-purple-500 text-3xl mb-3"></i>
-                    <span class="text-sm">正在分析題意與選項...</span>
+            <div id="aiContent" class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-gray-700 text-sm leading-relaxed prose prose-sm max-w-none">
+                <div class="flex flex-col items-center justify-center py-6 text-gray-400">
+                    <i class="fas fa-circle-notch fa-spin text-purple-500 text-2xl mb-2"></i>
+                    <span class="text-xs">AI 正在思考中...</span>
                 </div>
             </div>
         </div>
     `;
 
-    // 渲染按鈕區
+    // 渲染按鈕區 (Mobile Sticky Footer)
     footer.innerHTML = `
-        <button onclick="document.getElementById('examModal').classList.add('hidden')" class="px-4 py-2 text-gray-500 font-medium hover:bg-gray-100 rounded-lg transition">關閉</button>
-        <button onclick="callAIForExplanation('${qid}')" id="solveBtn" class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition transform active:scale-95 font-medium flex items-center gap-2 shadow-teal-200">
-            <i class="fas fa-lightbulb"></i> AI 幫我解題
+        <button onclick="document.getElementById('examModal').classList.add('hidden')" 
+                class="flex-1 px-4 py-3 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 active:bg-gray-100 transition text-sm">
+            關閉
+        </button>
+        <button onclick="callAIForExplanation('${qid}')" id="solveBtn" 
+                class="flex-[2] bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-4 py-3 rounded-xl font-bold hover:shadow-lg active:scale-95 transition text-sm flex items-center justify-center gap-2 shadow-teal-200">
+            <i class="fas fa-lightbulb"></i> <span id="solveBtnText">AI 解題</span>
         </button>
     `;
 
-    // 1. 如果之前已經有詳解，直接顯示 (Persistence)
+    // 恢復詳解狀態
     if (q.aiExplanation) {
         document.getElementById('aiAnalysisArea').classList.remove('hidden');
         document.getElementById('aiContent').innerHTML = marked.parse(q.aiExplanation);
-        
-        // 將按鈕設為「完成」狀態
         const solveBtn = document.getElementById('solveBtn');
         solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成`;
-        solveBtn.classList.remove('from-teal-600', 'to-emerald-600');
-        solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+        solveBtn.classList.add('bg-gray-400', 'from-gray-400', 'to-gray-500', 'cursor-not-allowed', 'opacity-80');
+        solveBtn.classList.remove('from-teal-600', 'to-emerald-600', 'shadow-teal-200');
         solveBtn.disabled = true;
     }
 
-    // 2. 如果知道答案，標記對錯
+    // 恢復選項對錯
     if (q.correctAnswer) {
-        // 嘗試找出正確選項的 Index
         let correctIdx = -1;
         q.options.forEach((opt, i) => {
              if (opt.toUpperCase().includes(`(${q.correctAnswer})`) || opt.startsWith(`${q.correctAnswer}.`)) {
@@ -4508,6 +4509,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
