@@ -1014,7 +1014,25 @@ async function callAIForExplanation(qid) {
         alert("請先在「AI 臨床實驗室」輸入 API Key 才能使用解題功能！");
         return;
     }
-
+// [補回遺失的函式] 輔助：只顯示正確答案 (修復 111 年考題無法顯示答案的問題)
+    function highlightCorrectAnswer(correctIdx) {
+        const el = document.getElementById(`exam-opt-${correctIdx}`);
+        if (el) {
+            el.className = "p-4 rounded-xl border-2 border-green-500 bg-green-50 transition cursor-pointer flex items-center gap-3 relative overflow-hidden select-none";
+            
+            // 確保 icon 容器存在
+            let iconDiv = el.querySelector('.status-icon');
+            if (!iconDiv) {
+                // 如果找不到 (可能被 reset 掉了)，重新建立一個
+                iconDiv = document.createElement('div');
+                iconDiv.className = "ml-auto status-icon self-center pl-2";
+                el.appendChild(iconDiv);
+            }
+            
+            iconDiv.innerHTML = '<i class="fas fa-check-circle text-green-600 text-xl"></i>';
+            iconDiv.classList.remove('hidden');
+        }
+    }
     const q = pastExamDB.find(i => i.id === qid);
     const solveBtn = document.getElementById('solveBtn');
     const aiArea = document.getElementById('aiAnalysisArea');
@@ -1308,6 +1326,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
