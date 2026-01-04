@@ -852,22 +852,35 @@ if (g.type === 'midterm') {
 
 // 2. 將變數套用到 HTML 樣板中 (取代原本寫死的 ternary operator)
 return `
-    <div class="bg-white rounded-xl ... (略) ...">
-        <div class="absolute top-0 right-0 w-20 h-20 ${themeColor} rounded-bl-full ..."></div>
+    <div class="bg-white rounded-xl p-5 md:p-6 border border-gray-200 shadow-sm hover:shadow-lg active:scale-[0.98] transition cursor-pointer group relative overflow-hidden" 
+         onclick="renderExamDashboard('${g.year}-${g.type}')">
+        
+        <div class="absolute top-0 right-0 w-20 h-20 ${themeColor} rounded-bl-full -mr-4 -mt-4 transition"></div>
         
         <div class="flex items-center gap-4 mb-4">
             <div class="w-12 h-12 rounded-full ${iconColor} flex items-center justify-center text-lg font-bold shrink-0">
                 ${g.year}
             </div>
+            
+            <div class="min-w-0">
+                <h3 class="text-lg font-bold text-gray-800 truncate pr-2">${g.title}</h3>
+                <div class="flex gap-2 mt-1">
+                     <span class="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full uppercase">共 ${g.questions.length} 題</span>
+                </div>
             </div>
+        </div>
         
         <div class="flex justify-between items-end">
-            <button class="${btnColor} text-white px-4 py-2 rounded-lg ...">
+            <div class="text-xs md:text-sm text-gray-500">
+                <div class="mb-1">題數: <span class="font-bold text-gray-800">${g.questions.length}</span></div>
+                <div>解析: <span class="font-bold text-green-600">${g.solvedCount}</span></div>
+            </div>
+            <button class="${btnColor} text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition">
                 練習 <i class="fas fa-arrow-right ml-1"></i>
             </button>
         </div>
         <div class="w-full bg-gray-100 h-1 mt-4 rounded-full overflow-hidden">
-            <div class="${barColor} h-full rounded-full" style="width: ..."></div>
+            <div class="${barColor} h-full rounded-full" style="width: ${(g.solvedCount/g.questions.length)*100}%"></div>
         </div>
     </div>
 `;
@@ -1406,6 +1419,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
