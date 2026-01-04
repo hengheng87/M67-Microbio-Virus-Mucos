@@ -252,52 +252,53 @@ function parseExamInfo(id) {
     <script src="database/exams.js"></script>
     
     <script>
-// --- V10.6 System Core & Navigation (Android Back Button Fixed) ---
-    
+// --- V11.0 System Core & Navigation ---
+
     let viewHistory = [];        
     let currentViewRestorer = null; 
     let isNavigatingBack = false;   
+    let userApiKey = localStorage.getItem('gemini_api_key') || '';
+    let currentExamQuestionId = null;
+    let userSelectedExamIdx = null; 
+
+    // [V11.0] ID 解析器
+    function parseExamInfo(id) {
+        const parts = id.split('-'); 
+        if (parts.length < 2) return { year: 'Unknown', type: 'Exam', title: '未知試卷', groupKey: 'unknown' };
+        const year = parts[0];     
+        const typeCode = parts[1]; 
+        const typeMap = { 'final': '期末考', 'midterm': '期中考', 'quiz': '小考' };
+        const typeName = typeMap[typeCode] || '考試';
+        return {
+            year: year,
+            type: typeCode,
+            title: `${year}學年度 微免${typeName}`,
+            groupKey: `${year}-${typeCode}`
+        };
+    }
 
     function initSystem() {
-        // 1. 讀取 API Key
         const savedKey = localStorage.getItem('gemini_api_key');
         if (savedKey) {
             const input = document.getElementById('headerApiKey');
             if(input) input.value = savedKey;
-            if (typeof userApiKey !== 'undefined') userApiKey = savedKey;
+            userApiKey = savedKey;
         }
-        
-        // 2. 設定起點
         currentViewRestorer = () => renderDashboard();
-        
-        // 3. [關鍵修正] 初始化歷史紀錄狀態，防止直接跳出 App
-        if (!history.state) {
-            history.replaceState({ type: 'root' }, '');
-        }
-        
-        // 4. [關鍵修正] 監聽硬體返回鍵 (Popstate Event)
+        if (!history.state) history.replaceState({ type: 'root' }, '');
         window.addEventListener('popstate', (event) => {
-            // A. 優先處理彈窗 (Modal)
             const modal = document.getElementById('examModal');
             if (modal && !modal.classList.contains('hidden')) {
-                // 如果彈窗開著，返回鍵的行為應該是「關閉彈窗」
                 modal.classList.add('hidden');
-                // 這裡不需要 pop viewHistory，因為彈窗通常是疊加在當前 View 之上的
                 return;
             }
-
-            // B. 處理頁面導航 (View Navigation)
             if (viewHistory.length > 0) {
                 const previousView = viewHistory.pop();
-                isNavigatingBack = true; // 標記為返回模式，避免 updateView 重複 pushState
+                isNavigatingBack = true; 
                 previousView();
-            } else {
-                // 如果沒有歷史紀錄了 (回到首頁)，此時再按返回鍵才會由瀏覽器處理 (離開 App)
             }
-            
             updateBackButtonState();
         });
-
         updateBackButtonState();
     }
 
@@ -308,7 +309,6 @@ function parseExamInfo(id) {
         } else {
             if (currentViewRestorer) {
                 viewHistory.push(currentViewRestorer);
-                // [關鍵修正] 切換頁面時，推入一筆歷史紀錄
                 history.pushState({ type: 'view' }, '');
             }
             currentViewRestorer = restorerFunc;
@@ -317,39 +317,21 @@ function parseExamInfo(id) {
     }
 
     function goBack() {
-        // [關鍵修正] 軟體返回按鈕改為觸發瀏覽器返回，以觸發 popstate
-        // 這樣可以與硬體返回鍵共用邏輯
-        if (viewHistory.length > 0) {
-            history.back();
-        }
+        if (viewHistory.length > 0) history.back();
     }
 
     function updateBackButtonState() {
         const btn = document.getElementById('globalBackBtn');
         if (!btn) return;
-        if (viewHistory.length > 0) {
-            btn.classList.remove('hidden');
-        } else {
-            btn.classList.add('hidden');
-        }
+        btn.classList.remove('hidden');
+        if (viewHistory.length === 0) btn.classList.add('hidden');
     }
 
     function updateGlobalApiKey(val) {
         const cleanVal = val.trim();
         localStorage.setItem('gemini_api_key', cleanVal);
-        if (typeof userApiKey !== 'undefined') userApiKey = cleanVal;
-        
-        // Mobile & Desktop Input Sync
-        const headerInput = document.getElementById('headerApiKey');
-        const mobileInput = document.getElementById('mobileApiKeyInput');
-        if(headerInput) headerInput.value = cleanVal;
-        if(mobileInput) mobileInput.value = cleanVal;
-
-        if(headerInput) {
-            headerInput.parentElement.classList.add('ring-2', 'ring-green-400');
-            setTimeout(() => headerInput.parentElement.classList.remove('ring-2', 'ring-green-400'), 500);
-        }
-    }     
+        userApiKey = cleanVal;
+    }
         // --- RENDER LOGIC ---
         function renderSidebar() {
             const nav = document.getElementById('sidebarNav');
@@ -1028,8 +1010,14 @@ function renderExamDashboard(groupFilter = null) {
                         <div class="bg-white p-4 md:p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md active:scale-[0.99] transition cursor-pointer relative overflow-hidden" onclick="openQuestionModal('${q.id}')">
                             <div class="flex justify-between items-start mb-2">
                                 <span class="bg-gray-100 text-gray-500 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Q${index + 1}</span>
-                                <span id="status-badge-${q.id}" class="text-[10px] font-bold ${q.correctAnswer ? 'text-green-600 bg-green-50' : 'text-gray-400 bg-gray-50'} px-2 py-0.5 rounded border border-gray-100">
-                                    ${q.correctAnswer ? '已解析' : '未解析'}
+                                <span id="status-badge-${q.id}">
+                                    ${q.aiExplanation 
+                                        ? `<span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded border border-green-200"><i class="fas fa-robot mr-1"></i>AI 詳解</span>`
+                                        : (q.correctAnswer 
+                                            ? `<span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">附答案</span>`
+                                            : `<span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-2 py-0.5 rounded border border-gray-100">未解析</span>`
+                                        )
+                                    }
                                 </span>
                             </div>
                             <h3 class="text-sm md:text-base font-medium text-gray-800 mb-2 line-clamp-2 leading-relaxed">
@@ -1098,25 +1086,27 @@ function openQuestionModal(qid) {
         </div>
     `;
 
-    // [關鍵修正] Footer 關閉按鈕改為 history.back()
+   // [V11.0 修正] 判斷按鈕狀態：只有當已經有「AI 詳解」時才鎖定按鈕，僅有答案時不鎖定
+    let btnDisabled = q.aiExplanation ? 'disabled' : '';
+    let btnClass = q.aiExplanation ? 
+        'bg-gray-400 cursor-not-allowed opacity-80' : 
+        'bg-gradient-to-r from-teal-600 to-emerald-600 text-white shadow-teal-200 hover:shadow-lg active:scale-95';
+    let btnText = q.aiExplanation ? '<i class="fas fa-check"></i> 解析完成' : '<i class="fas fa-lightbulb"></i> AI 解題';
+
     footer.innerHTML = `
         <button onclick="history.back()" 
                 class="flex-1 px-4 py-3 bg-white border border-gray-300 text-gray-600 font-bold rounded-xl hover:bg-gray-50 active:bg-gray-100 transition text-sm">
             關閉
         </button>
-        <button onclick="callAIForExplanation('${qid}')" id="solveBtn" 
-                class="flex-[2] bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-4 py-3 rounded-xl font-bold hover:shadow-lg active:scale-95 transition text-sm flex items-center justify-center gap-2 shadow-teal-200">
-            <i class="fas fa-lightbulb"></i> <span id="solveBtnText">AI 解題</span>
+        <button onclick="callAIForExplanation('${qid}')" id="solveBtn" ${btnDisabled}
+                class="flex-[2] px-4 py-3 rounded-xl font-bold transition flex items-center justify-center gap-2 text-sm ${btnClass}">
+            ${btnText}
         </button>
     `;
 
     if (q.aiExplanation) {
         document.getElementById('aiAnalysisArea').classList.remove('hidden');
         document.getElementById('aiContent').innerHTML = marked.parse(q.aiExplanation);
-        const solveBtn = document.getElementById('solveBtn');
-        solveBtn.innerHTML = `<i class="fas fa-check"></i> 解析完成`;
-        solveBtn.classList.add('bg-gray-400', 'cursor-not-allowed', 'opacity-80');
-        solveBtn.disabled = true;
     }
 
     if (q.correctAnswer) {
@@ -1157,15 +1147,22 @@ async function callAIForExplanation(qid) {
     const contextData = q.relatedPathogen && pathogenData[q.relatedPathogen] ? 
         `Reference: ${pathogenData[q.relatedPathogen].title}, Facts: ${pathogenData[q.relatedPathogen].quickFacts.map(f => f.val).join(', ')}` : "";
 
+    // [V11.0 新增] 如果題目已有正確答案 (111年)，提示 AI 這個答案
+    let answerHint = "";
+    if (q.correctAnswer) {
+        answerHint = `\n[System Note] The known correct answer is (${q.correctAnswer}). Please analyze why this option is correct and others are incorrect.`;
+    }
+
     const prompt = `
         You are a medical professor explaining an exam question.
         Question: "${q.question}"
         Options: ${JSON.stringify(q.options)}
         ${contextData}
+        ${answerHint}
 
         Task:
-        1. Identify the Correct Answer Option (A, B, C, or D).
-        2. Provide explanation.
+        1. Identify/Confirm the Correct Answer Option (A, B, C, or D).
+        2. Provide detailed explanation in Traditional Chinese.
 
         Format:
         Return in Traditional Chinese.
@@ -1205,11 +1202,10 @@ async function callAIForExplanation(qid) {
                     q.aiExplanation = aiText; // [新增] 儲存詳解文字
                     q.userNote = "AI Solved"; 
 
-                    // 2. [新增] 直接更新背景列表的「狀態標籤」，無需重繪
+                   // 2. [V11.0 修正] 更新為綠色 AI 標籤
                     const badge = document.getElementById(`status-badge-${qid}`);
                     if (badge) {
-                        badge.innerText = '已解析';
-                        badge.className = "text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded border border-gray-100 transition-colors duration-300";
+                        badge.innerHTML = `<span class="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded border border-green-200"><i class="fas fa-robot mr-1"></i>AI 詳解</span>`;
                     }
                     
                     // 3. 更新上方進度文字 (Optional)
@@ -1425,6 +1421,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
