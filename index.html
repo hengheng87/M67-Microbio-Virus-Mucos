@@ -144,13 +144,29 @@
                 </div>
             </div>
             
-            <div class="flex items-center gap-3">
+           <div class="flex items-center gap-3">
                 <div class="hidden md:flex items-center bg-medical-800/80 rounded-full px-3 py-1.5 border border-medical-700 focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-400/20 transition-all group">
                     <i class="fas fa-key text-yellow-400 text-xs mr-2 group-hover:text-yellow-300"></i>
                     <input type="password" id="headerApiKey" placeholder="Paste Gemini API Key" 
                         class="bg-transparent border-none text-xs text-white placeholder-medical-300 focus:ring-0 w-28 focus:w-64 transition-all outline-none"
                         onchange="updateGlobalApiKey(this.value)">
                 </div>
+
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" 
+                   class="hidden md:flex items-center gap-1 text-[10px] text-teal-300 hover:text-white transition-colors border border-teal-500/30 rounded-full px-2 py-1 hover:bg-teal-500/20" 
+                   title="前往 Google AI Studio 獲取免費金鑰">
+                    <span>Get Key</span>
+                    <i class="fas fa-external-link-alt text-[9px]"></i>
+                </a>
+
+                <div class="flex items-center gap-2 bg-medical-800 px-3 py-1.5 rounded-full border border-medical-600 cursor-pointer hover:bg-medical-700 transition" onclick="document.getElementById('examToggle').click()">
+                    <span class="text-xs font-medium select-none"><i class="fas fa-user-graduate mr-1"></i>考點</span>
+                    <label class="relative inline-flex items-center cursor-pointer pointer-events-none">
+                        <input type="checkbox" id="examToggle" class="sr-only peer">
+                        <div class="w-9 h-5 bg-gray-400 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
+                    </label>
+                </div>
+            </div>
 
                 <div class="flex items-center gap-2 bg-medical-800 px-3 py-1.5 rounded-full border border-medical-600 cursor-pointer hover:bg-medical-700 transition" onclick="document.getElementById('examToggle').click()">
                     <span class="text-xs font-medium select-none"><i class="fas fa-user-graduate mr-1"></i>考點</span>
@@ -4492,6 +4508,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
