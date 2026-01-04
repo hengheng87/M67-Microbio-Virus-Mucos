@@ -1,7 +1,11 @@
+// database/exams.js
+// V11.0 架構：ID 決定一切
+// 格式：{year}-{type}-{number} (例如: 113-final-01)
+
 const pastExamDB = [
+    // === 113 學年度 ===
     {
         id: "113-final-01",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "mechanism",
         question: "病毒最常利用下列何種蛋白質進行吸附步驟？(What type of protein do viruses most commonly use to carry out the attachment step?)",
@@ -16,7 +20,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-02",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "mechanism",
         question: "下列何者是正確的病毒複製步驟？(Which of the following is the correct step in the viral replication process?) \n步驟代號：(1)去殼 (uncoating) (2)認識目標細胞 (recognition)/附著 (attachment) (3)巨分子合成 (macromolecule synthesis) (4)穿入 (penetration) (5)病毒組合 (assembly) (6)病毒釋出 (release)",
@@ -31,7 +34,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-03",
-        source: "113-微免期末",
         relatedPathogen: "immunology",
         type: "mechanism",
         question: "下列那一個最有可能是病毒感染引發「全身性類感冒症狀 (flu-like systemic symptom)」之因子？",
@@ -46,7 +48,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-04",
-        source: "113-微免期末",
         relatedPathogen: "lab_diagnosis",
         type: "basic",
         question: "下列何種技術或系統無法用來進行病毒的培養？",
@@ -61,7 +62,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-05",
-        source: "113-微免期末",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "下列有關抗病毒藥物之敘述，何者最不適當？",
@@ -76,7 +76,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-06",
-        source: "113-微免期末",
         relatedPathogen: "prion",
         type: "clinical",
         question: "目前科學家認為克魯氏症 (Kuru) 是由 prion 所致的人類疾病，下列敘述何者正確？",
@@ -91,7 +90,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-07",
-        source: "113-微免期末",
         relatedPathogen: "hpv",
         type: "clinical",
         question: "下列有關人類乳突狀瘤病毒 (HPV) 的敘述，何者最不適當？",
@@ -106,7 +104,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-08",
-        source: "113-微免期末",
         relatedPathogen: "rabies",
         type: "virology",
         question: "下列有關狂犬病毒 (rabies virus) 的敘述，何者錯誤？",
@@ -121,7 +118,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-09",
-        source: "113-微免期末",
         relatedPathogen: "picornavirus",
         type: "virology",
         question: "腸病毒 (Enterovirus) 與鼻病毒 (Rhinovirus) 同屬小 RNA 病毒科 (Picornaviridae)，下列敘述何者錯誤？",
@@ -136,7 +132,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-10",
-        source: "113-微免期末",
         relatedPathogen: "hsv",
         type: "clinical",
         question: "下列關於單純疱疹病毒一型 (HSV-1) 感染所引起的病症之敘述，何者正確？",
@@ -151,7 +146,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-11",
-        source: "113-微免期末",
         relatedPathogen: "vzv",
         type: "clinical",
         question: "下列有關水痘帶狀疱疹病毒 (VZV) 及其疾病之敘述，何者錯誤？",
@@ -166,7 +160,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-12",
-        source: "113-微免期末",
         relatedPathogen: "ebv",
         type: "clinical",
         question: "下列有關 Epstein-Barr virus (EB virus) 之敘述，何者錯誤？",
@@ -181,7 +174,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-13",
-        source: "113-微免期末",
         relatedPathogen: "poxvirus",
         type: "clinical",
         question: "下列有關 M 痘 (Mpox) 的敘述，何者最適當？",
@@ -196,7 +188,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-14",
-        source: "113-微免期末",
         relatedPathogen: "polio",
         type: "epidemiology",
         question: "下列有關野生株小兒麻痺病毒的敘述，何者最不合適？",
@@ -211,7 +202,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-15",
-        source: "113-微免期末",
         relatedPathogen: "parvo",
         type: "virology",
         question: "下列有關小病毒 B19 (parvovirus B19) 的敘述，何者最適當？",
@@ -224,9 +214,8 @@ const pastExamDB = [
         correctAnswer: "",
         userNote: ""
     },
-{
+    {
         id: "113-final-16",
-        source: "113-微免期末",
         relatedPathogen: "rna_retro",
         type: "virology",
         question: "有關反轉錄病毒 (retrovirus) 的敘述，何者最不適當？",
@@ -241,7 +230,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-17",
-        source: "113-微免期末",
         relatedPathogen: "dna_adeno",
         type: "clinical",
         question: "下列何種病毒最可能引發咽喉結膜熱 (pharyngoconjunctival fever)？",
@@ -256,7 +244,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-18",
-        source: "113-微免期末",
         relatedPathogen: "dna_pap_poly",
         type: "clinical",
         question: "進行性多灶性白質腦病 (Progressive multifocal leukoencephalopathy) 是一種髓鞘脫失 (demyelination) 的病變，臨床上常與免疫抑制有關。此病主要由何種病毒引起？",
@@ -271,7 +258,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-19",
-        source: "113-微免期末",
         relatedPathogen: "dna_herpes",
         type: "mechanism",
         question: "Epstein-Barr virus 可導致下列何種細胞的不死化 (immortalization)？",
@@ -286,7 +272,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-20",
-        source: "113-微免期末",
         relatedPathogen: "rna_retro",
         type: "clinical",
         question: "下列何種症狀最可能為人類免疫缺陷病毒 (HIV) 感染或罹患愛滋病 (AIDS)？",
@@ -301,7 +286,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-21",
-        source: "113-微免期末",
         relatedPathogen: "rna_retro",
         type: "mechanism",
         question: "人類免疫缺陷病毒 (HIV) 最主要是殺死下列何種細胞而導致愛滋病 (AIDS)？",
@@ -316,7 +300,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-22",
-        source: "113-微免期末",
         relatedPathogen: "rna_picorna",
         type: "clinical",
         question: "下列何者與引起疱疹性咽喉炎 (herpangina) 及手足口病 (hand-foot-and-mouth disease) 的致病原最相關？",
@@ -331,7 +314,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-23",
-        source: "113-微免期末",
         relatedPathogen: "rna_reo",
         type: "clinical",
         question: "在托育中心的一歲男嬰，持續兩天水瀉並嘔吐，且有輕微發燒現象，之後因為脫水而住院。他最可能受到下列何種病毒的感染？",
@@ -346,7 +328,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-24",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "clinical",
         question: "下列何種病毒感染不會引發胎兒的先天性缺陷？",
@@ -361,7 +342,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-25",
-        source: "113-微免期末",
         relatedPathogen: "dna_parvo",
         type: "clinical",
         question: "下列何種病毒感染最有可能造成關節炎的症狀？",
@@ -376,7 +356,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-26",
-        source: "113-微免期末",
         relatedPathogen: "prion",
         type: "diagnosis",
         question: "一種新的檢驗方式稱作“real-time quaking-induced conversion (RT-QuIC)”，可以快速檢驗出檢體內是否含有 PrPSc。請問這是利用 prion 的那一種特性？",
@@ -391,7 +370,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-27",
-        source: "113-微免期末",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "Acyclovir 可抑制下列何者之功能？",
@@ -406,7 +384,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-28",
-        source: "113-微免期末",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "下列何種藥物可用來抑制第一型人類免疫缺乏病毒 (HIV-1) 最終組裝 (assembly) 和成熟 (maturation) 步驟所需的酵素活性？",
@@ -421,7 +398,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-29",
-        source: "113-微免期末",
         relatedPathogen: "dna_pap_poly",
         type: "vaccine",
         question: "下列有關人類乳突狀瘤病毒 (human papillomavirus) 疫苗的敘述，何者錯誤？",
@@ -436,7 +412,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-30",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "clinical",
         question: "下列病毒中，何者引起的主要臨床表徵是因其會造成潛伏感染 (latent infection)，感染並潛藏在感覺神經元細胞內所致？\n①單純疱疹病毒 (Herpes simplex virus) ②脊髓灰質炎病毒 (Poliovirus) ③ 水痘帶狀皰疹病毒 (Varicella-zoster virus)",
@@ -451,7 +426,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-31",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列哪些病毒對乾洗手 (含有 70% 酒精) 的處理有抗性？\n①克沙奇病毒 (Coxsackievirus) ②輪狀病毒 (Rotavirus) ③ 水痘帶狀疱疹病毒 (VZV) ④ E 型肝炎病毒 (Hepatitis E virus)",
@@ -466,7 +440,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-32",
-        source: "113-微免期末",
         relatedPathogen: "hepatitis",
         type: "virology",
         question: "下列有關 D 型肝炎病毒的敘述，何者錯誤？",
@@ -481,7 +454,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-33",
-        source: "113-微免期末",
         relatedPathogen: "rna_ortho",
         type: "virology",
         question: "下列有關流感病毒 (influenza virus) 的敘述，何者錯誤？",
@@ -496,7 +468,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-34",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "epidemiology",
         question: "下列那幾種病毒不經由動物暨節肢動物而傳播？\n①漢他病毒 (Hantavirus) ②日本腦炎病毒 (JEV) ③黃熱病病毒 (Yellow fever virus) ④德國麻疹病毒 (Rubella virus)",
@@ -511,7 +482,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-35",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列何者不是負股 RNA 病毒？",
@@ -526,7 +496,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-36",
-        source: "113-微免期末",
         relatedPathogen: "rna_paramyxo",
         type: "virology",
         question: "下列何者是流行性感冒病毒 (Influenza virus) 和副流行性感冒病毒 (Parainfluenza virus) 的不同點？",
@@ -541,7 +510,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-37",
-        source: "113-微免期末",
         relatedPathogen: "hepatitis",
         type: "clinical",
         question: "罹患慢性 B 型肝炎 (chronic hepatitis B) 的孕婦，若是測到以下哪一種抗原呈現陽性，則其新生兒必須在出生 24 小時內接受 B 型肝炎免疫球蛋白注射一劑，然後再按時接受疫苗注射？",
@@ -556,7 +524,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-38",
-        source: "113-微免期末",
         relatedPathogen: "myco_intro",
         type: "basic",
         question: "構成真菌細胞壁之主要成分為何？",
@@ -571,7 +538,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-39",
-        source: "113-微免期末",
         relatedPathogen: "myco_pharma",
         type: "pharmacology",
         question: "下列何種抗黴菌藥物，其作用機轉是和黴菌細胞膜之麥角脂醇 (ergosterol) 結合，造成黴菌細胞內容物流出而殺死黴菌？",
@@ -586,7 +552,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-40",
-        source: "113-微免期末",
         relatedPathogen: "rna_arbo",
         type: "virology",
         question: "下列有關日本腦炎病毒與登革熱病毒特性之敘述，何者正確？",
@@ -601,7 +566,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-41",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "immunology",
         question: "感染下列那些病毒後，病人可獲得終身免疫力？\n①麻疹病毒 (Measles virus) ②單純疱疹病毒 (Herpes simplex virus) ③腺病毒 (Adenovirus) ④腮腺炎病毒 (Mumps virus)",
@@ -616,7 +580,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-42",
-        source: "113-微免期末",
         relatedPathogen: "hepatitis",
         type: "virology",
         question: "下列有關 E 型肝炎病毒的敘述，何者最適當？",
@@ -631,7 +594,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-43",
-        source: "113-微免期末",
         relatedPathogen: "rna_paramyxo",
         type: "clinical",
         question: "下列何種病毒，會引起睪丸、卵巢、胰臟等腺體發炎之病症？",
@@ -646,7 +608,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-44",
-        source: "113-微免期末",
         relatedPathogen: "hepatitis",
         type: "clinical",
         question: "病患若先感染 B 型肝炎病毒後，再感染下列何種肝炎病毒，極易引發猛爆性肝炎？",
@@ -661,7 +622,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-45",
-        source: "113-微免期末",
         relatedPathogen: "rna_paramyxo",
         type: "clinical",
         question: "一名兩歲幼童出現發高燒、咳嗽、流鼻水、結膜炎及皮膚出現紅疹/皮疹的現象，他的媽媽說幾位同班同學在幾天前也出現這些症狀。請問造成這個孩子的疾病及病原的描述，何者不正確？",
@@ -676,7 +636,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-46",
-        source: "113-微免期末",
         relatedPathogen: "myco_superficial",
         type: "clinical",
         question: "有關花斑癬 (pityriasis versicolor) 之敘述，下列何者錯誤？",
@@ -691,7 +650,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-47",
-        source: "113-微免期末",
         relatedPathogen: "general_virology",
         type: "vaccine",
         question: "下列何種病毒目前尚無有效的疫苗可以預防感染？",
@@ -706,7 +664,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-48",
-        source: "113-微免期末",
         relatedPathogen: "rna_arbo",
         type: "virology",
         question: "下列關於馬堡病毒 (Marburg virus) 和伊波拉病毒 (Ebola virus) 之敘述，何者正確？",
@@ -721,7 +678,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-49",
-        source: "113-微免期末",
         relatedPathogen: "myco_intro",
         type: "basic",
         question: "有關黴菌 (fungus) 的敘述，下列何者錯誤？",
@@ -736,7 +692,6 @@ const pastExamDB = [
     },
     {
         id: "113-final-50",
-        source: "113-微免期末",
         relatedPathogen: "myco_intro",
         type: "basic",
         question: "真菌之無性孢子 (asexual spores) 可分成那兩大類？",
@@ -749,9 +704,10 @@ const pastExamDB = [
         correctAnswer: "",
         userNote: ""
     },
+
+    // === 112 學年度 ===
     {
-        id: "112-final-01", // 原 Q26
-        source: "112-微免期末 (M65)",
+        id: "112-final-01",
         relatedPathogen: "rna_retro",
         type: "clinical",
         question: "下列有關人類免疫缺陷病毒 (HIV) 及愛滋病 (AIDS) 的敘述，何者是錯誤的?",
@@ -765,8 +721,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-02", // 原 Q27
-        source: "112-微免期末 (M65)",
+        id: "112-final-02",
         relatedPathogen: "rna_retro",
         type: "virology",
         question: "下列何種不是人類免疫缺陷病毒 (HIV) 感染的細胞種類?",
@@ -780,8 +735,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-03", // 原 Q28
-        source: "112-微免期末 (M65)",
+        id: "112-final-03",
         relatedPathogen: "rna_retro",
         type: "virology",
         question: "HIV 會因為對細胞親和性的不同，而區分為 X4 strain 或 R5 strain。請問下列哪一個基因的點突變，會改變 HIV 對細胞的親和性?",
@@ -795,8 +749,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-04", // 原 Q29
-        source: "112-微免期末 (M65)",
+        id: "112-final-04",
         relatedPathogen: "rna_retro",
         type: "diagnosis",
         question: "下列有關人類免疫缺陷病毒 (HIV) 檢測的描述，何者錯誤?",
@@ -810,8 +763,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-05", // 原 Q30
-        source: "112-微免期末 (M65)",
+        id: "112-final-05",
         relatedPathogen: "rna_retro",
         type: "clinical",
         question: "下列有關成人 T 細胞白血病 (adult T-cell leukemia) 的敘述，何者正確?",
@@ -825,8 +777,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-06", // 原 Q31
-        source: "112-微免期末 (M65)",
+        id: "112-final-06",
         relatedPathogen: "poxvirus",
         type: "virology",
         question: "下列有關痘病毒 (poxvirus) 的敘述，何者正確?",
@@ -840,8 +791,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-07", // 原 Q32
-        source: "112-微免期末 (M65)",
+        id: "112-final-07",
         relatedPathogen: "hepatitis",
         type: "virology",
         question: "下列有關 D 型肝炎病毒的敘述，何者錯誤?",
@@ -855,8 +805,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-08", // 原 Q33
-        source: "112-微免期末 (M65)",
+        id: "112-final-08",
         relatedPathogen: "rna_ortho",
         type: "virology",
         question: "下列有關流感病毒 (influenza virus) 的敘述，何者錯誤?",
@@ -870,8 +819,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-09", // 原 Q34
-        source: "112-微免期末 (M65)",
+        id: "112-final-09",
         relatedPathogen: "general_virology",
         type: "epidemiology",
         question: "下列哪幾種病毒可經由動物暨節肢動物而傳播? \n①漢他病毒 (hantavirus) \n②日本腦炎病毒 (Japanese encephalitis virus) \n③黃熱病病毒 (yellow fever virus) \n④狂犬病病毒 (rabies virus)",
@@ -885,8 +833,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-10", // 原 Q35
-        source: "112-微免期末 (M65)",
+        id: "112-final-10",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列何者不是負股 RNA 病毒?",
@@ -900,8 +847,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-11", // 原 Q36
-        source: "112-微免期末 (M65)",
+        id: "112-final-11",
         relatedPathogen: "rna_paramyxo",
         type: "virology",
         question: "下列何者是流行性感冒病毒 (Influenza virus) 和副流行性感冒病毒 (Parainfluenza virus) 的不同點?",
@@ -915,8 +861,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-12", // 原 Q37
-        source: "112-微免期末 (M65)",
+        id: "112-final-12",
         relatedPathogen: "general_virology",
         type: "safety",
         question: "有關生物安全等級-3 (BSL-3) 實驗室設計上的防護，下列敘述何者錯誤?",
@@ -930,8 +875,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-13", // 原 Q38
-        source: "112-微免期末 (M65)",
+        id: "112-final-13",
         relatedPathogen: "myco_intro",
         type: "basic",
         question: "構成真菌細胞壁之主要成分為何?",
@@ -945,8 +889,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-14", // 原 Q39
-        source: "112-微免期末 (M65)",
+        id: "112-final-14",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列何者不是 Bunyaviruses 與 Arenaviruses 共同具有的特性?",
@@ -960,8 +903,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-15", // 原 Q40
-        source: "112-微免期末 (M65)",
+        id: "112-final-15",
         relatedPathogen: "rna_arbo",
         type: "virology",
         question: "下列有關日本腦炎病毒與登革熱病毒特性之敘述，何者正確?",
@@ -975,8 +917,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-16", // 原 Q41
-        source: "112-微免期末 (M65)",
+        id: "112-final-16",
         relatedPathogen: "hepatitis",
         type: "virology",
         question: "下列有關 E 型肝炎病毒的敘述，何者最適當?",
@@ -990,8 +931,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-17", // 原 Q42
-        source: "112-微免期末 (M65)",
+        id: "112-final-17",
         relatedPathogen: "immunology",
         type: "vaccine",
         question: "感染下列哪些病毒後，病人可獲得終身免疫力? \n①麻疹病毒 (Measles virus) \n②單純疱疹病毒 (Herpes simplex virus) \n③腺病毒 (Adenovirus) \n④腮腺炎病毒 (Mumps virus)",
@@ -1005,8 +945,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-18", // 原 Q43
-        source: "112-微免期末 (M65)",
+        id: "112-final-18",
         relatedPathogen: "rna_paramyxo",
         type: "clinical",
         question: "下列何種病毒，會引起睪丸、卵巢、胰臟等腺體發炎之病症?",
@@ -1020,8 +959,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-19", // 原 Q44
-        source: "112-微免期末 (M65)",
+        id: "112-final-19",
         relatedPathogen: "hepatitis",
         type: "clinical",
         question: "病患若先感染 B 型肝炎病毒後，再感染下列何種肝炎病毒，極易引發猛爆性肝炎?",
@@ -1035,8 +973,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-20", // 原 Q45
-        source: "112-微免期末 (M65)",
+        id: "112-final-20",
         relatedPathogen: "rna_ortho",
         type: "epidemiology",
         question: "下列有關流感病毒的敘述，何者正確?",
@@ -1050,8 +987,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-21", // 原 Q46
-        source: "112-微免期末 (M65)",
+        id: "112-final-21",
         relatedPathogen: "myco_superficial",
         type: "clinical",
         question: "有關花斑癬 (pityriasis versicolor) 之敘述，下列何者錯誤?",
@@ -1065,8 +1001,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-22", // 原 Q47
-        source: "112-微免期末 (M65)",
+        id: "112-final-22",
         relatedPathogen: "vaccine",
         type: "vaccine",
         question: "下列何種病毒目前尚無有效的疫苗可以預防感染?",
@@ -1080,8 +1015,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-23", // 原 Q48
-        source: "112-微免期末 (M65)",
+        id: "112-final-23",
         relatedPathogen: "rna_ortho",
         type: "clinical",
         question: "感染下列何種病毒，若自行服用阿斯匹靈 (aspirin) 等水楊酸類退燒藥物後，最易增加兒童罹患雷氏症候群 (Reye syndrome) 的風險?",
@@ -1095,8 +1029,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-24", // 原 Q49
-        source: "112-微免期末 (M65)",
+        id: "112-final-24",
         relatedPathogen: "rna_arbo",
         type: "virology",
         question: "有關登革病毒之敘述，下列何者正確?",
@@ -1110,8 +1043,7 @@ const pastExamDB = [
         userNote: ""
     },
     {
-        id: "112-final-25", // 原 Q50
-        source: "112-微免期末 (M65)",
+        id: "112-final-25",
         relatedPathogen: "myco_intro",
         type: "basic",
         question: "真菌之無性孢子 (asexual spores) 可分為哪兩大類?",
@@ -1126,7 +1058,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-26",
-        source: "112-微免期末 (M65)", // 修改來源以合併試卷
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列哪一類病毒對酒精敏感，而且病毒顆粒內必須攜帶 RNA-dependent RNA polymerase?",
@@ -1141,7 +1072,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-27",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列有關病毒的敘述，何者最適當?",
@@ -1156,7 +1086,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-28",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列有關病毒與細胞受體的配對，何者正確? \n1. Epstein-Barr: CD4 \n2. Rhinovirus: ICAM-1 \n3. Rabies virus: acetylcholine receptor \n4. B19 virus: Erythrocyte P antigen",
@@ -1171,7 +1100,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-29",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "hepatitis",
         type: "diagnosis",
         question: "以下有關實驗室檢驗的描述，何者不正確?",
@@ -1186,7 +1114,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-30",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "rna_retro",
         type: "vaccine",
         question: "愛滋病患者若需要進行疫苗接種，不適合接種下列哪一種疫苗?",
@@ -1201,7 +1128,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-31",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "下列有關抗病毒藥、作用機轉與病毒的配對，何者正確? \n① Lamivudine: 核酸複製: HIV \n② Acyclovir: 核酸複製: CMV \n③ Amantadine: 去蛋白衣: Influenza A \n④ Ribavirin: 核酸複製: HCV \n⑤ Ritonavir: 核酸複製: HIV",
@@ -1216,7 +1142,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-32",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "有關抗病毒藥物 acyclovir 的敘述，下列何者錯誤?",
@@ -1231,7 +1156,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-33",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "dna_herpes",
         type: "clinical",
         question: "關於疱疹病毒 (herpesvirus) 所引起的疾病或現象，下列敘述何者正確?",
@@ -1246,7 +1170,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-34",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "rna_reo",
         type: "virology",
         question: "下列有關輪狀病毒 (rotavirus) 的敘述，何者錯誤?",
@@ -1261,7 +1184,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-35",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "rna_picorna",
         type: "virology",
         question: "下列何者為鼻病毒 (rhinovirus) 之特性?",
@@ -1276,7 +1198,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-36",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "rabies",
         type: "clinical",
         question: "下列有關狂犬病毒 (rabies virus) 的敘述，何者最不適當?",
@@ -1291,7 +1212,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-37",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "prion",
         type: "clinical",
         question: "下列關於庫賈氏病 (Creutzfeldt-Jakob disease) 之敘述，何者錯誤?",
@@ -1306,7 +1226,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-38",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "general_virology",
         type: "diagnosis",
         question: "下列何種病毒無法利用抗原特異性來區分型別?",
@@ -1321,7 +1240,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-39",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "vzv",
         type: "clinical",
         question: "下列何者較不可能發生於初次感染水痘帶狀疱疹病毒 (VZV) 的成年人?",
@@ -1336,7 +1254,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-40",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "ebv",
         type: "mechanism",
         question: "Epstein-Barr virus 感染可導致下列何種細胞的不死化 (immortalization)?",
@@ -1351,7 +1268,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-41",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "dna_herpes",
         type: "virology",
         question: "下列何種病毒的潛伏感染部位 (latency site) 最常在單核球 (monocyte)?",
@@ -1366,7 +1282,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-42",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "rna_picorna",
         type: "clinical",
         question: "下列何者與引起疱疹性咽喉炎 (herpangina) 及手足口病 (hand-foot-and-mouth disease) 的致病原最相關?",
@@ -1381,7 +1296,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-43",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "dna_parvo",
         type: "clinical",
         question: "孕婦感染下列何種病毒較易造成胎兒水腫 (hydrops fetalis)?",
@@ -1396,7 +1310,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-44",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "hpv",
         type: "clinical",
         question: "下列何種疾病與人類乳突狀瘤病毒 (HPV) 最無關?",
@@ -1411,7 +1324,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-45",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "dna_pap_poly",
         type: "clinical",
         question: "下列何種病毒的感染與常見於腎臟移植病患的輸尿管狹窄 (ureteral stenosis) 最相關?",
@@ -1426,7 +1338,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-46",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "dna_adeno",
         type: "clinical",
         question: "下列何者為腺病毒 (adenovirus) 第 41 型所引發的主要臨床症狀?",
@@ -1441,7 +1352,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-47",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "rna_picorna",
         type: "clinical",
         question: "一位小朋友發高燒 5 天，持續出現食慾不佳、意識模糊和四肢無力的情形。家長自述一星期前幼稚園的同學也出現同樣的情形。最需要考慮下列何種病毒感染?",
@@ -1456,7 +1366,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-48",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "ebv",
         type: "clinical",
         question: "一位大學新生持續 2 週有頭痛、發燒、疲倦的狀況。這兩天又有喉嚨痛及淋巴腫大、實驗室診斷發現其為嗜異性抗體 (heterophile antibody) 陽性。下列有關該病毒及疾病的描述何者正確?",
@@ -1471,7 +1380,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-49",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列何者病毒引起的主要臨床表徵是因其會造成潛伏感染 (latent infection)，感染並潛藏在感覺神經元細胞內所致? \n① HSV-1 \n② Poliovirus \n③ VZV (HHV-3) \n④ JC virus \n⑤ Rabies virus",
@@ -1486,7 +1394,6 @@ const pastExamDB = [
     },
     {
         id: "112-final-50",
-        source: "112-微免期末 (M65)",
         relatedPathogen: "general_virology",
         type: "epidemiology",
         question: "到開發中國家旅遊可能會因為吃到不乾淨的食物而被感染，請問下列哪些病毒可以藉由糞口傳播? \n① Poliovirus \n② VZV \n③ Adenovirus \n④ Parvovirus B19 \n⑤ Norovirus",
@@ -1499,9 +1406,10 @@ const pastExamDB = [
         correctAnswer: "",
         userNote: ""
     },
+
+    // === 111 學年度 ===
     {
         id: "111-final-01",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "有關病毒的敘述，下列何者錯誤？",
@@ -1516,7 +1424,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-02",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "general_virology",
         type: "mechanism",
         question: "下列為病毒生活史的基本步驟，請依照感染步驟依序加以排列：(1)釋放 (release) (2)穿透 (penetration) (3)基因體的複製及蛋白質的產生 (4)組裝 (assembly) (5)吸附 (attachment) (6)去蛋白衣 (uncoating)。",
@@ -1531,7 +1438,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-03",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "immunology",
         type: "clinical",
         question: "下列數據是某患者相隔兩星期分別測得之某一致病原的抗體效價，請問那一組的結果 (急性期/恢復期) 可以判斷該病人為近期感染？",
@@ -1546,7 +1452,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-04",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "下列有關各種抗病毒藥物與其作用機制的配對，何者錯誤？",
@@ -1561,7 +1466,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-05",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "prion",
         type: "clinical",
         question: "關於 Prion 敘述何者正確？",
@@ -1576,7 +1480,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-06",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "prion",
         type: "epidemiology",
         question: "根據食品衛生管理法規定，雖非疫區但近十年內有發生牛海綿狀腦病之國家，其牛隻何種部位不屬於台灣明訂禁止進口的特定風險物質？",
@@ -1591,7 +1494,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-07",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "hpv",
         type: "clinical",
         question: "下列有關人類乳突病毒 (HPV) 的敘述何者錯誤？",
@@ -1606,7 +1508,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-08",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_rhabdo",
         type: "clinical",
         question: "下列有關狂犬病毒 (Rabies) 何者最不適當？",
@@ -1621,7 +1522,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-09",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_picorna",
         type: "virology",
         question: "下列有關鼻病毒 (Rhinovirus) 的敘述何者錯誤？",
@@ -1636,7 +1536,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-10",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_picorna",
         type: "clinical",
         question: "關於腸病毒的敘述下列何者正確？",
@@ -1651,7 +1550,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-11",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列病毒之敘述何者錯誤？",
@@ -1666,7 +1564,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-12",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "dna_herpes",
         type: "clinical",
         question: "口唇疱疹 (Cold sore) 與下列何種病毒有關？",
@@ -1681,7 +1578,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-13",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "dna_adeno",
         type: "clinical",
         question: "下列何者為腺病毒第 41 型所引發的主要臨床症狀？",
@@ -1696,7 +1592,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-14",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "vzv",
         type: "clinical",
         question: "有關帶狀疱疹 (Zoster) 何者錯誤？",
@@ -1711,7 +1606,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-15",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_reo",
         type: "virology",
         question: "下列何種病毒具有雙層蛋白衣，經胰蛋白酶 (Trypsin) 消化後形成中間型次病毒顆粒，其感染能力會增強？",
@@ -1726,7 +1620,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-16",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "ebv",
         type: "clinical",
         question: "下列何種症狀最不可能發生於 EBV 感染？",
@@ -1741,7 +1634,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-17",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列何種病毒最不可能有潛伏性感染 (latent infection)？",
@@ -1756,7 +1648,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-18",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "dna_herpes",
         type: "clinical",
         question: "下列何種病毒可引發單核球增多症，也是輸血後症候群的常見致病原？",
@@ -1771,7 +1662,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-19",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "hpv",
         type: "vaccine",
         question: "目前臨床上使用的子宮頸癌疫苗可以預防下列哪一種疾病？",
@@ -1786,7 +1676,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-20",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "vaccine",
         type: "vaccine",
         question: "目前人類疱疹病毒中，何者具有疫苗可預防感染？",
@@ -1801,7 +1690,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-21",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_picorna",
         type: "vaccine",
         question: "下列何者是口服小兒麻痺疫苗 (OPV) 的特性？",
@@ -1816,7 +1704,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-22",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "下列哪些病毒對乾洗手 (酒精) 的處理有抗性？ (1)克沙其病毒 (2)輪狀病毒 (3)水痘-帶狀疱疹病毒 (4)腺病毒",
@@ -1831,7 +1718,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-23",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "Acyclovir 是臨床上治療何種病毒之藥物？",
@@ -1846,7 +1732,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-24",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "antiviral",
         type: "clinical",
         question: "小孩因病毒感染而使用某種藥物作為退燒時，易伴隨有雷氏症候群 (Reye syndrome)。下列何種藥物產生此副作用的可能性最高？",
@@ -1859,11 +1744,8 @@ const pastExamDB = [
         correctAnswer: "B",
         userNote: ""
     },
-    
-    // --- 原期末考範圍 (HIV, 肝炎, 蟲媒, 黴菌) ---
     {
         id: "111-final-25",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_retro",
         type: "clinical",
         question: "下列有關 HIV 的敘述，何者是正確的？",
@@ -1878,7 +1760,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-26",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_retro",
         type: "virology",
         question: "下列何種細胞不是 HIV 主要感染的細胞種類？",
@@ -1893,7 +1774,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-27",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_retro",
         type: "diagnosis",
         question: "下列有關 HIV-1 診斷的敘述，何者是錯誤的？",
@@ -1908,7 +1788,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-28",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_retro",
         type: "pharmacology",
         question: "在 HIV-1 中，下列那個基因的點突變會對治療藥物 lamivudine 產生抗藥性？",
@@ -1923,7 +1802,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-29",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_retro",
         type: "diagnosis",
         question: "利用現行 HIV-1 檢驗試劑，可測得特異性標記在血液中出現的時間順序依次為何？(1)HIV-1 IgG (2)HIV-1 IgM (3)HIV-1 RNA (4)p24 Ag",
@@ -1938,7 +1816,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-30",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "dna_pox",
         type: "clinical",
         question: "下列何種人類疾病不是由痘病毒 (Poxvirus) 引起？",
@@ -1953,7 +1830,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-31",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "antiviral",
         type: "pharmacology",
         question: "有關抗流感藥物 zanamivir (Relenza) 及 oseltamivir (Tamiflu) 的敘述，下列何者錯誤？",
@@ -1968,7 +1844,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-32",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_ortho",
         type: "virology",
         question: "下列有關流感病毒 (influenza virus) 的敘述，何者錯誤？",
@@ -1983,7 +1858,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-33",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "hepatitis",
         type: "clinical",
         question: "某醫院工作人員被驗出有 HBsAg，繼而又被驗出 HBeAg。此醫院工作人員最可能是下列何種情況？",
@@ -1998,7 +1872,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-34",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_arbo",
         type: "virology",
         question: "下列有關日本腦炎病毒與登革熱病毒特性之敘述，何者正確？",
@@ -2013,7 +1886,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-35",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "hepatitis",
         type: "virology",
         question: "B 型肝炎病毒中何種蛋白可自行聚集形成大小形狀不一的顆粒 (Decoy particles)？",
@@ -2028,7 +1900,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-36",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_paramyxo",
         type: "virology",
         question: "下列何者是流行性感冒病毒 (Influenza) 和副流行性感冒病毒 (Parainfluenza) 的不同點？",
@@ -2043,7 +1914,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-37",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "general_virology",
         type: "safety",
         question: "有關生物安全等級-3 (BSL-3) 實驗室設計上的防護，下列敘述何者錯誤？",
@@ -2058,7 +1928,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-38",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "myco_intro",
         type: "basic",
         question: "構成真菌細胞壁之主要成分為何？",
@@ -2073,7 +1942,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-39",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "myco_opportunistic",
         type: "clinical",
         question: "常見於嬰孩口腔之鵝口瘡，是何種微生物感染？",
@@ -2088,7 +1956,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-40",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "general_virology",
         type: "virology",
         question: "血球附著現象 (Hemadsorption) 不可用來初步認定下列那一種病毒培養？",
@@ -2103,7 +1970,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-41",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "immunology",
         type: "vaccine",
         question: "感染下列那些病毒後，病人可獲得終身免疫力？(1)麻疹病毒 (2)單純疱疹病毒 (3)腺病毒 (4)腮腺炎病毒",
@@ -2118,7 +1984,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-42",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_paramyxo",
         type: "clinical",
         question: "下列何種病毒，會引起睪丸、卵巢、胰臟等腺體發炎之病症？",
@@ -2133,7 +1998,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-43",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "hepatitis",
         type: "clinical",
         question: "病患若先感染 B 型肝炎病毒後，再感染下列何種肝炎病毒，極易引發猛爆性肝炎 (Fulminant hepatitis)？",
@@ -2148,7 +2012,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-44",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "hepatitis",
         type: "virology",
         question: "下列那一種肝炎病毒與腸病毒 (Enterovirus) 在分類上最接近？",
@@ -2163,7 +2026,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-45",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "myco_superficial",
         type: "clinical",
         question: "有關花斑癣 (pityriasis versicolor) 之敘述，下列何者錯誤？",
@@ -2178,7 +2040,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-46",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_filo",
         type: "virology",
         question: "下列關於馬堡病毒 (Marburg) 和伊波拉病毒 (Ebola) 之敘述，何者正確？",
@@ -2193,7 +2054,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-47",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_ortho",
         type: "clinical",
         question: "感染下列何種病毒，若自行服用阿司匹靈 (Aspirin) 等水楊酸類退燒藥物後，最易增加兒童罹患雷氏症候群 (Reye syndrome) 的風險？",
@@ -2208,7 +2068,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-48",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "rna_arbo",
         type: "virology",
         question: "關於黃病毒屬 (Flavivirus) 之敘述，下列何者錯誤？",
@@ -2223,7 +2082,6 @@ const pastExamDB = [
     },
     {
         id: "111-final-49",
-        source: "111-微免期末 (M64)",
         relatedPathogen: "myco_intro",
         type: "basic",
         question: "真菌之無性孢子 (asexual spores) 可分成那兩大類？",
@@ -2237,4 +2095,3 @@ const pastExamDB = [
         userNote: ""
     }
 ];
-
