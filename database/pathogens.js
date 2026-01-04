@@ -1,7 +1,7 @@
 const pathogenData = {
             'dna_pap_poly': {
                 category: 'DNA Viruses',
-                title: "乳突瘤與多瘤病毒科 (Papilloma & Polyoma)",
+                title: "乳突狀瘤與多型瘤病毒科 (Papilloma & Polyoma)",
                 family: "Papillomaviridae / Polyomaviridae",
                 color: "blue",
                 tags: { genome: "dsDNA (Circular)", envelope: "Naked", disease: "Warts, Cancer, PML" },
@@ -1611,4 +1611,5 @@ const pathogenData = {
                 ]
             }
         };
+
 
