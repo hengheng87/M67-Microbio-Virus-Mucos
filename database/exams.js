@@ -1,4 +1,3 @@
-export const pastExamDB = [
 const pastExamDB = [
     {
         id: "113-final-01",
@@ -1505,5 +1504,4 @@ const pastExamDB_112_Filtered = [
         correctAnswer: "",
         userNote: ""
     }
-];
 ];
