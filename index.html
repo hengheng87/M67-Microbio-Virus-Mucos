@@ -930,9 +930,9 @@ function renderExamDashboard(sourceFilter = null) {
                             <div class="absolute top-0 right-0 w-16 h-16 md:w-20 md:h-20 bg-teal-50 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-teal-100"></div>
                             
                             <div class="flex items-center gap-4 mb-4">
-                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-lg font-bold shrink-0">
-                                    ${s.src.includes('113') ? '113' : '112'}
-                                </div>
+
+<div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-lg font-bold shrink-0">
+    ${s.src.match(/^\d+/) ? s.src.match(/^\d+/)[0] : 'Exam'} </div>
                                 <div class="min-w-0">
                                     <h3 class="text-base md:text-lg font-bold text-gray-800 truncate pr-2">${s.src}</h3>
                                     <span class="text-[10px] text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">Final Exam</span>
@@ -1404,6 +1404,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
