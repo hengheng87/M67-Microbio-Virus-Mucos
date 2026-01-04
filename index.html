@@ -1265,33 +1265,33 @@ function handleSearch(query) {
     }
 }
 
-// 3. 執行搜尋演算法 (Traverse Logic)
+// 3. [V11.1 更新] 執行搜尋演算法 (含考古題搜尋)
 function performSearch(term) {
     const nav = document.getElementById('sidebarNav');
     const results = [];
 
-    // 遍歷資料庫
+    // --- Part A: 搜尋筆記資料庫 (pathogenData) ---
     for (const [key, data] of Object.entries(pathogenData)) {
         let score = 0;
         let context = '';
 
-        // A. 標題權重最高
+        // 1. 標題權重最高
         if (data.title.toLowerCase().includes(term)) {
             score += 10;
             context = '標題符合';
         }
-        // B. 快速事實 (QuickFacts)
+        // 2. 快速事實 (QuickFacts)
         else if (data.quickFacts.some(f => f.val.toLowerCase().includes(term) || f.label.toLowerCase().includes(term))) {
             score += 5;
             const match = data.quickFacts.find(f => f.val.toLowerCase().includes(term) || f.label.toLowerCase().includes(term));
             context = `考點: ${match.label} - ${stripHtml(match.val)}`;
         }
-        // C. Tags
+        // 3. Tags
         else if (Object.values(data.tags).some(t => t.toLowerCase().includes(term))) {
             score += 3;
             context = '關鍵標籤符合';
         }
-        // D. 內文搜尋 (Sections)
+        // 4. 內文搜尋 (Sections)
         else {
             for (const section of data.sections) {
                 if (section.content.toLowerCase().includes(term) || section.title.toLowerCase().includes(term)) {
@@ -1303,12 +1303,59 @@ function performSearch(term) {
         }
 
         if (score > 0) {
-            results.push({ key, title: data.title, category: data.category, color: data.color, score, context });
+            results.push({ 
+                type: 'note', // 標記為筆記
+                key: key, 
+                title: data.title, 
+                category: data.category, 
+                color: data.color, 
+                score: score, 
+                context: context 
+            });
         }
     }
 
-    // 排序與渲染結果
-    results.sort((a, b) => b.score - a.score); // 分數高者在錄
+    // --- Part B: [新增] 搜尋考古題庫 (pastExamDB) ---
+    pastExamDB.forEach(q => {
+        let score = 0;
+        let context = '';
+
+        // 1. 題目內文
+        if (q.question.toLowerCase().includes(term)) {
+            score += 8;
+            context = q.question;
+        }
+        // 2. 選項內容
+        else if (q.options.some(opt => opt.toLowerCase().includes(term))) {
+            score += 4;
+            const match = q.options.find(opt => opt.toLowerCase().includes(term));
+            context = `選項: ${match}`;
+        }
+        // 3. 關聯病原體 ID 或 User Note
+        else if ((q.relatedPathogen && q.relatedPathogen.toLowerCase().includes(term)) || (q.userNote && q.userNote.toLowerCase().includes(term))) {
+            score += 2;
+            context = `關聯關鍵字`;
+        }
+
+        if (score > 0) {
+            // 解析 ID 取得年份標題 (例如 112-final -> 112學年度 期末考)
+            const info = parseExamInfo(q.id);
+            const qNumber = q.id.split('-').pop(); // 取出題號
+
+            results.push({
+                type: 'exam', // 標記為考題
+                id: q.id,     // 考題需要 ID 來開啟 Modal
+                title: `${info.title} #${qNumber}`, 
+                category: '考古題',
+                color: 'teal', // 考題統一用 Teal 色系
+                score: score,
+                context: context
+            });
+        }
+    });
+
+    // 排序與渲染結果 (分數高者在錄)
+    results.sort((a, b) => b.score - a.score); 
 
     if (results.length === 0) {
         nav.innerHTML = `
@@ -1322,21 +1369,31 @@ function performSearch(term) {
                 <span>搜尋結果</span>
                 <span class="bg-gray-100 px-1.5 rounded text-gray-500">${results.length} 筆</span>
             </div>
-            ${results.map(item => `
-                <button onclick="loadContent('${item.key}', true)" class="nav-btn w-full text-left px-3 py-2 rounded-md text-sm font-medium hover:bg-medical-50 transition mb-1 group border border-transparent hover:border-medical-100">
+            ${results.map(item => {
+                // [關鍵] 根據類型決定點擊行為
+                const clickAction = item.type === 'exam' 
+                    ? `openQuestionModal('${item.id}')`   // 考題 -> 開彈窗
+                    : `loadContent('${item.key}', true)`; // 筆記 -> 讀取內容
+
+                // [關鍵] 根據類型決定圖示
+                const iconClass = item.type === 'exam' ? 'fa-pen-alt' : 'fa-book-medical';
+
+                return `
+                <button onclick="${clickAction}" class="nav-btn w-full text-left px-3 py-2 rounded-md text-sm font-medium hover:bg-medical-50 transition mb-1 group border border-transparent hover:border-medical-100">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2 overflow-hidden">
-                            <div class="w-1.5 h-1.5 rounded-full bg-${item.color}-400 shrink-0"></div>
-                            <span class="truncate text-gray-700 font-bold">${highlightString(item.title, term)}</span>
+                            <div class="w-5 h-5 rounded-full bg-${item.color}-100 text-${item.color}-600 flex items-center justify-center shrink-0 text-[10px]">
+                                <i class="fas ${iconClass}"></i>
+                            </div>
+                            <span class="truncate text-gray-700 font-bold text-xs">${highlightString(item.title, term)}</span>
                         </div>
-                        <span class="text-[9px] bg-gray-100 text-gray-400 px-1 rounded">${item.category.split(' ')[0]}</span>
+                        <span class="text-[9px] bg-gray-100 text-gray-400 px-1 rounded whitespace-nowrap">${item.category.split(' ')[0]}</span>
                     </div>
-                    ${item.context ? `<span class="search-match-context pl-3.5">${highlightString(item.context, term)}</span>` : ''}
+                    ${item.context ? `<span class="search-match-context pl-7 text-[10px] opacity-80">${highlightString(item.context, term)}</span>` : ''}
                 </button>
-            `).join('')}`;
+            `}).join('')}`;
     }
 }
-
 // 4. [修改] 渲染導航 (回復原狀用)
 function renderSidebar() {
     const nav = document.getElementById('sidebarNav');
@@ -1424,6 +1481,7 @@ function highlightString(str, term) {
     </script>
 </body>
 </html>
+
 
 
 
