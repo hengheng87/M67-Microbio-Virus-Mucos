@@ -914,7 +914,7 @@ const pastExamDB = [
             "(D) 感染後均產生感冒般症狀"
         ],
         correctAnswer: "",
-        userNote: ""
+        userNote: "上課內容說登革熱沒有疫苗，但民國111年已經有兩家公司Dengvaxia®和QDENGA®研發出來，台灣仍未核可上市。"
     },
     {
         id: "112-final-16",
@@ -5056,3 +5056,4 @@ const pastExamDB = [
         userNote: "Zika 屬於 Flaviviridae，為正股 (+)ssRNA [cite: 165]"
     }
 ];
+
